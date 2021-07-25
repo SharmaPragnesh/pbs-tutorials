@@ -1,0 +1,57 @@
+https://www.itsolutionstuff.com/post/how-to-use-toaster-notification-in-angular-8example.html
+npm install ngx-toastr --save
+npm install @angular/animations --save
+--------------------------------------------------------------------------------------------------------
+https://github.com/CodAffection/Angular-7-Master-Detail-CRUD-with-Web-API (video-Part1)
+npm install --save @angular/material @angular/cdk  @angular/animations
+--------------------------------------------------------------------------------------------------------
+https://medium.com/letsboot/translate-angular-4-apps-with-ngx-translate-83302fb6c10d
+https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-angular8-app-with-ngx-translate
+npm install @ngx-translate/core --save
+npm install @ngx-translate/http-loader
+--------------------------------------------------------------------------------------------------------
+https://www.freakyjolly.com/angular-pagination-example-using-ngx-pagination/#.X3v1rmgzaUk
+for paging
+npm install ngx-pagination --save
+--------------------------------------------------------------------------------------------------------
+https://ciphertrick.com/search-sort-pagination-angular/
+for sorting
+npm install ng2-order-pipe --save
+--------------------------------------------------------------------------------------------------------
+https://www.npmjs.com/package/ng-starrating
+npm install ng-starrating
+--------------------------------------------------------------------------------------------------------
+https://www.techiediaries.com/angular/angular-9-calendar-ngx-bootstrap-datepicker-tutorial/
+https://valor-software.com/ngx-bootstrap/#/datepicker 
+for examples
+npm install ngx-bootstrap --save
+--------------------------------------------------------------------------------------------------------
+https://www.c-sharpcorner.com/article/aes-encryptiondecryption-with-angular-7/
+npm install crypto-js --save
+
+add below code in package.json file 
+ "browser": {
+    "crypto": false
+  }
+--Note: This package for encrypt/decrypt data on/from localStorage.
+--------------------------------------------------------------------------------------------------------
+https://stackoverflow.com/questions/30623825/how-to-use-jquery-with-angular
+npm install --save jquery
+--------------------------------------------------------------------------------------------------------
+https://www.npmjs.com/package/angularx-social-login
+npm i angularx-social-login
+--------------------------------------------------------------------------------------------------------
+https://firstclassjs.com/create-a-reusable-confirmation-dialog-in-angular-7-using-angular-material/
+========================================================================================================
+For loading
+https://nezhar.com/blog/create-a-loading-screen-for-angular-apps/
+https://codepen.io/avstorm/pen/QZEKWr
+https://codepen.io/sashatran/pen/vRrxXw
+========================================================================================================
+https://www.c-sharpcorner.com/article/searching-and-pagination-using-angular-7/
+https://ciphertrick.com/search-sort-pagination-angular/
+https://codesource.io/server-side-pagination-with-ngx-pagination-in-angular/
+========================================================================================================
+for Microsoft login
+npm install @azure/msal-angular @azure/msal-browser
+========================================================================================================

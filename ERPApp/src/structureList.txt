@@ -1,0 +1,98 @@
+ng g c Components/Admin/order
+ng g c Components/Admin/order/order-list
+----------------------------------------------------------
+ng g class Models/Institution --type=model
+ng g c Components/Admin/institution
+ng g c Components/Admin/institution/institution-detail
+ng g c Components/Admin/institution/institution-list
+ng g s Services/Institution
+-----------------------------------------------------------
+ng g class Models/Study --type=model
+ng g c Components/Admin/study
+ng g c Components/Admin/study/study-detail
+ng g c Components/Admin/study/study-list
+ng g c Components/Admin/study/term-type
+ng g c Components/Admin/study/term-type-list
+ng g c Components/Admin/study/term-type-optional-name
+ng g s Services/study
+-----------------------------------------------------------
+ng g class Models/User --type=model
+ng g c Components/Admin/user
+ng g c Components/Admin/user/user-list 
+ng g c Components/Admin/user/user-file-list
+ng g c Components/Admin/user/user-monitoring-list
+-- ng g s Services/User
+-----------------------------------------------------------
+ng g s Services/notification
+-----------------------------------------------------------
+ng generate module Components/Admin --routing
+ng generate module shared
+-----------------------------------------------------------
+ng g c Components/Admin/admin
+-----------------------------------------------------------
+ng generate module Components/User
+ng g c Components/user
+ng g c Components/user/about-me
+ng g c Components/user/monitoring
+ng g c Components/user/my-files
+-----------------------------------------------------------
+ng g class Models/Subject --type=model
+ng g c Components/Admin/Subject
+ng g s Services/Subject
+ng g c Components/Admin/subject/subject-mapping
+ng g c Components/Admin/subject/subject-list
+ng g c Components/Admin/subject/subject-lookup
+-----------------------------------------------------------
+ng g class Models/semester --type=model
+ng g c Components/Admin/semester
+ng g c Components/Admin/semester/semester-list
+ng g s Services/semester
+-----------------------------------------------------------
+ng g c Components/note-list
+ng g class Models/note-list --type=model
+ng g c Components/note-list/download-file
+ng g c Components/note-list/note
+ng g c Components/note-list/note-edit
+ng g c Components/note-list/note-list-detail
+ng g c Components/note-list/custom-rating
+ng g c Components/note-list/note-search
+ng g c Components/note-list/note-search-list
+ng g c Components/note-list/online-view
+ng g c Components/note-list/feedback
+ng g c Components/upload-file
+-----------------------------------------------------------
+ng g s Services/note-list
+ng g s Services/upload-file
+ng g s Services/auto-logout
+-----------------------------------------------------------
+ng g c Components/Admin/unapproved-files
+-----------------------------------------------------------
+ng g c Components/Admin/statistics
+ng g class Models/statistics --type=model
+ng g s Services/statistics
+
+-----------------------------------------------------------
+ng g d Directives/Number
+-----------------------------------------------------------
+ng g c Components/forgot-password
+ng g c Components/login/reset-password
+ng g c Components/register/activate-user
+-----------------------------------------------------------
+ng g c Components/Shared/confirmation-dialog
+ng g c Components/Shared/message-dialog
+ng g c Components/loading-screen
+ng g s Services/loading-screen
+ng g s Services/soap
+
+ng g pipe Pipes/myfilter
+ng g pipe Pipes/callback
+
+ng g pipe Pipes/safe
+//https://stackoverflow.com/questions/35981094/display-ms-word-file-in-html-using-angular
+//https://jsfiddle.net/gcuzq343/
+-----------------------------------------------------------
+https://medium.com/angular-in-depth/top-10-ways-to-use-interceptors-in-angular-db450f8a62d6
+https://codepen.io/sashatran/pen/vRrxXw
+
+
+ng g s Services/order
