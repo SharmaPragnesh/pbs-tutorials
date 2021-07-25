@@ -11,13 +11,13 @@ namespace ERP.Repository.Repository
 {
     public class RolesRepository : IRolesRepository ///, BaseRepository
     {
-        private readonly string _connectionString = "Data Source=PRAGNESH-PC;Initial Catalog=ShowRoom;User ID=sa;password=test123;";
+        private readonly string _connectionString = "Data Source=erptrainee.database.windows.net;Initial Catalog=ERPTrainees_DEV;User ID=erpadmin;password=psspl@12345;";
 
         public async Task<Page<RolesResponse>> GetRoles(PageParameter pageParameter)
         {
             using (SqlConnection sql = new SqlConnection(_connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand("USP_Cars", sql))
+                using (SqlCommand cmd = new SqlCommand("USP_GetRoles", sql))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.Add(new SqlParameter("@Search", pageParameter.Search));
@@ -39,6 +39,7 @@ namespace ERP.Repository.Repository
                     }
 
                     result.List = response;
+                    result.PageCount = response != null ? response.Count : 0;
                     result.PageStart = pageParameter.PageStart;
                     result.PageSize = pageParameter.PageSize;
                     //result.TotalCount = response.Count;
@@ -54,7 +55,7 @@ namespace ERP.Repository.Repository
             {
                 Id = Convert.ToInt32(reader["id"]),
                 Name = Convert.ToString(reader["name"]),
-                IsActive = Convert.ToByte(reader["IsActive"])
+                IsActive = Convert.ToByte(reader["Active"])
             };
         }
 

@@ -11,6 +11,9 @@ namespace Common.Extension
 
         private List<T> _list = new List<T>();
 
+        [JsonProperty(PropertyName = "page_count")]
+        public long PageCount { get; set; }
+
         [JsonProperty(PropertyName = "total_count")]
         public long TotalCount { get; set; }
 
