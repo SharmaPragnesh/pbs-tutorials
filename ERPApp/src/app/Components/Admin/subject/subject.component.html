@@ -1,0 +1,80 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="uni-header" translate>PageHeader.Subject</h4>
+<form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()" class="admin-form-content">
+    <input type="hidden" class="form-control" formControlName="SemesterId">
+    <input type="hidden" class="form-control" formControlName="SubjectId">
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Subject.SubjectNo</label>
+        <div class="col-sm-5">
+            <input class="form-control lookup-inputtext" formControlName="SubjectNo" maxlength="7" numbersOnly>
+            <button type="button" class="btn text-white btn-lookup" translate autofocus
+                *ngIf="subjectService.subjectLookupList != null && subjectService.subjectLookupList.length>0"
+                (click)="ShowLookup()">Subject.NoInUse</button>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.SubjectNo.touched && f.SubjectNo.errors?.required"
+                translate>Common.RequiredField</label>
+            <label class="text-danger" *ngIf="f.SubjectNo.touched && f.SubjectNo.errors?.minlength"
+                translate>Common.Require4Digits</label>
+            <label class="text-danger" *ngIf="f.SubjectNo.touched && f.SubjectNo.errors?.subjectNoExists" translate>
+                Subject.SubjectNoExist</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Subject.SubjectDanish</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="SubjectNameDaDK" maxlength="100">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.SubjectNameDaDK.touched && f.SubjectNameDaDK.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Subject.SubjectEnglish</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="SubjectNameEnUS" maxlength="100">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.SubjectNameEnUS.touched && f.SubjectNameEnUS.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required" *ngIf="toggleMultipleSemesters">
+        <label class="col-sm-3 col-form-label">{{this.noteListService.filesParameter.TermType}}</label>
+        <div class="col-sm-5">
+            <div class="form-check form-check-inline" *ngFor="let control of fruitsArray.controls; let i = index;">
+                <input class="form-check-input" type="checkbox" (change)="getSelectedFruitsValue()"
+                    [formControl]="control" id="inlineCheckbox{{i}}">
+                <label class="form-check-label" for="inlineCheckbox{{i}}">                    
+                    {{fruits[i].SemesterName}}&nbsp;
+                </label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="favFruitsError && checkFruitControlsTouched()" style="display: none;"
+                translate>Atleast choose one</label>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+            <div class="admin-action flt">
+                <div style="display: none;">{{selectedFruitValues|json}}</div>
+                <button type="submit" class="btn" [disabled]="registerForm.invalid" translate>Common.Save
+                    <i class="fa fa-floppy-o"></i>
+                </button>
+                <button type="button" class="btn btn-info" (click)="ShowMultipleSemesters()"
+                    *ngIf="!toggleMultipleSemesters">
+                    <span><span translate>Study.Multiple</span> {{noteListService.filesParameter.TermType}}</span>
+                </button>
+                <button type="button" class="btn btn-secondary" [mat-dialog-close] translate>Common.Cancel
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

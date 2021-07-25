@@ -1,0 +1,64 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="uni-header" translate>Subject.SubjectNoInUse</h4>
+<mat-dialog-content>
+    <span class="anchor" id="formLogin"></span>
+    <div class="card rounded-0">
+        <div class="table-responsive" *ngIf="subjectService.subjectLookupList!=null">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="code-width" translate>
+                            Subject.SubjectNo
+                        </th>
+                        <th translate>
+                            PageHeader.Subject
+                        </th>
+                        <th class="sorting-width text-center" translate>
+                            PageHeader.Period
+                            <!-- {{noteListService.filesParameter.TermType}} -->
+                        </th>
+                        <th translate>
+                            PageHeader.Study
+                        </th>
+                        <th translate>
+                            PageHeader.Institution
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let subject of subjectService.subjectLookupList | paginate: configLookup ;index as i; let first = first; let last = last;"
+                        [ngClass]="{'alt_row': i%2!==0}">
+                        <td>
+                            {{subject.SubjectNo}}
+                        </td>
+                        <td>
+                            {{subject.SubjectName}}
+                        </td>
+                        <td class="text-center">
+                            {{subject.SemesterName}}
+                        </td>
+                        <td>
+                            {{subject.StudyName}}
+                        </td>
+                        <td>
+                            {{subject.InstitutionName}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="clear"></div>
+            <div class="text-center">
+                <pagination-controls id="paginationNoteListDetail" (pageChange)="pageChanged($event)"
+                    [previousLabel]="userService.labels.previousLabel | translate"
+                    [nextLabel]="userService.labels.nextLabel | translate"></pagination-controls>
+                <!-- <pagination-controls id="paginationUserList123" (pageChange)="pageChanged($event)"
+            [previousLabel]="userService.labels.previousLabel | translate"
+            [nextLabel]="userService.labels.nextLabel | translate"></pagination-controls> -->
+            </div>
+        </div>
+
+    </div>
+</mat-dialog-content>

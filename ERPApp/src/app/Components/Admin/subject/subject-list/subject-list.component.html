@@ -1,0 +1,149 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0 admin-heading" translate>PageHeader.Subject</h3>
+                    <div class="admin-action">
+                        <button type="button" class="btn btn-light" routerLink='/admin/study' translate>
+                            Common.Back</button>
+                        <button class="btn text-white"
+                            *ngIf="noteListService.filesParameter.InstitutionId && noteListService.filesParameter.StudyId"
+                            (click)="AddOrEditSubject(noteListService.filesParameter.SemesterId,0)"
+                            translate>Subject.AddSubject
+                            <i class="fa fa-plus"></i></button>
+                        <button class="btn btn-success text-white" [disabled]="disableSaveOrder"
+                            *ngIf="noteListService.filesParameter.InstitutionId && noteListService.filesParameter.StudyId && noteListService.filesParameter.SemesterId"
+                            (click)="UpdateSubjectSorting()" translate>Common.Save
+                            <i class="fa fa-floppy-o"></i></button>
+                    </div>
+                </div>
+                <div class="card-body education">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label translate>PageHeader.Institution&nbsp;&nbsp;</label>
+                            <select *ngIf="institutionService.institutionList != null" name="InstitutionId"
+                                #InstitutionId="ngModel" [(ngModel)]="noteListService.filesParameter.InstitutionId"
+                                class="form-control" (change)='noteListService.onInsititutionChange($event)'>
+                                <option [ngValue]="0" translate>Messages.ChooseInstitution</option>
+                                <option *ngFor='let institute of institutionService.institutionList'
+                                    [ngValue]="institute.InstitutionId">{{institute.InstitutionName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label translate>PageHeader.Study&nbsp;&nbsp;</label>
+                            <select *ngIf="studyService.studyList != null" name="StudyId" #StudyId="ngModel"
+                                [(ngModel)]="noteListService.filesParameter.StudyId" class="form-control"
+                                (change)='onStudyChange($event)'>
+                                <option [ngValue]="0" translate>Messages.ChooseStudy</option>
+                                <option class='option' *ngFor='let study of studyService.studyList'
+                                    [ngValue]="study.StudyId">{{study.StudyName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>{{this.noteListService.filesParameter.TermType}}&nbsp;&nbsp;</label>
+                            <select name="SemesterId" #SemesterId="ngModel"
+                                [(ngModel)]="noteListService.filesParameter.SemesterId" class="form-control"
+                                (change)='onSemesterChange($event)'>
+                                <option [ngValue]="0" translate>Common.All</option>
+                                <option class='option' *ngFor='let semester of semesterService.semesterList'
+                                    [ngValue]="semester.SemesterId">{{semester.SemesterName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- <div class="alert_yel_msg" *ngIf="subjectList==null">
+                            <div class="font_16">
+                                No data found
+                            </div>
+                            <p></p>
+                        </div> -->
+                        <div class="table-responsive" *ngIf="subjectList!=null">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="hand code-width" (click)="sort('SubjectNo')">
+                                            <span class="sorting-column" translate>
+                                                Subject.SubjectNo
+                                                <i class="fa sorting-angle" *ngIf="key =='SubjectNo'"
+                                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                            </span>
+                                        </th>
+                                        <th class="hand" (click)="sort('SubjectNameDaDK')">
+                                            <span class="sorting-column" translate>
+                                                Subject.SubjectDanish
+                                                <i class="fa sorting-angle" *ngIf="key =='SubjectNameDaDK'"
+                                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                            </span>
+                                        </th>
+                                        <th class="hand" (click)="sort('SubjectNameEnUS')">
+                                            <span class="sorting-column" translate>
+                                                Subject.SubjectEnglish
+                                                <i class="fa sorting-angle" *ngIf="key =='SubjectNameEnUS'"
+                                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                            </span>
+                                        </th>
+                                        <th class="text-center hand sorting-width" (click)="sort('SemesterName')"
+                                            *ngIf="noteListService.filesParameter.SemesterId===0">
+                                            <span class="sorting-column">
+                                                {{this.noteListService.filesParameter.TermType}}
+                                                <i class="fa sorting-angle" *ngIf="key =='SemesterName'"
+                                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                            </span>
+                                        </th>
+                                        <th class="text-center sorting-width" translate
+                                            *ngIf="noteListService.filesParameter.SemesterId!==0">
+                                            Common.Sorting
+                                        </th>
+                                        <th class="text-center delete-width">&nbsp;</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let subject of subjectList | orderBy: key : reverse ;index as i; let first = first; let last = last;"
+                                        [ngClass]="{'alt_row': i%2!==0}">
+                                        <td class="hand"
+                                            (click)="AddOrEditSubject(subject.SemesterId,subject.SubjectId)">
+                                            {{subject.SubjectNo}}                                            
+                                        </td>
+                                        <td class="hand"
+                                            (click)="AddOrEditSubject(subject.SemesterId,subject.SubjectId)">
+                                            {{subject.SubjectNameDaDK}}
+                                        </td>
+                                        <td class="hand"
+                                            (click)="AddOrEditSubject(subject.SemesterId,subject.SubjectId)">
+                                            {{subject.SubjectNameEnUS}}
+                                        </td>
+                                        <td class="text-center" *ngIf="noteListService.filesParameter.SemesterId===0">
+                                            {{subject.SemesterName}}
+                                        </td>
+                                        <td id="tr{{subject.Sorting}}"
+                                            class="text-center position-relative arrow-sort-width"
+                                            *ngIf="noteListService.filesParameter.SemesterId!==0">
+                                            <span class="text-center sb-box-left">
+                                                <i class="fa fa-angle-up hand sorting-button-up" (click)="MoveUp(i)"
+                                                    *ngIf="!first"></i>&nbsp;
+                                            </span>
+                                            <span class="text-center sb-box-right">
+                                                <i class="fa fa-angle-down hand sorting-button-down"
+                                                    (click)="MoveDown(i)" *ngIf="!last"></i>
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="fa fa-trash fa-lg hand remove-icon"
+                                                (click)="DeleteConfirmDialog(subject)"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

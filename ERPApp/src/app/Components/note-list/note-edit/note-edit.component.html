@@ -1,0 +1,153 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="uni-header" translate>Note.Document</h4>
+<form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()" class="admin-form-content">
+    <input type="hidden" class="form-control" formControlName="FileId">
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label" translate>PageHeader.Institution</label>
+        <div class="col-sm-5">
+            <select formControlName="InstitutionId" class="form-control" (change)="ChangeInstitution($event)">
+                <option *ngFor='let institute of institutionService.institutionList' [value]="institute.InstitutionId">
+                    {{institute.InstitutionName}}</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.InstitutionId.touched && f.InstitutionId.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>PageHeader.Study</label>
+        <div class="col-sm-5">
+            <select formControlName="StudyId" class="form-control" (change)="ChangeStudy($event)">
+                <option value="" translate>Messages.ChooseStudy</option>
+                <option *ngFor='let study of studyList' [value]="study.StudyId">
+                    {{study.StudyName}}</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.StudyId.touched && f.StudyId.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label">{{myfiles.TermType}}</label>
+        <div class="col-sm-5">
+            <select formControlName="SemesterId" class="form-control" (change)="ChangeSemester($event)">
+                <option value="" translate>Messages.ChooseSemester</option>
+                <option *ngFor='let semester of semesterList' [value]="semester.SemesterId">
+                    {{semester.SemesterName}}</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.SemesterId.touched && f.SemesterId.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>PageHeader.Subject</label>
+        <div class="col-sm-5">
+            <select formControlName="SubjectId" class="form-control">
+                <option value="" translate>Messages.ChooseSubject</option>
+                <option *ngFor='let subject of subjectList' [value]="subject.SubjectId">
+                    {{subject.SubjectName}}</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.SubjectId.touched && f.SubjectId.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Note.FileTitle</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="FileTitle" maxlength="200">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.FileTitle.touched && f.FileTitle.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Note.Description</label>
+        <div class="col-sm-5">
+            <textarea class="form-control" rows="3" formControlName="FileDescription" maxlength="200"></textarea>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.FileDescription.touched && f.FileDescription.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label"><span translate>Note.Keyword</span> 1</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="Keyword1" maxlength="50">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.Keyword1.touched && f.Keyword1.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label"><span translate>Note.Keyword</span> 2</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="Keyword2" maxlength="50">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.Keyword2.touched && f.Keyword2.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label"><span translate>Note.Keyword</span> 3</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="Keyword3" maxlength="50">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.Keyword3.touched && f.Keyword3.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label"><span translate>Note.Keyword</span> 4</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="Keyword4" maxlength="50">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.Keyword4.touched && f.Keyword4.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label"><span translate>Note.Keyword</span> 5</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="Keyword5" maxlength="50">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.Keyword5.touched && f.Keyword5.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row" *ngIf="this.registerForm.invalid">
+        <label class="col-sm-3 col-form-label">&nbsp;</label>
+        <div class="col-sm-5 error-msg-text" translate>
+            Messages.PleaseFillOut
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+    <div class="form-row admin-action-footer">
+        <label class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+            <div class="admin-action flt">
+                <button type="submit" class="btn" [disabled]="registerForm.invalid" translate>Common.Save
+                    <i class="fa fa-floppy-o"></i>
+                </button>
+                <button type="button" class="btn btn-secondary" [mat-dialog-close] translate>Common.Close
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

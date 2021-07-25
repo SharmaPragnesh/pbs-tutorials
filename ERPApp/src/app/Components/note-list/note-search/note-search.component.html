@@ -1,0 +1,50 @@
+<div class="pps" id="divStudyId{{studyId}}">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb uninor-breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">{{InstitutionName}}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{StudyName}}</li>
+        </ol>
+    </nav>
+    <!-- Bind No of Semesters/Years -->
+    <div class="semyearbutton" *ngIf="firstSemYearId>0">
+        <button class="btn" *ngFor="let semester of semesterList;index as i;" (click)="GetSubjectAndNotesList(semester.SemesterId)"
+            [class.active]="semester.SemesterId == firstSemYearId" id="btnSemester{{semester.SemesterId}}">
+            <span>{{semester.SemesterName}}</span>
+        </button>
+    </div>
+    <div *ngFor="let subject of subjectList | orderBy: 'Sorting'" id="divSubject{{subject.SubjectId}}">
+        <div class="bc-row uninor-sub-breadcrumb" *ngIf="firstSemYearId>0 && subject.SubjectId!=0">
+            <div class="bc-column breadcrumb-item active" aria-current="page">
+                <span translate>PageHeader.Subject</span>
+                <div class="breadcrumb-subject">{{subject.SubjectName}}</div>
+            </div>
+            <div class="bc-column">
+                <div class="sub-breadcrumb-result" translate>Note.Result
+                    <span>: {{subject.UploadedFiles}} &nbsp;</span>
+                    <span *ngIf="subject.UploadedFiles != 1" translate>PageHeader.Notes</span>
+                    <span *ngIf="subject.UploadedFiles == 1" translate>PageHeader.Note</span>
+                </div>
+            </div>
+            <div class="bc-column">
+                <button class="btn search-action" (click)="ApplyMonitor(subject.SubjectId,subject.SubjectName)"
+                    *ngIf="userService.loggedIn() && !SubjectIdExist(subject.SubjectId)" translate>Note.Monitor <i
+                        class="fa fa-eye"></i>
+                </button>
+                <button class="btn search-action text-white" style="background-color: grey;border-color: grey"
+                    *ngIf="userService.loggedIn() && SubjectIdExist(subject.SubjectId)" [disabled]="true"
+                    translate>Note.MonitorAlready
+                    <i class="fa fa-eye"></i>
+                </button>
+                <button class="btn search-action" (click)="OpenUploadFilePage(subject)" *ngIf="userService.loggedIn()"
+                    translate>Note.UploadNotes <i class="fa fa-upload"></i>
+                </button>
+            </div>
+        </div>
+        <div *ngIf="subject.SubjectId==0">
+            <strong class="text-danger" translate>Messages.NoSearchFound</strong> :
+            {{noteListService.filesParameter.SearchText}}
+        </div>
+        <app-note (buttonClick)="onButtonClick($event)" name="{{ name }}" [subjectId]="subject.SubjectId"
+            [isFilesFoundList]="isFilesFoundList" [filesListAllRecords]="filesList"></app-note>
+    </div>
+</div>

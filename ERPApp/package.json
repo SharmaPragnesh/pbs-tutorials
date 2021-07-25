@@ -30,6 +30,7 @@
     "ng-starrating": "^1.0.20",
     "ng2-order-pipe": "^0.1.5",
     "ngx-bootstrap": "^7.0.0",
+    "ngx-cookiebot-angular7": "^1.0.7",
     "ngx-pagination": "^5.1.1",
     "ngx-toastr": "^14.0.0",
     "rxjs": "~6.6.0",

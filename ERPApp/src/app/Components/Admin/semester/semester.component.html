@@ -1,0 +1,31 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="display-6" translate>PageHeader.Semester</h4>
+<hr>
+<form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()">
+    <input type="hidden" class="form-control" formControlName="StudyId">
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Semester.SemesterNo</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="SemesterNo" maxlength="7" numbersOnly>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.SemesterNo.touched && f.SemesterNo.errors?.required"
+                translate>Common.RequiredField</label>
+            <label class="text-danger" *ngIf="f.SemesterNo.touched && f.SemesterNo.errors?.semesterNoExists" translate>
+                Study.StudyNoExist</label>
+            <label class="text-danger" *ngIf="f.SemesterNo.touched && f.SemesterNo.errors?.semesterNoCanNotZero">
+                Semester No can not be zero</label>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+            <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid"
+                translate>Common.Save</button>
+            <button type="button" class="btn btn btn-secondary ml-1" [mat-dialog-close] translate>Common.Close</button>
+        </div>
+    </div>
+</form>

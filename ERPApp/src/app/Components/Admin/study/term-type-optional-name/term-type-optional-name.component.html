@@ -1,0 +1,67 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="uni-header" translate>PageHeader.Period</h4>
+<mat-dialog-content>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th translate>PageHeader.Period</th>
+                    <th>Period Name DK</th>
+                    <th>Period Name EN</th>
+                    <th class="text-center sorting-width" translate>
+                        Common.Sorting
+                    </th>
+                    <th class="text-center delete-width"></th>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor='let semester of semesterList | callback: semesterService.filterSemester; index as i; let first = first; let last = last;'>
+                    <td><span translate>Study.Period</span> {{i+1}}</td>
+                    <td>
+                        <input class="form-control" type="text" name="SemesterNameDaDK" #SemesterNameDaDK="ngModel"
+                            [(ngModel)]="semester.SemesterNameDaDK" (change)="SemesterValueModified(semester)"
+                            (keypress)="SemesterValueModified(semester)">
+                    </td>
+                    <td>
+                        <input class="form-control" type="text" name="SemesterNameEnUS" #SemesterNameEnUS="ngModel"
+                            [(ngModel)]="semester.SemesterNameEnUS" (change)="SemesterValueModified(semester)"
+                            (keypress)="SemesterValueModified(semester)">
+                    </td>
+                    <td id="tr{{semester.Sorting}}" class="text-center position-relative arrow-sort-width">
+                        <span class="text-center sb-box-left">
+                            <i class="fa fa-angle-up hand sorting-button-up" (click)="MoveUp(i)"
+                                *ngIf="!first"></i>&nbsp;
+                        </span>
+                        <span class="text-center sb-box-right">
+                            <i class="fa fa-angle-down hand sorting-button-down" (click)="MoveDown(i)"
+                                *ngIf="!last"></i>
+                        </span>
+                    </td>
+                    <td *ngIf="semester.StudyId !=0" class="text-center" (click)="CofirmDeleteTermTypeName(semester,i)">
+                        <i class="fa fa-trash fa-lg hand remove-icon"></i>
+                    </td>
+                    <!-- <td>IsModified={{semester.IsModified}}</td>
+                    <td>{{semester.SemesterId}}</td>
+                    <td>{{semester.StudyId}}</td>
+                    <td>{{semester.IsForDelete}}</td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-row admin-action-footer">
+        <!-- <label class="col-sm-3 col-form-label"></label> -->
+        <div class="col-sm-12">
+            <div class="admin-action" style="text-align: center; float: inherit;">
+                <button type="button" class="btn" (click)="SaveTermTypeOptionalName()" translate>Common.Ok
+                    <i class="fa fa-check"></i>
+                </button>
+                <button type="button" class="btn btn-secondary" [mat-dialog-close] translate>Common.Cancel
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

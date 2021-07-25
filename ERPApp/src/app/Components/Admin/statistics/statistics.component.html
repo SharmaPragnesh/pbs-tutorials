@@ -1,0 +1,129 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <div style="float: left; text-align: left;">
+                        <h3 class="mb-0" translate>PageHeader.Statistics</h3>
+                    </div>
+                </div>
+                <div class="statistics-form">
+                    <form [formGroup]="usageForm" autocomplete="off" class="uniform-row statistics-form-col"
+                        (ngSubmit)="onSubmitStatistics()">
+                        <!-- <h5 translate>Statistics.Usage</h5> -->
+                        <div class="form-datepicker">
+                            <div class="form-group">
+                                <label class="uniform-colleft"><span translate>Statistics.From</span></label>
+                                <div class="uniform-colleft">
+                                    <input class="form-control" #dpMDY="bsDatepicker" bsDatepicker
+                                        formControlName="UsageFromDate"
+                                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', showWeekNumbers : false,  returnFocusToInput: true }">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="uniform-colleft"><span translate>Statistics.To</span></label>
+                                <div class="uniform-colleft">
+                                    <input class="form-control" #dpMDY="bsDatepicker" bsDatepicker
+                                        formControlName="UsageToDate"
+                                        [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', showWeekNumbers : false,  returnFocusToInput: true }">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="admin-action edit flt">
+                                    <button type="submit" class="btn btn-primary " translate>Common.Search
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="showUsage">
+                            <div class="uniform-row usage-form-col">
+                                <div class="form-group">
+                                    <label class="uniform-colleft"><span translate>Statistics.NewUsers</span></label>
+                                    <div class="uniform-colleft">
+                                        <input class="form-control text-right" formControlName="NewUsers" readonly>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <label class="uniform-colleft"><span
+                                            translate>Statistics.DeletedUsers</span></label>
+                                    <div class="uniform-colleft">
+                                        <input class="form-control text-right" formControlName="DeletedUsers" readonly>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <label class="uniform-colleft"><span
+                                            translate>Statistics.ActiveUsers</span></label>
+                                    <div class="uniform-colleft">
+                                        <input class="form-control text-right" formControlName="TotalActiveUsers"
+                                            readonly>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <label class="uniform-colleft"><span translate>Statistics.TotalLogins</span></label>
+                                    <div class="uniform-colleft">
+                                        <input class="form-control text-right" formControlName="TotalLogins" readonly>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <label class="uniform-colleft"><span
+                                            translate>Statistics.UploadedNotes</span></label>
+                                    <div class="uniform-colleft">
+                                        <input class="form-control text-right" formControlName="UploadedNotes" readonly>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <label class="uniform-colleft"><span
+                                            translate>Statistics.DownloadedNotes</span></label>
+                                    <div class="uniform-colleft">
+                                        <input class="form-control text-right" formControlName="DownloadedNotes"
+                                            readonly>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <label class="uniform-colleft"><span
+                                            translate>Statistics.MonitoredSubjects</span></label>
+                                    <div class="uniform-colleft">
+                                        <input class="form-control text-right" formControlName="MonitoredSubjects"
+                                            readonly>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <label class="uniform-colleft"><span translate>Statistics.Reviews</span></label>
+                                    <div class="uniform-colleft">
+                                        <input class="form-control text-right" formControlName="Reviews" readonly>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <label class="uniform-colleft"><span translate>Statistics.Comments</span></label>
+                                    <div class="uniform-colleft">
+                                        <input class="form-control text-right" formControlName="Comments" readonly>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="form-group">
+                                    <label class="uniform-colleft">&nbsp;</label>
+                                    <div class="uniform-colleft">
+                                        <button type="button" class="btn btn-primary" (click)="DownloadExcel()"
+                                            translate>Statistics.DownloadExcel
+                                            <i class="fa fa-print" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,176 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="uni-header" translate>Note.UploadNotes</h4>
+<mat-dialog-content class="upload-notes">
+    <form>
+        <div class="uniform-row">
+            <div class="form-group">
+                <label class="uniform-colleft"><span translate>PageHeader.Institution</span></label>
+                <div class="uniform-colleft">
+                    <span>{{noteListService.filesParameter.InstitutionName}}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="uniform-colleft"><span translate>PageHeader.Study</span></label>
+                <div class="uniform-colleft">
+                    <span>{{noteListService.filesParameter.StudyName}}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="uniform-colleft"><span translate>PageHeader.Semester</span></label>
+                <div class="uniform-colleft">
+                    <span>{{noteListService.filesParameter.SemesterName}}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="uniform-colleft"><span translate>PageHeader.Subject</span></label>
+                <div class="uniform-colleft">
+                    <span>{{noteListService.filesParameter.SubjectName}}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="uniform-colleft v-top"><span translate>Note.MyFilename</span></label>
+                <div class="uniform-colleft dis-ib width-auto">
+                    <div *ngIf="!showMore">
+                        <div class="admin-action edit">
+                            <button class="btn btn-primary text-white" (click)="inputFile.click()"
+                                [disabled]="uploadResponse.status === 'progress'" translate>Messages.ChooseFile
+                                <i class="fa fa-file-o" aria-hidden="true"></i>
+                            </button>
+                            <input name="file" id="file" (change)="upload($event)" type="file" #inputFile hidden>
+                            <button *ngIf="!showMore" type="button" class="btn btn btn-secondary" [mat-dialog-close]
+                                translate>Common.Cancel
+                                <i class="fa fa-close"></i></button>
+                        </div>
+                        <div *ngIf="uploadResponse.status === 'progress'" style="clear: both;">
+                            <br>
+                            <div class="progress" *ngIf="uploadResponse.percentage">
+                                <div class="progress-bar" [style.width]="uploadResponse.percentage + '%'">
+                                    {{uploadResponse.percentage}}%</div>
+                            </div>
+                            <div class="please-wait blink" *ngIf="uploadResponse.percentage == 100"><span translate>Messages.UploadingPleaseWait</span><img alt=""
+                                    src="/assets/images/loading-blue.gif"></div>
+                        </div>
+                    </div>
+                    <div *ngIf="showMore">
+                        <span>{{originalFileName}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <h1>originalFileName={{originalFileName}}</h1>
+        <h1>uploadResponse={{uploadResponse}}</h1>
+        <h1>showMore={{showMore}}</h1> -->
+        <div class="form-group row text-danger" *ngIf="fileUploadError">
+            <div class="col-sm-12">
+                <strong>{{fileUploadError}}</strong>
+                <br>
+                <hr>
+            </div>
+        </div>
+        <div class="form-group row text-danger" *ngIf="!uploadResponse && !showMore">
+            <div class="col-sm-12">
+                <strong translate>Messages.FileCouldNotPass</strong>
+                <br>
+                <hr>
+            </div>
+        </div>
+        <div class="form-group row text-success" *ngIf="showMore">
+            <div class="col-sm-12">
+                <strong translate>Messages.FilePassedVirus</strong>
+                <br>
+                <hr>
+            </div>
+        </div>
+    </form>
+    <div *ngIf="showMore">
+        <form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()">
+            <input type="hidden" class="form-control" formControlName="InstitutionId">
+            <input type="hidden" class="form-control" formControlName="StudyId">
+            <input type="hidden" class="form-control" formControlName="SemesterId">
+            <input type="hidden" class="form-control" formControlName="SubjectId">
+            <div class="form-group row">
+                <label class="col-sm-12 col-form-label" translate>Note.PleaseAddSomeKeywords</label>
+            </div>
+            <div class="form-group row required">
+                <label class="col-sm-2 col-form-label" translate>Note.FileTitle</label>
+                <div class="col-sm-6">
+                    <input class="form-control" formControlName="FileTitle" tabindex="1" maxlength="200">
+                </div>
+                <div class="col-sm-4">
+                    <label class="text-danger" *ngIf="f.FileTitle.touched && f.FileTitle.errors?.required"
+                        translate>Common.RequiredField</label>
+                </div>
+            </div>
+            <div class="form-group row required">
+                <label class="col-sm-2 col-form-label"><span translate>Note.Keyword</span> 1</label>
+                <div class="col-sm-6">
+                    <input class="form-control" formControlName="Keyword1" tabindex="2" maxlength="50">
+                </div>
+                <div class="col-sm-4">
+                    <label class="text-danger" *ngIf="f.Keyword1.touched && f.Keyword1.errors?.required"
+                        translate>Common.RequiredField</label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><span translate>Note.Keyword</span> 2</label>
+                <div class="col-sm-6">
+                    <input class="form-control" formControlName="Keyword2" tabindex="3" maxlength="50">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><span translate>Note.Keyword</span> 3</label>
+                <div class="col-sm-6">
+                    <input class="form-control" formControlName="Keyword3" tabindex="4" maxlength="50">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><span translate>Note.Keyword</span> 4</label>
+                <div class="col-sm-6">
+                    <input class="form-control" formControlName="Keyword4" tabindex="5" maxlength="50">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"><span translate>Note.Keyword</span> 5</label>
+                <div class="col-sm-6">
+                    <input class="form-control" formControlName="Keyword5" tabindex="6" maxlength="50">
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="form-group row required">
+                <label class="col-sm-2 col-form-label" translate>Note.Description</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="3" formControlName="FileDescription" tabindex="7"
+                        maxlength="200"></textarea>
+                </div>
+                <div class="col-sm-4">
+                    <label class="text-danger" *ngIf="f.FileDescription.touched && f.FileDescription.errors?.required"
+                        translate>Common.RequiredField</label>
+                    <h6><span translate>Note.AvailableCharacters</span> :
+                        {{(200-registerForm.value.FileDescription.length)}}/200</h6>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="this.registerForm.invalid">
+                <label class="col-sm-2 col-form-label">&nbsp;</label>
+                <div class="col-sm-6 error-msg-text" translate>
+                    Messages.PleaseFillOut
+                </div>
+                <div class="col-sm-4"></div>
+            </div>
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end" *ngIf="showMore">
+    <div class="admin-action flt">
+        <button type="submit" class="btn" tabindex="8" [disabled]="registerForm.invalid" (click)="onSubmit()"
+            translate>Note.Upload
+            <i class="fa fa-floppy-o"></i></button>
+        <button type="button" class="btn btn btn-secondary" tabindex="9" [mat-dialog-close] translate>Common.Close
+            <i class="fa fa-close"></i></button>
+    </div>
+</mat-dialog-actions>

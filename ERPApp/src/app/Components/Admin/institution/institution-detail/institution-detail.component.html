@@ -1,0 +1,38 @@
+<form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+    <input type="hidden" name="InstitutionId" #InstitutionId="ngModel"
+        [(ngModel)]="institutionService.institutionFormData.InstitutionId">
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <!-- <label for="inputZip">Institution No</label> -->
+            <input type="text" class="form-control" placeholder="Institution No" #InstitutionNo="ngModel"
+                [(ngModel)]="institutionService.institutionFormData.InstitutionNo" name="InstitutionNo" minlength="4"
+                required>
+            <div class="validation-error" *ngIf="InstitutionNo.invalid && InstitutionNo.touched">This field is required
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <!-- <label for="inputEmail4">Institution Danish</label> -->
+            <input type="text" class="form-control" placeholder="Institution Danish" #InstitutionNameDaDK="ngModel"
+                [(ngModel)]="institutionService.institutionFormData.InstitutionNameDaDK" name="InstitutionNameDaDK"
+                required>
+            <div class="validation-error" *ngIf="InstitutionNameDaDK.invalid && InstitutionNameDaDK.touched">This field
+                is required
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <!-- <label for="inputPassword4">Institution English</label> -->
+            <input type="text" class="form-control" placeholder="Institution English" #InstitutionNameEnUS="ngModel"
+                [(ngModel)]="institutionService.institutionFormData.InstitutionNameEnUS" name="InstitutionNameEnUS"
+                required>
+            <div class="validation-error" *ngIf="InstitutionNameEnUS.invalid && InstitutionNameEnUS.touched">This field
+                is required
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <div class="btn-toolbar">
+                <button type="submit" class="btn btn-primary" [disabled]="form.invalid" translate>Common.Save</button>
+                <button type="button" class="btn btn btn-secondary ml-1" translate>Common.Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>

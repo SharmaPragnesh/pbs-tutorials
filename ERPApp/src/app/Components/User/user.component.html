@@ -1,0 +1,22 @@
+<div class="mynotes-edit">
+    <h3 class="mb-0 admin-heading" translate>User.MyNotes</h3>
+    <div class="admin-action">
+        <a class="btn text-white hand" (click)="noteListService.ChangeThemeMode(noteListService.themeMode)">
+            <span *ngIf="noteListService.themeMode == '1'" translate>Common.DarkMode</span>
+            <span *ngIf="noteListService.themeMode == '0'" translate>Common.NormalMode</span>
+            <i class="fa fa-paint-brush" aria-hidden="true"></i>
+        </a>
+        <a class="btn text-white" routerLink="/user/about-me" routerLinkActive="active" translate>User.AboutMe
+            <i class="fa fa-user-circle" aria-hidden="true"></i></a>
+        <a class="btn text-white" routerLink="/user/monitoring" routerLinkActive="active" translate>Note.Monitoring
+            <i class="fa fa-eye" aria-hidden="true"></i></a>
+        <a class="btn text-white" routerLink="/user/my-files" routerLinkActive="active" translate>User.MyFiles
+            <i class="fa fa-files-o" aria-hidden="true"></i>
+        </a>
+        <button type="button" class="btn btn-secondary frt" routerLink="/" translate>Common.Close
+            <i class="fa fa-close"></i></button>
+    </div>
+</div>
+<div style="clear: both;"></div>
+<br>
+<router-outlet></router-outlet>

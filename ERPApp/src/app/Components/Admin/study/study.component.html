@@ -1,0 +1,145 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="uni-header" translate>PageHeader.Study</h4>
+<form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()" class="admin-form-content">
+    <input type="hidden" class="form-control" formControlName="InstitutionId">
+    <!-- <div class="form-group">
+        <label for="InstitutionId" translate>PageHeader.Institution</label>
+        <select formControlName="InstitutionId" class="form-control">
+            <option value="">Select Institution</option>
+            <option *ngFor='let option of institutionService.institutionList' [value]="option.InstitutionId">
+                {{option.InstitutionName}}</option>
+        </select>
+        <div *ngIf="f.InstitutionId.touched && f.InstitutionId.invalid" class="text-danger">
+            <div *ngIf="f.InstitutionId.errors.required">Please select Institution</div>
+        </div>
+    </div> -->
+    <!-- {{f.StudyNo.pending}} -->
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Study.StudyNo</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="StudyNo" maxlength="7" numbersOnly>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.StudyNo.touched && f.StudyNo.errors?.required"
+                translate>Common.RequiredField</label>
+            <label class="text-danger" *ngIf="f.StudyNo.touched && f.StudyNo.errors?.minlength"
+                translate>Common.Require4Digits</label>
+            <label class="text-danger" *ngIf="f.StudyNo.touched && f.StudyNo.errors?.studyNoExists" translate>
+                Study.StudyNoExist</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Study.StudyDanish</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="StudyNameDaDK" maxlength="100">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.StudyNameDaDK.touched && f.StudyNameDaDK.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Study.StudyEnglish</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="StudyNameEnUS" maxlength="100">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.StudyNameEnUS.touched && f.StudyNameEnUS.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Study.Period</label>
+        <div class="col-sm-5">
+            <select formControlName="TermTypeId" class="form-control period-select" (change)="ChangeTermType($event)">
+                <option *ngFor='let termTypes of studyService.termTypesList' [value]="termTypes.TermTypeId">
+                    {{termTypes.TermType}}
+                </option>
+            </select>
+            <div class="admin-action">
+                <button type="button" class="btn text-white" (click)="AddTermType()" style="display: none;"
+                    translate>Study.AddTermType
+                    <i class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="btn text-white" (click)="GetTermTypeList()" style="display: none;"
+                translate>Period List
+                <i class="fa fa-plus"></i></button>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label" translate>Study.Number</label>
+        <div class="col-sm-5">
+            <input class="form-control period-select" formControlName="SemesterNo" maxlength="2"  (blur)="onNumberChange($event.target.value)" numbersOnly>
+            <div class="admin-action">
+                <button type="button" class="btn btn-success" (click)="ChangeTermTypeOptionalName()"
+                    translate>PageHeader.View</button>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.SemesterNo.touched && f.SemesterNo.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-row" style="display:none;">
+        <div class="semyearbutton" style="width: 100%;">
+            <div class="btn text-left" *ngFor="let semester of semesterService.semesterList;index as i;">
+                <span>Period {{i+1}}</span><br>
+                <span>{{semester.SemesterNameDaDK}}</span><br>
+                <span>{{semester.SemesterNameEnUS}}</span><br>
+                <span>IsForDelete={{semester.IsForDelete}}</span><br>
+                <span>IsModified={{semester.IsModified}}</span><br>
+                <span>SemesterId={{semester.SemesterId}}</span><br>
+                <span>StudyId={{semester.StudyId}}</span><br>
+                <!-- ({{semester.UploadedFiles}}) -->
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+            <div class="admin-action flt">
+                <button type="submit" class="btn" [disabled]="registerForm.invalid" translate>Common.Save
+                    <i class="fa fa-floppy-o"></i>
+                </button>
+                <button type="button" class="btn btn-secondary" [mat-dialog-close] translate>Common.Cancel
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+    <input type="hidden" name="StudyId" #StudyId="ngModel" [(ngModel)]="formData.StudyId">
+    <div class="form-group">
+        <label>Instituion</label>
+        <select *ngIf="institutionService.institutionList != null" name="InstitutionId" #InstitutionId="ngModel"
+            [(ngModel)]="formData.InstitutionId" class="form-control">
+            <option value="0">Select Instituion</option>
+            <option class='option' *ngFor='let option of institutionService.institutionList'
+                [value]="option.InstitutionId">{{option.InstitutionName}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Study No</label>
+        <input type="text" name="StudyNo" #StudyNo="ngModel" [(ngModel)]="formData.StudyNo" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Study name in Danish</label>
+        <input type="text" name="StudyNameDaDK" #StudyNameDaDK="ngModel" [(ngModel)]="formData.StudyNameDaDK"
+            class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Study name in English</label>
+        <input type="text" name="StudyNameEnUS" #StudyNameEnUS="ngModel" [(ngModel)]="formData.StudyNameEnUS"
+            class="form-control">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn btn-secondary ml-1" [mat-dialog-close]>Close</button>
+    </div>
+</form> -->

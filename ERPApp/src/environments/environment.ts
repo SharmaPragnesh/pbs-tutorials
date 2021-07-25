@@ -10,8 +10,10 @@ export const environment = {
   timeSpanMedium: 5000,
   timeSpanLarge: 7000,
   pageSize: 20,
+  UploadFileSize: 104857600,
   GoogleClientId: "981659961080-9qeq7ra4kt6k47t9k1lnfbvrjrglom5l.apps.googleusercontent.com",
   FacebookClientId: "1046651368784150",
+  CbId: '1e7f20aa-73c3-4a41-b529-ba02f82cfcdd', //https://www.cookiebot.com/en/
   Timeout: 60,
   ShowConsoleLogs: false,
   ShowTimerLogs: false,

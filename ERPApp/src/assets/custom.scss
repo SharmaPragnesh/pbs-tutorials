@@ -144,7 +144,7 @@ ul { margin: 0; padding: 0}
 .sidebar .nav1 li ul li a.has-arrow:after{ display: block; top:11px; font-size: 17px}
 .sidebar .nav1 li a.active { color: #2962ff !important }
 .sidebar .nav1 li a.active:after {color: #2962ff; -moz-transform: rotate(90deg);-o-transform: rotate(90deg);-ms-transform: rotate(90deg);-webkit-transform: rotate(90deg);transform: rotate(90deg);}
-.hero-banner { margin-bottom: 65px}
+.hero-banner { margin-bottom: 30px}
 .hero-banner .slider-track {-moz-transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);-o-transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);-ms-transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);-webkit-transition: all 1s cubic-bezier(0.7, 0, 0.3, 1);
   transition: all 1s cubic-bezier(0.7, 0, 0.3, 1)}
 .hero-banner .item {height: 600px;position: relative; z-index: 1}
@@ -154,7 +154,7 @@ ul { margin: 0; padding: 0}
   object-position:center}
 .hero-banner .item.slick-active .banner-img{-moz-transform: scale(1);-o-transform: scale(1);-ms-transform: scale(1);-webkit-transform: scale(1.2);transform: scale(1.2);}
 .banner-content { padding:65px 20px 20px; color:#fff; position: absolute; left:0; bottom:0; width: 100%; background: linear-gradient(0deg,rgba(0,0,0,1) 15%,rgba(0,0,0,0) 100%); }
-.banner-content p{ margin-bottom: 0; margin-top: 5px; width: 60%; font-size: 14px; line-height: 1.4}
+.banner-content p{ margin-bottom: 0; margin-top: 5px; width: 90%; font-size: 14px; line-height: 1.4}
 .banner-content strong{ font-size: 20px}
 .slick-dots { position: absolute; right:20px; margin: 0; bottom:10px}
 .slick-dots li{ display: inline-block; text-indent: -10000px; cursor: pointer;margin: 0 3px; background: #fff; width:10px; height: 10px; -moz-border-radius: 100%;-o-border-radius: 100%;-ms-border-radius: 100%;-webkit-border-radius: 100%;border-radius: 100%;}
@@ -162,8 +162,8 @@ ul { margin: 0; padding: 0}
 .common-row { -moz-display: flex;-o-display: flex;-ms-display: flex;-webkit-display: flex;display: flex; margin: 0 -15px 40px }
 .common-row .column { padding:0 15px; -moz-display: flex;-o-display: flex;-ms-display: flex;-webkit-display: flex;display: flex;-moz-flex-direction: row;-o-flex-direction: row;-ms-flex-direction: row;-webkit-flex-direction: row;flex-direction: row;}
 .common-row .column .content { padding-right:30px}
-.common-row .column:first-child { width: 64%}
-.common-row .column:last-child { width: 36%}
+/*.common-row .column:first-child { width: 64%}
+ .common-row .column:last-child { width: 36%}*/
 .common-row .column h3 { margin: 10px 0 20px; width: 70%; color: var(--mainColor)}
 .common-row .column span{ color:#2962ff; font-size: 20px; font-weight: 600;}
 video:focus { outline: 0; border: 0}
@@ -258,7 +258,7 @@ table .remove-icon { color: var(--requiredFieldColor); }
 .nav-middle li.user-name ul li:last-child{ margin-bottom: 0} 
 .nav-middle li.user-name.active ul a, .nav-middle li.user-name ul a, .nav-middle-right li.user-name ul a, .nav-middle-right li.user-name.active ul a  { color: #fff; font-size: 14px; font-weight: 500; }
 .nav-middle li.user-name.active ul a:hover, .nav-middle-right li.user-name.active ul a:hover {color:#fff} 
-.sidebar-sticky {overflow-y: auto;height: 100vh}
+.sidebar-sticky {overflow-y: auto;height: 94vh}
 /* .main-wrapper .sidebar:after {
   content: '';
   position: absolute;
@@ -525,6 +525,7 @@ button.btn-confirm-confirm:focus { outline: 5px auto #2962ff;}
 .padd-bottom7 { padding-bottom : 7px !important}
 .uploaded-td .tooltip-hover { color: #888; margin-top: 8px;  font-size: 15px; }
 .uploaded-initials { color: #447bb4; font-weight: bold; font-size: 15px; margin-left: 5px;}
+.tooltip-common { position: relative; display: inline-block; cursor: pointer; }
 .comments-btn { background:#fff; font-size: 13px; border: 1px solid gray; color: #000; padding: 5px 10px; font-weight: 600; font-family: 'Open Sans', sans-serif; -moz-border-radius :5px; -o-border-radius :5px; -ms-border-radius :5px; -webkit-border-radius :5px; border-radius :5px; border-radius :5px; min-width: 90px; cursor: pointer; height: 31px; margin: 0 2px; }
 .tooltip-feedback {
   display: none;
@@ -544,6 +545,7 @@ button.btn-confirm-confirm:focus { outline: 5px auto #2962ff;}
   font-size: 14px;
   text-align: center;
   pointer-events: none;
+  min-width: 200px;
   }
 .tooltip-feedback:before {
   content: "\f0d7";
@@ -561,10 +563,10 @@ button.btn-confirm-confirm:focus { outline: 5px auto #2962ff;}
   bottom:-13px;
   color: rgb(28, 45, 65);
 }
-.comments-btn:hover .tooltip-feedback{ display: block}
+.comments-btn:hover .tooltip-feedback, .tooltip-common:hover .tooltip-feedback{ display: block}
 .comments-btn:after { content: "\f075";  color: #576977; margin-left: 5px; font: normal normal normal 14px/1 FontAwesome; display: none;}
-.comments-btn.feedback-btn{ min-width : inherit; position: relative }
-.comments-btn.feedback-btn:after{ display: block; }
+.comments-btn.feedback-btn{ min-width : inherit; position: relative; width: 40px; height: 31px; font-size: 16px; top: 2px; font-weight: 600; padding: 0; }
+.comments-btn.feedback-btn:after{ display: none; }
 .user-name .lang, .user-name:before, .sidebar .nav1 li a { color: var(--linkColor) }
 .sidebar .nav1 li.li-institute a:before {background: var(--navBottomBgColor) }
 .sidebar .nav1 li.li-institute a:after, .sidebar .nav1 li:hover li a { color: var(--mainColor) }
@@ -614,3 +616,18 @@ display: block; margin-bottom: 5px; border: 1px solid #eee; position: relative}
 .paste-imgbox img { height:200px;-moz-object-fit: cover;-o-object-fit: cover;-ms-object-fit: cover;-webkit-object-fit: cover;object-fit: cover;}
 .form-check.feedback-formcheck input{ width:20px; height:20px; margin-right:5px}
 .form-check.feedback-formcheck label { padding:2px 0 0 10px}
+.please-wait { clear: both;margin-bottom: 5px; }
+.please-wait span { margin-right:20px; }
+.please-wait img { width: 40px; }
+.questionmark-icon { width: 20px; height: 20px; cursor: pointer; position: relative; top: -2px;}
+.tooltip-feedback.tooltip-questionmark { right: -80px; top: -72px; z-index: 999999;}
+.tooltip-feedback.tooltip-questionmark:before { right: 83px;}
+.text-justify {
+  text-align: justify;
+  text-justify: inter-word;
+}
+.aboutus-row .column { width: 50%; }
+.ab-common-row ul { padding: 0 15px 20px;}
+.ab-common-row ul li{ list-style: disc; list-style-type: disc;}
+
+.simple-font { font-weight :500; color: inherit; }

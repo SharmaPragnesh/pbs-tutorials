@@ -1,0 +1,123 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0 admin-heading" translate>PageHeader.Study</h3>
+                    <div class="admin-action">
+                        <button type="button" class="btn btn-light" routerLink='/admin/institution' translate>
+                            Common.Back</button>
+                        <button class="btn text-white" *ngIf="noteListService.filesParameter.InstitutionId"
+                            (click)="AddOrEditStudy(noteListService.filesParameter.InstitutionId,0)"
+                            translate>Study.AddStudy
+                            <i class="fa fa-plus"></i></button>
+                        <button class="btn btn-success text-white" [disabled]="disableSaveOrder"
+                            *ngIf="noteListService.filesParameter.InstitutionId" (click)="UpdateStudySorting()"
+                            translate>Common.Save
+                            <i class="fa fa-floppy-o"></i></button>
+                    </div>
+                </div>
+                <div class="card-body education">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label translate>PageHeader.Institution&nbsp;&nbsp;</label>
+                            <select *ngIf="institutionService.institutionList != null" name="InstitutionId"
+                                #InstitutionId="ngModel" [(ngModel)]="noteListService.filesParameter.InstitutionId"
+                                class="form-control" (change)='onInsititutionChange($event)'>
+                                <option [ngValue]="0" translate>Messages.ChooseInstitution</option>
+                                <option *ngFor='let institute of institutionService.institutionList'
+                                    [ngValue]="institute.InstitutionId">{{institute.InstitutionName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive" *ngIf="studyList!=null">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="hand code-width" (click)="sort('StudyNo')">
+                                    <span class="sorting-column" translate>
+                                        Study.StudyNo
+                                        <i class="fa sorting-angle" *ngIf="key =='StudyNo'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand" (click)="sort('StudyNameDaDK')">
+                                    <span class="sorting-column" translate>
+                                        Study.StudyDanish
+                                        <i class="fa sorting-angle" *ngIf="key =='StudyNameDaDK'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand" (click)="sort('StudyNameEnUS')">
+                                    <span class="sorting-column" translate>
+                                        Study.StudyEnglish
+                                        <i class="fa sorting-angle" *ngIf="key =='StudyNameEnUS'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="text-center" (click)="sort('TermType')">
+                                    <span class="sorting-column" translate>
+                                        Study.Period
+                                        <i class="fa sorting-angle" *ngIf="key =='TermType'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="text-center semestercount-width" translate>
+                                    Study.Number
+                                </th>
+                                <th class="text-center sorting-width" translate>
+                                    Common.Sorting
+                                </th>
+                                <th class="text-center parent-width" translate>
+                                    Semester.Subjects
+                                </th>
+                                <th class="text-center delete-width"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let study of studyList | orderBy: key : reverse ;index as i; let first = first; let last = last;"
+                                [ngClass]="{'alt_row': i%2!==0}">
+                                <td class="hand" (click)="AddOrEditStudy(study.InstitutionId,study.StudyId)">
+                                    {{study.StudyNo}}
+                                </td>
+                                <td class="hand" (click)="AddOrEditStudy(study.InstitutionId,study.StudyId)">
+                                    {{study.StudyNameDaDK}}
+                                </td>
+                                <td class="hand" (click)="AddOrEditStudy(study.InstitutionId,study.StudyId)">
+                                    {{study.StudyNameEnUS}}
+                                </td>
+                                <td class="text-center hand code-width"
+                                    (click)="AddOrEditStudy(study.InstitutionId,study.StudyId)">
+                                    {{study.TermType}}
+                                </td>
+                                <td class="text-center hand code-width"
+                                    (click)="AddOrEditStudy(study.InstitutionId,study.StudyId)">
+                                    {{study.SemesterNo}}
+                                </td>
+                                <td id="tr{{study.Sorting}}" class="text-center position-relative arrow-sort-width">
+                                    <span class="text-center sb-box-left">
+                                        <i class="fa fa-angle-up hand sorting-button-up" (click)="MoveUp(i)"
+                                            *ngIf="!first"></i>&nbsp;
+                                    </span>
+                                    <span class="text-center sb-box-right">
+                                        <i class="fa fa-angle-down hand sorting-button-down" (click)="MoveDown(i)"
+                                            *ngIf="!last"></i>
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <i class="fa fa-book fa-lg hand" (click)="ShowSubjects(study)"></i>
+                                </td>
+                                <td class="text-center">
+                                    <i class="fa fa-trash fa-lg hand remove-icon" (click)="DeleteStudy(study)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,183 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0 admin-heading" translate>PageHeader.Users</h3>
+                    <div class="admin-action">
+                        <select class="form-control" #mySelect (change)='onOptionsSelected(mySelect.value)'
+                            style="float: left; width: 120px;">
+                            <option [value]="1" translate>Common.Active</option>
+                            <option [value]="0" translate>Common.Inactive</option>
+                            <option [value]="-1" translate>Common.All</option>
+                        </select>
+                        <button class="btn text-white" (click)="AddOrEditUser(0)" style="display: none;"
+                            translate>Users.AddUser</button>
+                        <button type="button" class="btn btn-primary" (click)="onPrint()" style="display: none;"
+                            translate>Statistics.Print
+                            <i class="fa fa-print" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="table-responsive" *ngIf="userService.userList!=null">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="hand semesterno-width" (click)="sort('UserId')">
+                                    <span class="sorting-column" translate>
+                                        Users.UserId
+                                        <i class="fa sorting-angle" *ngIf="key =='UserId'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand firstname-width" (click)="sort('FirstName')">
+                                    <span class="sorting-column" translate>
+                                        Users.FirstName
+                                        <i class="fa sorting-angle" *ngIf="key =='FirstName'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand" (click)="sort('LastName')">
+                                    <span class="sorting-column" translate>
+                                        Users.LastName
+                                        <i class="fa sorting-angle" *ngIf="key =='LastName'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand single-width" (click)="sort('Initials')">
+                                    <span class="sorting-column" translate>
+                                        Users.Initials
+                                        <i class="fa sorting-angle" *ngIf="key =='Initials'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand sorting-width" (click)="sort('StartingDate')">
+                                    <span class="sorting-column" translate>
+                                        Users.StartingDate
+                                        <i class="fa sorting-angle" *ngIf="key =='StartingDate'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand sorting-width" (click)="sort('UserLoginType')">
+                                    <span class="sorting-column" translate>
+                                        Common.Login
+                                        <i class="fa sorting-angle" *ngIf="key =='UserLoginType'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand sorting-width" (click)="sort('LastLoginDate')">
+                                    <span class="sorting-column" translate>
+                                        Users.LastLogin
+                                        <i class="fa sorting-angle" *ngIf="key =='LastLoginDate'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand text-center sorting-width" (click)="sort('FilesUploaded')">
+                                    <span class="sorting-column" translate>
+                                        Users.NoOfFileUploads
+                                        <i class="fa sorting-angle" *ngIf="key =='FilesUploaded'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand text-center sorting-width" (click)="sort('SubjectInterestCount')">
+                                    <span class="sorting-column" translate>
+                                        Note.Monitoring
+                                        <i class="fa sorting-angle" *ngIf="key =='SubjectInterestCount'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <!-- <th class="text-center single-width"></th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of userService.userList | orderBy: key : reverse | paginate: config ;index as i;"
+                                [ngClass]="{'alt_row': i%2!==0}">
+                                <td (click)="AddOrEditUser(user.UserId)"
+                                    [ngClass]="user.IsActive == 0 ? 'inactive-users' :''">{{user.UserId}}</td>
+                                <td (click)="AddOrEditUser(user.UserId)"
+                                    [ngClass]="user.IsActive == 0 ? 'inactive-users' :''" class="tooltip-hover">
+                                    {{user.FirstName}}
+                                    <div class="tooltip-box">
+                                        <p>
+                                            <label translate>Users.EmailAddress</label>
+                                            <span>{{user.Email}}</span>
+                                        </p>
+                                        <p>
+                                            <label translate>Common.UserName</label>
+                                            <span>{{user.UserName}}</span>
+                                        </p>
+                                        <p>
+                                            <label translate>Common.Active</label>
+                                            <span *ngIf="user.IsActive" translate>Common.Yes</span>
+                                            <span *ngIf="!user.IsActive" translate>Common.No</span>
+                                        </p>
+                                        <p>
+                                            <label translate>PageHeader.Admin</label>
+                                            <span *ngIf="user.IsAdmin" translate>Common.Yes</span>
+                                            <span *ngIf="!user.IsAdmin" translate>Common.No</span>
+                                        </p>
+                                        <p>
+                                            <label>Send Notification</label>
+                                            <span *ngIf="user.SendNotification" translate>Common.Yes</span>
+                                            <span *ngIf="!user.SendNotification" translate>Common.No</span>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td (click)="AddOrEditUser(user.UserId)"
+                                    [ngClass]="user.IsActive == 0 ? 'inactive-users' :''">{{user.LastName}}</td>
+                                <td class="tooltip-hover text-center" (click)="AddOrEditUser(user.UserId)"
+                                    [ngClass]="user.IsActive == 0 ? 'inactive-users' :''">
+                                    {{user.Initials}}
+                                    <div class="tooltip-box notelist-tooltip-box initials-box text-left">
+                                        <p>
+                                            <span>{{user.FirstName + ' ' + user.LastName}}</span>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td (click)="AddOrEditUser(user.UserId)"
+                                    [ngClass]="user.IsActive == 0 ? 'inactive-users' :''">
+                                    {{user.StartingDate | date: 'dd/MM/yyyy'}}</td>
+                                <td (click)="AddOrEditUser(user.UserId)"
+                                    [ngClass]="user.IsActive == 0 ? 'inactive-users' :''">
+                                    <span *ngIf="user.UserLoginType == 1" translate>UniNoter</span>
+                                    <span *ngIf="user.UserLoginType == 2" translate>Google</span>
+                                    <span *ngIf="user.UserLoginType == 3" translate>Facebook</span>
+                                </td>
+                                <td (click)="AddOrEditUser(user.UserId)"
+                                    [ngClass]="user.IsActive == 0 ? 'inactive-users' :''">
+                                    {{user.LastLoginDate | date: 'dd/MM/yyyy'}}</td>
+                                <td class="text-center" [ngClass]="user.IsActive == 0 ? 'inactive-users' :''">
+                                    <span
+                                        *ngIf="user.FilesUploaded==0 || !(userService.userInfo.UserId == user.UserId || userService.userInfo.IsAdmin)">{{user.FilesUploaded}}</span>
+                                    <a href="javascript:void(0);" class="a-link"
+                                        *ngIf="user.FilesUploaded!=0 && (userService.userInfo.UserId == user.UserId || userService.userInfo.IsAdmin)"
+                                        (click)="FilesUploadedList(user.UserId)">
+                                        {{user.FilesUploaded}}
+                                    </a>
+                                </td>
+                                <td class="text-center" [ngClass]="user.IsActive == 0 ? 'inactive-users' :''">
+                                    <span
+                                        *ngIf="user.SubjectInterestCount==0 || !(userService.userInfo.UserId == user.UserId || userService.userInfo.IsAdmin)">{{user.SubjectInterestCount}}</span>
+                                    <a href="javascript:void(0);" class="a-link"
+                                        *ngIf="user.SubjectInterestCount!=0 && (userService.userInfo.UserId == user.UserId || userService.userInfo.IsAdmin)"
+                                        (click)="FilesMonitoringList(user.UserId)">
+                                        {{user.SubjectInterestCount}}
+                                    </a>
+                                </td>
+                                <!-- <td class="text-center" [ngClass]="user.IsActive == 0 ? 'inactive-users' :''">
+                                    <i class="fa fa-trash fa-lg hand remove-icon" (click)="onDelete(user)"></i>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="clear"></div>
+                    <div class="text-center">
+                        <pagination-controls id="paginationUserList" (pageChange)="pageChanged($event)"
+                            [previousLabel]="userService.labels.previousLabel | translate"
+                            [nextLabel]="userService.labels.nextLabel | translate"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

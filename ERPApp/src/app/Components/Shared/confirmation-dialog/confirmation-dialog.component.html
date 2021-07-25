@@ -1,0 +1,17 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="uni-header">{{ message.title }}</h4>
+<div class="confirm-body">
+    {{ message.content }}
+</div>
+<div class="btn-confirm">
+    <!-- Write cdkFocusInitial to Yes button if you want default focus on Yes -->
+    <!-- <button class="btn-confirm-no" (click)="onNoClick()" translate>Common.No</button> -->
+    <button class="{{ message.nocss || 'btn-confirm-no' }}" (click)="onNoClick()" translate>{{ message.no || 'Common.No'
+        }}</button>
+    <!-- <button class="btn-confirm-yes" [mat-dialog-close]="true" cdkFocusInitial translate>{{ message.yes || 'Common.Yes' }}</button> -->
+    <button class="{{ message.yescss || 'btn-confirm-yes' }}" [mat-dialog-close]="true" cdkFocusInitial translate>{{
+        message.yes || 'Common.Yes' }}</button>
+</div>

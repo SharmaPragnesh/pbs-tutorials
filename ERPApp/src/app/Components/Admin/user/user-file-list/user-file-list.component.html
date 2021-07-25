@@ -1,0 +1,135 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="uni-header" translate>Users.NoOfFileUploads
+    <span *ngIf="filesList"> : {{filesList.length}}</span>
+</h4>
+<mat-dialog-content>
+    <span class="anchor" id="formLogin"></span>
+    <div class="card rounded-0">
+        <!-- <div class="alert_yel_msg" *ngIf="filesList==null">
+                    <div class="font_16">
+                        No data found
+                    </div>
+                    <p></p>
+                </div> -->
+        <div class="progress" *ngIf="percentage && showProgress">
+            <div class="progress-bar" [style.width]="percentage + '%'">{{percentage}}%</div>
+        </div>
+        <!-- <p *ngIf="showProgress"> progress <strong>{{percentage}}%</strong></p> -->
+        <!-- Target Listing section start here -->
+        <div class="table-responsive" *ngIf="filesList!=null">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="hand semesterno-width text-center" (click)="sort('SemesterName')">
+                            <span class="sorting-column" translate>
+                                Study.Period
+                                <span class="fa sorting-angle" *ngIf="key =='SemesterName'"
+                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></span>
+                            </span>
+                        </th>
+                        <th class="hand" (click)="sort('SubjectName')">
+                            <span class="sorting-column" translate>
+                                PageHeader.Subject
+                                <span class="fa sorting-angle" *ngIf="key =='SubjectName'"
+                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></span>
+                            </span>
+                        </th>
+                        <th class="hand" (click)="sort('FileName')">
+                            <span class="sorting-column" translate>
+                                Note.MyFilename
+                                <span class="fa sorting-angle" *ngIf="key =='FileName'"
+                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></span>
+                            </span>
+                        </th>
+                        <th class="hand" (click)="sort('FileTitle')">
+                            <span class="sorting-column" translate>
+                                Note.FileTitle
+                                <span class="fa sorting-angle" *ngIf="key =='FileTitle'"
+                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></span>
+                            </span>
+                        </th>
+                        <th class="hand" (click)="sort('Keywords')">
+                            <span class="sorting-column" translate>
+                                Note.Keywords
+                                <span class="fa sorting-angle" *ngIf="key =='Keywords'"
+                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></span>
+                            </span>
+                        </th>
+                        <th class="hand rating-width" (click)="sort('AverageScore')">
+                            <span class="sorting-column" translate>
+                                Note.Evaluation
+                                <span class="fa sorting-angle" *ngIf="key =='AverageScore'"
+                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></span>
+                            </span>
+                        </th>
+                        <th class="hand" (click)="sort('CreatedDate')">
+                            <span class="sorting-column" translate>
+                                Note.Uploaded
+                                <span class="fa sorting-angle" *ngIf="key =='CreatedDate'"
+                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></span>
+                            </span>
+                        </th>
+                        <th class="hand text-center" (click)="sort('FileType')">
+                            <span class="sorting-column" translate>
+                                Note.Type
+                                <span class="fa sorting-angle" *ngIf="key =='FileType'"
+                                    [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></span>
+                            </span>
+                        </th>
+                        <th translate style="display: none;">
+                            Common.Download
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container
+                        *ngFor="let notes of filesList | orderBy: key : reverse | paginate: config ;index as i;">
+                        <tr id="tr{{notes.FileId}}">
+                            <td class="text-center">
+                                {{notes.SemesterName}}
+                            </td>
+                            <td class="hand">
+                                {{notes.SubjectName}}
+                            </td>
+                            <td>
+                                {{notes.FileName}}
+                            </td>
+                            <td>
+                                {{notes.FileTitle}}
+                            </td>
+                            <td>
+                                {{notes.Keywords}}
+                            </td>
+                            <td class="star-rating">
+                                <star-rating [(value)]="notes.AverageScore" [(totalstars)]="totalstars"
+                                    checkedcolor="orange" uncheckedcolor="gray" size="26px" readonly="true" class="star"
+                                    *ngIf="notes.AverageScore!==0">
+                                </star-rating>
+                            </td>
+                            <td>
+                                {{notes.CreatedDate | date: 'dd/MM/yyyy'}}
+                            </td>
+                            <td class="text-center">
+                                <div [innerHTML]="noteListService.ShowFileTypeImage(notes.FileType,'s')"></div>
+                            </td>
+                            <td style="display: none;">
+                                <app-download-file [disabled]="showProgress" [files]="notes" [showButton]="true"
+                                    [userActionLog]="false" (downloadStatus)="downloadStatus($event)">
+                                </app-download-file>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <div class="clear"></div>
+            <div class="text-center">
+                <pagination-controls id="paginationNoteList" (pageChange)="pageChanged($event)"
+                    [previousLabel]="userService.labels.previousLabel | translate"
+                    [nextLabel]="userService.labels.nextLabel | translate"></pagination-controls>
+            </div>
+        </div><!-- Target Listing section end here -->
+    </div>
+</mat-dialog-content>

@@ -1,0 +1,6 @@
+<a (click)="download()" class="a-link hand" href="javascript:void(0);" *ngIf="!showButton">
+    {{files.FileTitle}}
+</a>
+<span *ngIf="showButton">
+    <button class="download-btn" (click)="download()" translate>Download<i class="fa fa-download"></i></button>
+</span>

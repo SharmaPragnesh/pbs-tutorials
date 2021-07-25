@@ -1,0 +1,121 @@
+<div class="mynotes-edit">
+    <h3 class="mb-0 admin-heading" translate>Users.NewUser</h3>
+</div>
+<form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()" class="register-user">
+    <div class="form-group row required">
+        <label class="col-sm-2 col-form-label" translate>Users.FirstName</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="FirstName" maxlength="100">
+        </div>
+        <div class="col-sm-5">
+            <label class="text-danger" *ngIf="f.FirstName.touched && f.FirstName.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-2 col-form-label" translate>Users.LastName</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="LastName" maxlength="100">
+        </div>
+        <div class="col-sm-5">
+            <label class="text-danger" *ngIf="f.LastName.touched && f.LastName.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div>
+    <!-- <div class="form-group row required">
+        <label class="col-sm-2 col-form-label" translate>Users.Initials</label>
+        <div class="col-sm-5">
+            <input class="form-control col-md-2" formControlName="Initials" maxlength="3">
+        </div>
+        <div class="col-sm-5">
+            <label class="text-danger" *ngIf="f.Initials.touched && f.Initials.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div> -->
+    <div class="form-group row required">
+        <label class="col-sm-2 col-form-label" translate>Common.Language</label>
+        <div class="col-sm-5">
+            <select formControlName="LanguageId" class="form-control">
+                <!-- <option value="">Select Language</option> -->
+                <option *ngFor='let lang of languageList' [value]="lang.LanguageId" translate>
+                    Common.{{lang.LanguageName}}</option>
+            </select>
+        </div>
+        <div class="col-sm-5">
+
+        </div>
+    </div>
+    <!-- <div class="form-group row">
+        <label class="col-sm-2 col-form-label" translate>Users.MobilePhone</label>
+        <div class="col-sm-5">
+            <input class="form-control col-md-5" formControlName="Mobile" maxlength="50">
+        </div>
+        <div class="col-sm-5">
+            <label class="text-danger" *ngIf="f.Mobile.touched && f.Mobile.errors?.required"
+                translate>Common.RequiredField</label>
+        </div>
+    </div> -->
+    <div class="form-group row required">
+        <label class="col-sm-2 col-form-label" translate>Users.EmailAddress</label>
+        <div class="col-sm-5">
+            <!-- https://stackoverflow.com/questions/12374442/chrome-ignores-autocomplete-off -->
+            <input class="form-control" formControlName="Email" maxlength="50"
+                (change)="onEmailChange($event.target.value)" onfocus="this.removeAttribute('readonly');" readonly>
+        </div>
+        <div class="col-sm-5">
+            <label class="text-danger" *ngIf="f.Email.touched && f.Email.errors?.required"
+                translate>Common.RequiredField</label>
+            <label class="text-danger" *ngIf="f.Email.touched && f.Email.errors?.email" translate>Please enter valid
+                emailid</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-2 col-form-label" translate>Common.UserName</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="UserName" maxlength="50">
+        </div>
+        <div class="col-sm-5">
+            <label class="text-danger" *ngIf="f.UserName.touched && f.UserName.errors?.required"
+                translate>Common.RequiredField</label>
+            <label class="text-danger" *ngIf="f.UserName.touched && f.UserName.errors?.userNameExists"
+                translate>Common.UserNameExist</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-2 col-form-label" translate>Common.Password</label>
+        <div class="col-sm-5">
+            <input type="password" class="form-control" formControlName="Password" maxlength="50"
+                onfocus="this.removeAttribute('readonly');" readonly>
+        </div>
+        <div class="col-sm-5">
+            <label class="text-danger" *ngIf="f.Password.touched && f.Password.errors?.required"
+                translate>Common.RequiredField</label>
+            <label class="text-danger" *ngIf="f.Password.touched && f.Password.errors?.pattern" translate>
+                Messages.ErrorPasswordLength</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-2 col-form-label" translate>Common.RepeatPassword</label>
+        <div class="col-sm-5">
+            <input type="password" class="form-control" formControlName="ConfirmPassword" maxlength="50"
+                onfocus="this.removeAttribute('readonly');" readonly>
+        </div>
+        <div class="col-sm-5">
+            <label class="text-danger" *ngIf="f.ConfirmPassword.touched && f.ConfirmPassword.errors?.required"
+                translate>Common.RequiredField</label>
+            <label class="text-danger" *ngIf="f.ConfirmPassword.touched && f.ConfirmPassword.errors?.passwordMismatch"
+                translate>Repeat password does not match</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">&nbsp;</label>
+        <div class="col-sm-5">
+            <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid"
+                translate>Common.Signup</button>
+            <button type="button" class="btn btn btn-secondary ml-1" routerLink="/login"
+                translate>Common.Cancel</button>
+        </div>
+        <div class="col-sm-5">
+        </div>
+    </div>
+</form>

@@ -1,0 +1,89 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0 admin-heading" translate>PageHeader.Institution</h3>
+                    <div class="admin-action">
+                        <button class="btn text-white" (click)="AddOrEditInstitution(0)"
+                            translate>Institution.AddInstitution
+                            <i class="fa fa-plus"></i></button>
+                        <button class="btn btn-success text-white" [disabled]="disableSaveOrder"
+                            (click)="UpdateInstitutionSorting()" translate>Common.Save
+                            <i class="fa fa-floppy-o"></i></button>
+                    </div>
+                </div>
+                <div class="table-responsive" *ngIf="institutionList!=null">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="hand code-width" (click)="sort('InstitutionNo')">
+                                    <span class="sorting-column" translate>
+                                        Institution.InstitutionNo
+                                        <i class="fa sorting-angle" *ngIf="key =='InstitutionNo'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand" (click)="sort('InstitutionNameDaDK')">
+                                    <span class="sorting-column" translate>
+                                        Institution.InstitutionDanish
+                                        <i class="fa sorting-angle" *ngIf="key =='InstitutionNameDaDK'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand" (click)="sort('InstitutionNameEnUS')">
+                                    <span class="sorting-column" translate>
+                                        Institution.InstitutionEnglish
+                                        <i class="fa sorting-angle" *ngIf="key =='InstitutionNameEnUS'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="text-center sorting-width" translate>
+                                    Common.Sorting
+                                </th>
+                                <th class="text-center parent-width" translate>
+                                    Institution.Studies
+                                </th>
+                                <th class="text-center delete-width"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let institution of institutionList | orderBy: key : reverse ; index as i; let first = first; let last = last;"
+                                [ngClass]="{'alt_row': i%2!==0}">
+                                <td class="hand" (click)="AddOrEditInstitution(institution.InstitutionId)">
+                                    {{institution.InstitutionNo}}
+                                </td>
+                                <td class="hand" (click)="AddOrEditInstitution(institution.InstitutionId)">
+                                    {{institution.InstitutionNameDaDK}}
+                                </td>
+                                <td class="hand" (click)="AddOrEditInstitution(institution.InstitutionId)">
+                                    {{institution.InstitutionNameEnUS}}
+                                </td>
+                                <td id="tr{{institution.Sorting}}"
+                                    class="text-center position-relative arrow-sort-width">
+                                    <span class="text-center sb-box-left">
+                                        <i class="fa fa-angle-up hand sorting-button-up" (click)="MoveUp(i)"
+                                            *ngIf="!first"></i>&nbsp;
+                                    </span>
+                                    <span class="text-center sb-box-right">
+                                        <i class="fa fa-angle-down hand sorting-button-down" (click)="MoveDown(i)"
+                                            *ngIf="!last"></i>
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <i class="fa fa-graduation-cap fa-lg hand" (click)="ShowStudies(institution)"></i>
+                                </td>
+                                <td class="text-center">
+                                    <i class="fa fa-trash fa-lg hand remove-icon"
+                                        (click)="DeleteConfirmDialog(institution)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

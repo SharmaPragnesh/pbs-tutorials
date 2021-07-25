@@ -1,0 +1,165 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="uni-header" *ngIf="showNotesDetails" translate>Note.Document</h4>
+<h4 class="uni-header" *ngIf="!showNotesDetails" translate>Statistics.Comments</h4>
+<mat-dialog-content>
+    <div class="note-list-detail one-third-ratio">
+        <form *ngIf="showNotesDetails">
+            <div class="form-row">
+                <div class="form-group">
+                    <label translate>PageHeader.Subject</label>
+                    <label>{{myfiles.SubjectName}}</label>
+                </div>
+                <div class="form-group sec-right">
+                    <label>{{myfiles.TermType}}</label>
+                    <label>{{myfiles.SemesterName}}</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group w100Per">
+                    <label class="v-top" translate>Note.FileTitle</label>
+                    <label>{{myfiles.FileTitle}}</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group w100Per">
+                    <label class="v-top" translate>Note.Description</label>
+                    <label>{{myfiles.FileDescription}}</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label translate>Note.Keywords</label>
+                    <label>{{myfiles.Keywords}}</label>
+                </div>
+                <div class="form-group sec-right">
+                    <label translate>Note.Uploaded</label>
+                    <label>{{myfiles.CreatedDate | date: 'dd/MM/yyyy'}}</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label translate>Note.ByUser</label>
+                    <label>{{myfiles.UserFullName}}</label>
+                </div>
+                <div class="form-group sec-right">
+                    <label translate>Note.Evaluation</label>
+                    <label style="pointer-events: none;">
+                        <star-rating [(value)]="myfiles.AverageScore" [(totalstars)]="totalstars" checkedcolor="orange"
+                            uncheckedcolor="gray" size="26px" readonly="true" class="star"
+                            *ngIf="myfiles.AverageScore!==0">
+                        </star-rating>
+                    </label>
+                </div>
+            </div>
+        </form>
+        <form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()" *ngIf="userService.loggedIn()">
+            <input type="hidden" class="form-control" formControlName="RemarkId">
+            <input type="hidden" class="form-control" formControlName="FileId">
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label translate>Note.Comment</label>
+                    <textarea class="form-control text-area" formControlName="RemarkText" rows="3"
+                        maxlength="500"></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label translate>Note.MyEvaluation</label>
+                    <label>
+                        <star-rating [(value)]="ratingElement.value" [(totalstars)]="ratingElement.totalstars"
+                            checkedcolor="{{ratingElement.checkedcolor}}"
+                            uncheckedcolor="{{ratingElement.uncheckedcolor}}" size="{{ratingElement.size}}"
+                            readonly={{ratingElement.readonly}} (rate)="onRate($event)">
+                        </star-rating>
+                    </label>
+                </div>
+                <div class="form-group hidden-mobile">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group note-button" style="width: 100%;">
+                    <div class="admin-action flt">
+                        <button type="button" class="btn" (click)="EditNotes()"
+                            *ngIf="showNotesDetails && userService.userInfo.IsAdmin" translate>Common.Edit
+                            <i class="fa fa-pencil"></i></button>
+                        <button type="submit" class="btn" [disabled]="registerForm.invalid" translate>Common.Save
+                            <i class="fa fa-floppy-o"></i></button>
+                        <button type="button" class="btn btn btn-secondary" [mat-dialog-close] translate>Common.Close
+                            <i class="fa fa-close"></i></button>
+                        <button type="button" class="btn btn-danger" (click)="DeleteNotesConfirmDialog()"
+                            *ngIf="showNotesDetails && userService.userInfo.IsAdmin" translate>Common.Delete
+                            <i class="fa fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="form-row" *ngIf="!userService.loggedIn() && showNotesDetails">
+            <div class="form-group note-button">
+                <div class="admin-action flt">
+                    <button type="button" class="btn btn btn-secondary ml-1" [mat-dialog-close] translate>Common.Close
+                        <i class="fa fa-close"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive" *ngIf="remarkList!=null">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th style="width: 130px;" class="hand" (click)="sortRemark('CreatedDate')">
+                            <span class="sorting-column" translate>
+                                Common.Date
+                                <i class="fa sorting-angle" *ngIf="keyRemark =='CreatedDate'"
+                                    [ngClass]="{'fa-angle-down':reverseRemark,'fa-angle-up':!reverseRemark}"></i>
+                            </span>
+                        </th>
+                        <th class="hand" (click)="sortRemark('RemarkText')">
+                            <span class="sorting-column" translate>
+                                Note.Comment
+                                <i class="fa sorting-angle" *ngIf="keyRemark =='RemarkText'"
+                                    [ngClass]="{'fa-angle-down':reverseRemark,'fa-angle-up':!reverseRemark}"></i>
+                            </span>
+                        </th>
+                        <th style="width: 90px;" class="hand text-center" (click)="sortRemark('Initials')">
+                            <span class="sorting-column" translate>
+                                PageHeader.User
+                                <i class="fa sorting-angle" *ngIf="keyRemark =='Initials'"
+                                    [ngClass]="{'fa-angle-down':reverseRemark,'fa-angle-up':!reverseRemark}"></i>
+                            </span>
+                        </th>
+                        <th style="width: 50px;" class="text-center" *ngIf="userService.loggedIn()"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let remark of remarkList  | orderBy: keyRemark : reverseRemark | paginate: configRemark ;index as i;"
+                        [ngClass]="{'alt_row': i%2!==0}">
+                        <td>
+                            {{remark.CreatedDate | date: 'dd/MM/yyyy'}}
+                        </td>
+                        <td>
+                            {{remark.RemarkText}}
+                        </td>
+                        <td class="tooltip-hover text-center">
+                            <div class="uploaded-initials tooltip-common simple-font">{{remark.Initials}}
+                                <div class="tooltip-feedback" translate>{{remark.UserFullName}}</div>
+                            </div>
+                        </td>
+                        <td class="text-center" style="width: 50px;" *ngIf="userService.loggedIn()">
+                            <i class="fa fa-trash fa-lg hand remove-icon" (click)="DeleteConfirmDialog(remark)"
+                                *ngIf="(userService.userInfo.UserId == remark.UserId || userService.userInfo.IsAdmin)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="clear"></div>
+            <div class="text-center">
+                <pagination-controls id="paginationNoteListDetail" (pageChange)="pageChangedRemark($event)"
+                    [previousLabel]="userService.labels.previousLabel | translate"
+                    [nextLabel]="userService.labels.nextLabel | translate"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

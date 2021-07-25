@@ -1,0 +1,117 @@
+<div class="close-container" [mat-dialog-close]>
+    <div class="leftright"></div>
+    <div class="rightleft"></div>
+</div>
+<h4 class="uni-header" translate>PageHeader.Feedback</h4>
+<form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()" class="admin-form-content">
+    <input type="hidden" class="form-control" formControlName="FeedbackComment">
+    <!-- Section 1 -->
+    <a href="javascript:void(0);" (click)="setFeedbackType(1)" class="feedback-type hand" translate>
+        <img alt="" src="/assets/images/smile-icon.png">Feedback.ILike</a>
+    <div class="feedback-row" style="display: none;" (paste)="onPaste($event,1)">
+        <div class="form-group row required">
+            <label class="col-sm-3 col-form-label" translate>Feedback.TypeYourComment</label>
+            <div class="col-sm-9">
+                <textarea class="form-control text-area" formControlName="FeedbackComment1" rows="3" maxlength="500"
+                    (change)="changeFeedbackComment($event)" (keypress)="changeFeedbackComment($event)"></textarea>
+                <label class="text-danger" *ngIf="f.FeedbackComment1.touched && f.FeedbackComment1.errors?.required"
+                    translate>Common.RequiredField</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label"><span translate>Feedback.InsertScreenShot</span>
+                <div class="uploaded-initials tooltip-common">
+                    <img alt="" src="/assets/images/questionmark-icon.png" class="questionmark-icon">
+                    <div class="tooltip-feedback tooltip-questionmark" [innerHTML]="'Feedback.InsertScreenShotHelp' | translate"></div>
+                </div>
+            </label>
+            <div class="col-sm-9">
+                <div class="paste-imgbox">
+                    <img #imgRenderer1 />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Section 2 -->
+    <a href="javascript:void(0);" (click)="setFeedbackType(2)" class="feedback-type hand" translate>
+        <img alt="" src="/assets/images/sad-icon.png">Feedback.IDoNotLike</a>
+    <div class="feedback-row" style="display: none;" (paste)="onPaste($event,2)">
+        <div class="form-group row required">
+            <label class="col-sm-3 col-form-label" translate>Feedback.TypeYourComment</label>
+            <div class="col-sm-5">
+                <textarea class="form-control text-area" formControlName="FeedbackComment2" rows="3" maxlength="500"
+                    (change)="changeFeedbackComment($event)" (keypress)="changeFeedbackComment($event)"></textarea>
+            </div>
+            <div class="col-sm-4">
+                <label class="text-danger" *ngIf="f.FeedbackComment2.touched && f.FeedbackComment2.errors?.required"
+                    translate>Common.RequiredField</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label"><span translate>Feedback.InsertScreenShot</span>
+                <div class="uploaded-initials tooltip-common">
+                    <img alt="" src="/assets/images/questionmark-icon.png" class="questionmark-icon">
+                    <div class="tooltip-feedback tooltip-questionmark" [innerHTML]="'Feedback.InsertScreenShotHelp' | translate"></div>
+                </div>
+            </label>
+            <div class="col-sm-9">
+                <div class="paste-imgbox">
+                    <img #imgRenderer2 />
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Section 3 -->
+    <a href="javascript:void(0);" (click)="setFeedbackType(3)" class="feedback-type hand" translate>
+        <img alt="" src="/assets/images/light-bulb-icon.png" style="height: 29px;">Feedback.IHaveProposal</a>
+    <div class="feedback-row" style="display: none;" (paste)="onPaste($event,3)">
+        <div class="form-group row required">
+            <label class="col-sm-3 col-form-label" translate>Feedback.TypeYourComment</label>
+            <div class="col-sm-5">
+                <textarea class="form-control text-area" formControlName="FeedbackComment3" rows="3" maxlength="500"
+                    (change)="changeFeedbackComment($event)" (keypress)="changeFeedbackComment($event)"></textarea>
+            </div>
+            <div class="col-sm-4">
+                <label class="text-danger" *ngIf="f.FeedbackComment3.touched && f.FeedbackComment3.errors?.required"
+                    translate>Common.RequiredField</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label"><span translate>Feedback.InsertScreenShot</span>
+                <div class="uploaded-initials tooltip-common">
+                    <img alt="" src="/assets/images/questionmark-icon.png" class="questionmark-icon">
+                    <div class="tooltip-feedback tooltip-questionmark" [innerHTML]="'Feedback.InsertScreenShotHelp' | translate"></div>
+                </div>
+            </label>
+            <div class="col-sm-9">
+                <div class="paste-imgbox">
+                    <img #imgRenderer3 />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="form-check feedback-formcheck">
+                <input type="checkbox" class="form-check-input" id="ContactMe" formControlName="ContactMe">
+                <label class="form-check-label" for="ContactMe" translate>Feedback.PleaseContactMe</label>
+            </div>
+        </div>
+    </div>
+    <div class="error-msg-text" *ngIf="inValidOneField" translate>
+        Messages.NotWrittenComment
+    </div>
+    <div class="form-row admin-action-footer">
+        <label class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+            <div class="admin-action flt">
+                <button type="submit" class="btn" translate>Common.Send
+                    <i class="fa fa-floppy-o"></i>
+                </button>
+                <button type="button" class="btn btn-secondary" [mat-dialog-close] translate>Common.Cancel
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

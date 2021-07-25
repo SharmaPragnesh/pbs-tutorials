@@ -1,0 +1,41 @@
+<div *ngIf="seachFiles" style="display: none;">
+    <h3>seachFiles.FilesFoundList.length={{seachFiles.FilesFoundList.length}}</h3>
+    <h3>seachFiles.FilesNotFoundList.length={{seachFiles.FilesNotFoundList.length}}</h3>
+</div>
+<div class="search-wrapper">
+    <div *ngIf="seachFiles && seachFiles.FilesFoundList && seachFiles.FilesFoundList?.length > 0">
+        <div *ngIf="seachFiles.FilesFoundList != null && seachFiles.FilesFoundList.length > 0">
+            <div class="progress" *ngIf="percentage && showProgress">
+                <div class="progress-bar" [style.width]="percentage + '%'">{{percentage}}%</div>
+            </div>
+            <div *ngFor="let seachFiles of searchFilesStudyFoundList">
+                <app-note-search [isFilesFoundList]="true" [studyId]="seachFiles.StudyId"
+                    [filesList]="seachFiles.FilesList" [assignedSubjectIds]="assignedSubjectIds"></app-note-search>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="seachFiles && seachFiles.FilesNotFoundList && seachFiles.FilesNotFoundList?.length > 0">
+        <div *ngIf="seachFiles.FilesNotFoundList != null && seachFiles.FilesNotFoundList.length > 0">
+            <div *ngFor="let seachFiles of searchFilesStudyNotFoundList">
+                <app-note-search [isFilesFoundList]="false" [studyId]="seachFiles.StudyId"
+                    [filesList]="seachFiles.FilesList" [assignedSubjectIds]="assignedSubjectIds"></app-note-search>
+            </div>
+        </div>
+    </div>
+    <div
+        *ngIf="seachFiles && seachFiles.FilesFoundList && seachFiles.FilesFoundList.length == 0 && seachFiles.FilesNotFoundList.length == 0">
+        <strong class="text-danger" translate>Messages.NoSearchFound</strong> : {{noSearchFound}}
+    </div>
+    <br>
+    <div>
+        <div class="flt">
+            <span *ngIf="!userService.loggedIn()" class="text-danger">
+                <strong translate>Messages.LoginIfYouWant</strong>
+            </span>
+        </div>
+        <div class="frt">
+            <a class="btn btn-cancel" *ngIf="seachFiles" (click)="Reset()" translate>Common.Reset</a>
+        </div>
+    </div>
+    <br><br>
+</div>

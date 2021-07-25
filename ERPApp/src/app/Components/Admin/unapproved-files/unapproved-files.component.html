@@ -1,0 +1,129 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0 admin-heading" translate>PageHeader.UnapprovedNotes
+                        <span *ngIf="noteListService.filesList">{{noteListService.filesList.length}}</span>
+                    </h3>
+                    <div class="admin-action">
+                        <button class="btn text-white" *ngIf="isCheckboxChecked()" (click)="ApproveFiles()"
+                            translate>Note.Approve
+                            <i class="fa fa-check" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="table-responsive" *ngIf="noteListService.filesList!= null">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="hand uploadedon-width" (click)="sort('CreatedDate')">
+                                    <span class="sorting-column" translate>
+                                        Note.Uploaded
+                                        <i class="fa sorting-angle" *ngIf="key =='CreatedDate'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand single-width text-center" (click)="sort('Initials')">
+                                    <span class="sorting-column" translate>
+                                        PageHeader.User
+                                        <i class="fa sorting-angle" *ngIf="key =='Initials'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand single-width text-center" (click)="sort('FileType')">
+                                    <span class="sorting-column" translate>
+                                        Note.Type
+                                        <i class="fa sorting-angle" *ngIf="key =='FileType'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand" (click)="sort('StudyName')">
+                                    <span class="sorting-column" translate>
+                                        PageHeader.Study
+                                        <i class="fa sorting-angle" *ngIf="key =='StudyName'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand text-center semesterno-width" (click)="sort('SemesterName')">
+                                    <span class="sorting-column" translate>
+                                        PageHeader.Period
+                                        <i class="fa sorting-angle" *ngIf="key =='SemesterName'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand subject-width" (click)="sort('SubjectName')">
+                                    <span class="sorting-column" translate>
+                                        PageHeader.Subject
+                                        <i class="fa sorting-angle" *ngIf="key =='SubjectName'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand title-width" (click)="sort('FileTitle')">
+                                    <span class="sorting-column" translate>
+                                        Note.FileTitle
+                                        <i class="fa sorting-angle" *ngIf="key =='FileTitle'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand" (click)="sort('Keywords')">
+                                    <span class="sorting-column" translate>
+                                        Note.Keywords
+                                        <i class="fa sorting-angle" *ngIf="key =='Keywords'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th translate class="text-center parent-width">Note.Size</th>
+                                <th translate class="text-center single-width">Note.Approve</th>
+                                <th translate class="text-center single-width">Common.Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let notes of noteListService.filesList | orderBy: key : reverse | paginate: config ;index as i;"
+                                id="tr{{notes.FileId}}">
+                                <td>{{notes.CreatedDate | date: 'dd/MM/yyyy'}}</td>
+                                <td class="tooltip-hover text-center">
+                                    {{notes.Initials}}
+                                    <div class="tooltip-box notelist-tooltip-box initials-box text-left">
+                                        <p>
+                                            <span>{{notes.UserFullName}}</span>
+                                        </p>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div [innerHTML]="noteListService.ShowFileTypeImage(notes.FileType,'s')"></div>
+                                </td>
+                                <td>{{notes.StudyName}}</td>
+                                <td class="text-center">{{notes.SemesterName}}</td>
+                                <td>{{notes.SubjectName}}</td>
+                                <td>
+                                    <app-download-file [disabled]="true" [files]="notes" [showButton]="false"
+                                        [userActionLog]="false">
+                                    </app-download-file>
+                                </td>
+                                <td>{{notes.Keywords}}</td>
+                                <!-- <td class="text-right">{{notes.FileSize.toLocaleString('de-DE')}} Mb</td> -->
+                                <td class="text-right">
+                                    {{noteListService.ShowFileSize(notes.FileSize | filesize :'MB')}} MB
+                                </td>
+                                <td class="text-center">
+                                    <input type="checkbox" [(ngModel)]="notes.Checked" name="list_name"
+                                        value="{{notes.FileId}}" />
+                                </td>
+                                <td class="text-center"><i class="fa fa-trash fa-lg hand remove-icon"
+                                        (click)="DeleteConfirmDialog(notes)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="clear"></div>
+                    <div class="text-center">
+                        <pagination-controls (pageChange)="pageChanged($event)"
+                            [previousLabel]="userService.labels.previousLabel | translate"
+                            [nextLabel]="userService.labels.nextLabel | translate"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

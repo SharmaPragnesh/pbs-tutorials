@@ -1,0 +1,103 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <div style="float: left; text-align: left;">
+                        <h3 class="mb-0" translate>PageHeader.Semester</h3>
+                    </div>
+                    <div style="float: right;text-align: right;width: 50%;">
+                        <button type="button" class="btn btn-light" routerLink='/admin/study' style="float: right;"
+                            translate>Common.Back</button>
+                        <!-- <a class="btn btn-primary text-white text-right"
+                            *ngIf="noteListService.filesParameter.InstitutionId && noteListService.filesParameter.StudyId"
+                            (click)="AddOrEditSemester(noteListService.filesParameter.StudyId,0)"
+                            translate>Semester.AddSemester</a> -->
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="form-inline">
+                        <div class="col-md-12">
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label translate>PageHeader.Institution&nbsp;&nbsp;</label>
+                                    <select *ngIf="institutionService.institutionList != null" name="InstitutionId"
+                                        #InstitutionId="ngModel"
+                                        [(ngModel)]="noteListService.filesParameter.InstitutionId" class="form-control"
+                                        (change)='noteListService.onInsititutionChange($event)'>
+                                        <option [ngValue]="0" translate>Messages.ChooseInstitution</option>
+                                        <option *ngFor='let institute of institutionService.institutionList'
+                                            [ngValue]="institute.InstitutionId">{{institute.InstitutionName}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label translate>PageHeader.Study&nbsp;&nbsp;</label>
+                                    <select *ngIf="studyService.studyList != null" name="StudyId" #StudyId="ngModel"
+                                        [(ngModel)]="noteListService.filesParameter.StudyId" class="form-control"
+                                        (change)='noteListService.onStudyChange($event)'>
+                                        <option [ngValue]="0" translate>Messages.ChooseStudy</option>
+                                        <option class='option' *ngFor='let option of studyService.studyList'
+                                            [ngValue]="option.StudyId">{{option.StudyName}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <form #form="ngForm" autocomplete="off" (submit)="AddOrEditSemester(form)"
+                                        style="text-align: right;"
+                                        *ngIf="noteListService.filesParameter.InstitutionId && noteListService.filesParameter.StudyId">
+                                        <label style="float:left;" translate>Semester.NoOfSemester</label>&nbsp;
+                                        <input type="text" name="NoOfSemesters" [(ngModel)]="NoOfSemesters"
+                                            style="width: 50px;" maxlength="2" numbersOnly>
+                                        &nbsp;
+                                        <button class="btn btn-primary text-white text-right"
+                                            translate>Common.Save</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert_yel_msg" *ngIf="semesterService.semesterList==null">
+                            <div class="font_16">
+                                No data found
+                            </div>
+                            <p></p>
+                        </div>
+                        <div class="table_section" *ngIf="semesterService.semesterList!=null">
+                            <div class="scroll_data table_list_data">
+                                <table class="table table-hover" cellpadding="0" cellspacing="0" border="0">
+                                    <thead>
+                                        <tr>
+                                            <th translate>Semester.SemesterNo</th>
+                                            <th class="text-center" translate>Semester.Subjects</th>
+                                            <th class="text-center"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let semester of semesterService.semesterList;index as i;"
+                                            [ngClass]="{'alt_row': i%2!==0}">
+                                            <td>
+                                                {{semester.SemesterNo}}
+                                            </td>
+                                            <td class="text-center" style="width: 100px;">
+                                                <i class="fa fa-eye fa-lg hand" (click)="ShowSubjects(semester)"></i>
+                                            </td>
+                                            <td class="text-center" style="width: 50px;">
+                                                <i class="fa fa-trash fa-lg hand"
+                                                    (click)="DeleteSemester(semester)"></i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

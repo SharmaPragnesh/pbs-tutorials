@@ -1,0 +1,124 @@
+<div class="search-wrapper">
+    <nav aria-label="breadcrumb" *ngIf="noteListService.filesParameter.InstitutionId !== 0">
+        <ol class="breadcrumb uninor-breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">{{noteListService.filesParameter.InstitutionName}}
+            </li>
+            <li class="breadcrumb-item active" aria-current="page" *ngIf="noteListService.filesParameter.StudyId !== 0">
+                {{noteListService.filesParameter.StudyName}}</li>
+            <!-- <li class="breadcrumb-item active" aria-current="page"
+                *ngIf="noteListService.filesParameter.SemesterId !== 0">
+                <span translate>PageHeader.{{noteListService.filesParameter.TermType}}</span>
+                {{noteListService.filesParameter.SemesterNo}}
+            </li>
+            <li class="breadcrumb-item active" aria-current="page"
+                *ngIf="noteListService.filesParameter.SubjectId !== 0">
+                {{noteListService.filesParameter.SubjectName}}</li> -->
+        </ol>
+    </nav>
+    <!-- Bind No of Semesters/Years -->
+    <div class="semyearbutton">
+        <button class="btn" *ngFor="let semester of semesterService.semesterList"
+            (click)="ClientSemesterChange(semester)"
+            [class.active]="semester.SemesterId == noteListService.filesParameter.SemesterId">
+            <span>{{semester.SemesterName}}</span>
+        </button>
+    </div>
+    <div *ngIf="noteListService.filesList!=null">
+        <div *ngFor="let subject of subjectService.subjectList | orderBy: 'Sorting'">
+            <div class="bc-row uninor-sub-breadcrumb">
+                <div class="bc-column breadcrumb-item active" aria-current="page">
+                    <span translate>PageHeader.Subject</span>
+                    <div class="breadcrumb-subject" ng-bind="subject.SubjectName"></div>
+                </div>
+                <div class="bc-column">
+                    <div class="sub-breadcrumb-result" translate>Note.Result
+                        <span>: {{subject.UploadedFiles}} &nbsp;</span>
+                        <span *ngIf="subject.UploadedFiles != 1" translate>PageHeader.Notes</span>
+                        <span *ngIf="subject.UploadedFiles == 1" translate>PageHeader.Note</span>
+                    </div>
+                </div>
+                <div class="bc-column">
+                    <button class="btn search-action" (click)="ApplyMonitor(subject.SubjectId,subject.SubjectName)"
+                        *ngIf="userService.loggedIn() && !SubjectIdExist(subject.SubjectId)" translate>Note.Monitor <i
+                            class="fa fa-eye"></i>
+                    </button>
+                    <button class="btn search-action text-white" style="background-color: grey;border-color: grey"
+                        *ngIf="userService.loggedIn() && SubjectIdExist(subject.SubjectId)" [disabled]="true"
+                        translate>Note.MonitorAlready
+                        <i class="fa fa-eye"></i>
+                    </button>
+                    <button class="btn search-action"
+                        (click)="OpenUploadFilePage(subject.SubjectId,subject.SubjectName)"
+                        *ngIf="userService.loggedIn()" translate>Note.UploadNotes <i class="fa fa-upload"></i>
+                    </button>
+                </div>
+            </div>
+            <H1>PS-VT</H1>
+            <app-note (buttonClick)="onButtonClick($event)" name="{{ name }}" [subjectId]="subject.SubjectId"
+                [filesListAllRecords]="noteListService.filesList"></app-note>
+        </div>
+    </div>
+</div>
+<div class="progress" *ngIf="percentage && showProgress">
+    <div class="progress-bar" [style.width]="percentage + '%'">{{percentage}}%</div>
+</div>
+<div class="row py-2" style="display:none ;">
+    <div class="col-md-12">
+        <hr>
+        <div class="container-upload">
+            <button class="button upload" (click)="inputFile.click()">UPLOAD</button>
+            <input name="file" id="file" (change)="upload($event)" type="file" #inputFile hidden>
+        </div>
+        <div style="display: none;">
+            https://w3path.com/new-angular-8-file-upload-or-image-upload/<br>
+            https://www.codeproject.com/Questions/5276646/How-to-upload-file-with-data-from-angular-8-to-ASP<br>
+            https://www.c-sharpcorner.com/article/file-upload-and-download-in-angular-9/<br>
+            https://karthiktechblog.com/aspnetcore/how-to-upload-a-file-with-net-core-web-api-3-1-using-iformfile<br>
+            https://dottutorials.net/dotnet-core-web-api-multipart-form-data-upload-file/
+            <form (submit)="submitApplication()" enctype="multipart/form-data">
+                <div class=" field">
+                    <label class="field__label">
+                        Name:
+                    </label>
+                    <input type="text" name="name" [(ngModel)]="form.name" class="field__input" />
+                </div>
+
+                <div class="field">
+                    <label class="field__label">
+                        Email:
+                    </label>
+                    <input type="text" name="email" [(ngModel)]="form.email" class="field__input" />
+                </div>
+
+                <div class="field">
+                    <label class="field__label">
+                        Resume:
+                    </label>
+                    <input #resumeRef type="file" name="resume" (change)="( form.resume = resumeRef.files )"
+                        class="field__input" />
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="actions__primary">
+                        Submit Application
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="flt">
+        <span *ngIf="!userService.loggedIn()" class="text-danger">
+            <strong translate>Messages.LoginIfYouWant</strong>
+        </span>
+    </div>
+    <div class="frt">
+        <button class="btn btn-cancel" (click)="Reset()" *ngIf="noteListService.IsNoteListSearchDone"
+            translate>Common.Reset
+        </button>
+        <!-- <a class="btn btn-cancel" *ngIf="seachFiles" (click)="Reset()" translate>Common.Reset</a> -->
+    </div>
+</div>
+<br><br>

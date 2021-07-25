@@ -87,7 +87,7 @@ h3 {font-size: 1.425rem;}
 .search-bar.active, .nav-right.active{-moz-transition: all 0.2s ease-out;-o-transition: all 0.2s ease-out; -ms-transition: all 0.2s ease-out; -webkit-transition: all 0.2s ease-out;transition: all 0.2s ease-out;}
 .footer .footer-col { width: 20%}
 .footer .fl li,  .footer .footer-col p { display: block; margin-right: 0}
-.common-row .column:first-child, .common-row .column:last-child { width: 50%}
+/* .common-row .column:first-child, .common-row .column:last-child { width: 50%} */
 .common-row {-moz-flex-direction:row;-o-flex-direction: row;-ms-flex-direction: row;-webkit-flex-direction: row;flex-direction: row;-moz-justify-content: space-between;-o-justify-content: space-between;-ms-justify-content: space-between;-webkit-justify-content: space-between;justify-content: space-between;height: 100%;}
 .common-row .column {flex-grow: 0 !important;}
 .common-row .column:last-child figure video{ height: auto}
@@ -138,6 +138,8 @@ h3 {font-size: 1.425rem;}
 .note-list-detail.one-third-ratio .form-row .form-group { width:100% !important}
 .note-list-detail.one-third-ratio .form-row .form-group label:first-child { width:100px}
 .note-list-detail.one-third-ratio .form-row .form-group label:last-child { width:calc(100% - 100px)}
+.tooltip-feedback.tooltip-questionmark { right: auto; }
+.tooltip-feedback.tooltip-questionmark:before { right: auto; left: 5px; }
 }
 @media only screen and (max-width: 941px) {
     .btn-lookup { margin:15px 0 0;}

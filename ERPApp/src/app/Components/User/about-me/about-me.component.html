@@ -1,0 +1,178 @@
+<div *ngIf="user">
+    <div *ngIf="!isEdit" class="uniform-row">
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.UserId</span></label>
+            <div class="uniform-colleft">
+                <span>{{user.UserId}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.FirstName</span></label>
+            <div class="uniform-colleft">
+                <span>{{user.FirstName}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.LastName</span></label>
+            <div class="uniform-colleft">
+                <span>{{user.LastName}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.Initials</span></label>
+            <div class="uniform-colleft">
+                <span>{{user.Initials}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Common.Language</span></label>
+            <div class="uniform-colleft">
+                <span *ngIf="user.LanguageId == 1" translate>Common.Danish</span>
+                <span *ngIf="user.LanguageId == 2" translate>Common.English</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.EmailAddress</span></label>
+            <div class="uniform-colleft">
+                <span>{{user.Email}}</span>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.MobilePhone</span></label>
+            <div class="uniform-colleft">
+                <span>{{user.Mobile}}</span>
+            </div>
+        </div> -->
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>User.Rights</span></label>
+            <div class="uniform-colleft">
+                <span *ngIf="user.IsAdmin" translate>PageHeader.Admin</span>
+                <span *ngIf="!user.IsAdmin" translate>User.NormalUser</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>User.Notifications</span></label>
+            <div class="uniform-colleft">
+                <span *ngIf="user.SendNotification" translate>Common.Yes</span>
+                <span *ngIf="!user.SendNotification" translate>Common.No</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>User.StartDate</span></label>
+            <div class="uniform-colleft">
+                <span>{{user.StartingDate | date}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>User.CreatedWith</span></label>
+            <div class="uniform-colleft">
+                <span *ngIf="user.UserLoginType == 1" translate>UniNoter login</span>
+                <span *ngIf="user.UserLoginType == 2" translate>Google login</span>
+                <span *ngIf="user.UserLoginType == 3" translate>Facebook login</span>
+            </div>
+        </div>
+        <div class="admin-action edit flt">
+            <button class="btn btn-primary" (click)="EditUser()" translate>Common.Edit
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn btn-danger" (click)="DeleteConfirmDialog()" translate>
+                Common.DeleteMe <i class="fa fa-close"></i>
+            </button>
+        </div>
+    </div>
+    <form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()" *ngIf="isEdit" class="uniform-row">
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.UserId</span></label>
+            <div class="uniform-colleft">
+                <span>{{user.UserId}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.FirstName</span></label>
+            <div class="uniform-colleft">
+                <input class="form-control" formControlName="FirstName" maxlength="100">
+                <span class="text-danger" *ngIf="f.FirstName.touched && f.FirstName.errors?.required"
+                    translate>Common.RequiredField</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.LastName</span></label>
+            <div class="uniform-colleft">
+                <input class="form-control" formControlName="LastName" maxlength="100">
+                <span class="text-danger" *ngIf="f.LastName.touched && f.LastName.errors?.required"
+                    translate>Common.RequiredField</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.Initials</span></label>
+            <div class="uniform-colleft">
+                <span>{{user.Initials}}</span>
+                <!-- <input class="form-control" formControlName="Initials" maxlength="3">
+                <span class="text-danger" *ngIf="f.Initials.touched && f.Initials.errors?.required"
+                    translate>Common.RequiredField</span> -->
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Common.Language</span></label>
+            <div class="uniform-colleft">
+                <select formControlName="LanguageId" class="form-control">
+                    <option *ngFor='let lang of languageList' [value]="lang.LanguageId" translate>
+                        Common.{{lang.LanguageName}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.EmailAddress</span></label>
+            <div class="uniform-colleft">
+                <input type="text" readonly class="form-control-plaintext" value="{{user.Email}}">
+            </div>
+        </div>
+        <!-- <div class="form-group">
+            <label class="uniform-colleft"><span translate>Users.MobilePhone</span></label>
+            <div class="uniform-colleft">
+                <input class="form-control" formControlName="Mobile" maxlength="50">
+                <span class="text-danger" *ngIf="f.Mobile.touched && f.Mobile.errors?.required"
+                    translate>Common.RequiredField</span>
+            </div>
+        </div> -->
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>User.Rights</span></label>
+            <div class="uniform-colleft">
+                <span *ngIf="user.IsAdmin" translate>PageHeader.Admin</span>
+                <span *ngIf="!user.IsAdmin" translate>User.NormalUser</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>User.Notifications</span></label>
+            <div class="uniform-colleft">
+                <select formControlName="SendNotification" class="form-control">
+                    <option value="true" translate>Common.Yes</option>
+                    <option value="false" translate>Common.No</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>User.StartDate</span></label>
+            <div class="uniform-colleft">
+                <span>{{user.StartingDate | date}}</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="uniform-colleft"><span translate>User.CreatedWith</span></label>
+            <div class="uniform-colleft">
+                <span *ngIf="user.UserLoginType == 1" translate>UniNoter login</span>
+                <span *ngIf="user.UserLoginType == 2" translate>Google login</span>
+                <span *ngIf="user.UserLoginType == 3" translate>Facebook login</span>
+            </div>
+        </div>
+        <div class="admin-action edit flt">
+            <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid" translate>Common.Save
+                <i class="fa fa-floppy-o"></i>
+            </button>
+            <button type="button" class="btn btn btn-secondary" (click)="isEdit=false" translate>Common.Cancel
+                <i class="fa fa-close"></i>
+            </button>
+        </div>
+    </form>
+</div>
+<div style="clear: both;"></div>

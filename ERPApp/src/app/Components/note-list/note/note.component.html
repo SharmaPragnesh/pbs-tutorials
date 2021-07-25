@@ -1,0 +1,147 @@
+<!-- <h1>{{isFilesFoundList}}</h1> -->
+<!-- <h1>{{subjectId}}</h1> -->
+<!-- <p>{{name}}!</p>
+<button (click)="buttonClick.emit($event)">Click</button> -->
+<div class="row" *ngIf="noteListService.IsNoteListSearchDone" style="display: none;">
+    <div class="col-md-6 result-count" translate>Note.Result
+        <span *ngIf="filesList">: {{filesList.length}}&nbsp;</span>
+        <span *ngIf="filesList && filesList.length != 1" translate>PageHeader.Notes</span>
+        <span *ngIf="filesList && filesList.length == 1" translate>PageHeader.Note</span>
+    </div>
+    <div class="col-md-6 text-right">&nbsp;</div>
+</div>
+<div class="table-responsive"
+    *ngIf="isFilesFoundList && filesList!=null && filesList.length>0 && noteListService.IsNoteListSearchDone">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="hand single-width text-center" (click)="sort('FileType')">
+                    <span class="sorting-column" translate>
+                        Note.Type
+                        <i class="fa sorting-angle" *ngIf="key =='FileType'"
+                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                    </span>
+                </th>
+                <th class="hand user-title-width" (click)="sort('FileTitle')">
+                    <span class="sorting-column" translate>
+                        Note.FileTitle
+                        <i class="fa sorting-angle" *ngIf="key =='FileTitle'"
+                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                    </span>
+                </th>
+                <th class="hand user-keywords-width" (click)="sort('Keywords')">
+                    <span class="sorting-column" translate>
+                        Note.Keywords
+                        <i class="fa sorting-angle" *ngIf="key =='Keywords'"
+                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                    </span>
+                </th>
+                <th class="hand text-center parent-width" (click)="sort('FileSize')">
+                    <span class="sorting-column" translate>
+                        Note.Size
+                        <i class="fa sorting-angle" *ngIf="key =='FileSize'"
+                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                    </span>
+                </th>
+                <th class="download-width">
+                </th>
+                <th class="hand uploadedon-width" (click)="sort('CreatedDate')">
+                    <span class="sorting-column" translate>
+                        Note.Uploaded
+                        <i class="fa sorting-angle" *ngIf="key =='CreatedDate'"
+                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                    </span>
+                </th>
+                <th class="evaluation-width hand" (click)="sort('AverageScore')">
+                    <span class="sorting-column" translate>
+                        Note.Evaluation
+                        <i class="fa sorting-angle" *ngIf="key =='AverageScore'"
+                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                    </span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let notes of filesList | orderBy: key : reverse | paginate: config ;index as i;">
+                <tr id="tr{{notes.FileId}}">
+                    <td class="padd-top7 text-center">
+                        <div [innerHTML]="noteListService.ShowFileTypeImage(notes.FileType,'l')"></div>
+                    </td>
+                    <td class="hand" (click)="ShowNoteDetail(notes,true)">
+                        <a href="javascript:void(0)" class="a-link">
+                            {{notes.FileTitle}}
+                        </a>
+                    </td>
+                    <td class="tooltip-hover">
+                        {{notes.Keywords}}
+                        <div class="tooltip-box notelist-tooltip-box">
+                            <p>
+                                <label translate>Note.Description</label>
+                                <span>{{notes.FileDescription}}</span>
+                            </p>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div *ngIf="notes.FileSize != 0">
+                            {{noteListService.ShowFileSize(notes.FileSize | filesize :'MB')}} MB
+                        </div>
+                        <div *ngIf="showProgress === true && notes.FileId === selectedFileId"
+                            style="clear: both;padding-top: 5px;">
+                            <div class="progress" *ngIf="percentage">
+                                <div class="progress-bar" [style.width]="percentage + '%'">
+                                    {{percentage}}%</div>
+                            </div>
+                        </div>
+                    </td>
+                    <!-- <td class="tooltip-hover text-center">
+
+                    </td> -->
+                    <td class="padd-top7 padd-bottom7" *ngIf="userService.loggedIn()">
+                        <app-download-file [disabled]="showProgress" [files]="notes" [showButton]="true"
+                            [userActionLog]="true" (downloadStatus)="downloadStatus($event, notes.FileId)">
+                        </app-download-file>
+                        <button class="onlineview-btn" (click)="OnlineViewing(notes.FilePath)"
+                            *ngIf="userService.loggedIn()" translate>Messages.LoginConfirmationOnlineViewTitle</button>
+                    </td>
+                    <td class="padd-top7 padd-bottom7" *ngIf="!userService.loggedIn()">
+                        <button class="download-btn" (click)="LoginConfirmDialog('Download')"
+                            translate>Common.Download<i class="fa fa-download"></i></button>
+                        <button class="onlineview-btn" (click)="LoginConfirmDialog('OnlineView')"
+                            translate>Messages.LoginConfirmationOnlineViewTitle</button>
+                    </td>
+                    <td class="uploaded-td">
+                        {{notes.CreatedDate | date: 'dd/MM/yyyy'}}
+                        <span class="uploaded-by" translate>PageHeader.User</span>
+                        <div class="uploaded-initials tooltip-common">{{notes.Initials}}
+                            <div class="tooltip-feedback" translate>{{notes.UserFullName}}</div>
+                        </div>
+                    </td>
+                    <td class="evaluation-width rating-width text-center padd-bottom7" style="padding-top:0px;">
+                        <div class="star-rating ratting-div">
+                            <star-rating [(value)]="notes.AverageScore" [(totalstars)]="totalstars"
+                                checkedcolor="orange" uncheckedcolor="gray" size="26px" readonly="true" class="star"
+                                *ngIf="notes.AverageScore!==0">
+                            </star-rating>
+                        </div>
+                        <button class="comments-btn hand" (click)="ShowNoteDetail(notes,false)"
+                            translate>Statistics.Comments</button>
+                        <button class="comments-btn feedback-btn hand" (click)="ShowFeedback(notes)"
+                            *ngIf="userService.loggedIn()">F
+                            <div class="tooltip-feedback" translate>Messages.FeedbackToUniNoter</div>
+                        </button>
+                        <button class="comments-btn feedback-btn hand" (click)="LoginConfirmDialog('Feedback')"
+                            *ngIf="!userService.loggedIn()">F
+                            <div class="tooltip-feedback" translate>Messages.FeedbackToUniNoter</div>
+                        </button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+    <div class="clear"></div>
+    <div class="text-center" *ngIf="filesList.length>config.itemsPerPage">
+        <pagination-controls [id]="pagingId" (pageChange)="pageChanged($event)"
+            [previousLabel]="userService.labels.previousLabel | translate"
+            [nextLabel]="userService.labels.nextLabel | translate"></pagination-controls>
+    </div>
+</div>

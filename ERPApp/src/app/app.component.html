@@ -1,10 +1,254 @@
-<h1>JSN</h1>
-<button (click)="login()" *ngIf="!isLoggedIn()">SIGN IN</button>
-<button (click)="logout()" *ngIf="isLoggedIn()">SIGN OUT</button>
-<div *ngIf="isLoggedIn()">
-  <h3>Your are logged in</h3>
+<!-- <app-loading-screen></app-loading-screen> -->
+<nav class="navbar sticky-top" id="pbsnavbar">
+    <a class="navbar-brand p-0" routerLink="/" href="javascript:void(0);"><img alt="" src="/assets/images/logo.png"></a>
+    <!-- first main menu -->
+    <a href="javascript:void(0);" class="sidebar-toggle"><i></i></a>
+    <!-- second search menu -->
+    <a href="javascript:void(0);" class="search-menu"><i class="fa fa-search"></i></a>
+    <!-- third more menu -->
+    <a href="javascript:void(0);" class="dots"><i class="fa fa-ellipsis-v"></i></a>
+    <form class="search-bar" #form="ngForm" autocomplete="off" (submit)="Search()">
+        <div class="search-box">
+            <input id="txtSearchText" autofocus class="form-control" type="text" name="SearchText" #SearchText="ngModel"
+                [placeholder]="'Note.SearchKeyword' | translate"
+                [(ngModel)]="noteListService.filesParameter.SearchText">
+            <button class="btn search-btn search-menu-close-button" type="submit"><i class="fa fa-search"></i></button>
+        </div>
+    </form>
+    <div class="nav-right">
+        <ul class="nav-middle">
+            <li *ngIf="userService.loggedIn() && !userService.userInfo.IsAdmin">
+                <a routerLink="/user" routerLinkActive="active" translate>User.MyNotes</a>
+            </li>
+            <li *ngIf="userService.loggedIn() && userService.userInfo.IsAdmin">
+                <a routerLink="/admin/unapproved-files" [ngClass]="{'active': router.url.search('admin') !== -1}"
+                    translate>PageHeader.Admin</a>
+            </li>
+            <li>
+                <a routerLink="/aboutus" routerLinkActive="active" translate>PageHeader.AboutUs</a>
+            </li>
+            <li id="liLanguage" class="user-name language"><span class="hand lang" translate>Common.Language</span>
+                <ul>
+                    <li *ngFor="let lang of languageList;">
+                        <a href="javascript:void(0)" (click)="ChangeLanguage(lang.LanguageId)"
+                            class="{{lang.LanguageName}}" translate>Common.{{lang.LanguageName}}</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="change-mode" *ngIf="userService.loggedIn() && userService.userInfo.IsAdmin"
+                id="liTheme{{noteListService.themeMode}}">
+                <a (click)="noteListService.ChangeThemeMode(noteListService.themeMode)" class="hand">
+                    <ng-container *ngIf="noteListService.themeMode == '1'"><span translate>Common.DarkMode</span>
+                    </ng-container>
+                    <ng-container *ngIf="noteListService.themeMode == '0'"><span translate>Common.NormalMode</span>
+                    </ng-container>
+                </a>
+            </li>
+        </ul>
+        <a href="javascript:void(0);" class="btn btn-primary pull-right login-button login-close-button"
+            routerLink="/login" *ngIf="!userService.loggedIn()" routerLinkActive="active" translate>Common.Login<img
+                alt="" src="/assets/images/user-icon.png" class="user-icon">
+        </a>
+        <!-- <a href="javascript:void(0);" class="btn btn-primary pull-right login-button" *ngIf="userService.loggedIn()"
+            (click)="userService.logoutUser()" translate>Common.Logout<img alt="" src="/assets/images/user-icon.png"
+                class="user-icon">
+        </a>
+        <div class="user-name" *ngIf="userService.loggedIn()">
+        </div> -->
+        <ul class="nav-middle-right" *ngIf="userService.loggedIn()">
+            <li class="user-name" [ngClass]="{'active' : showLogout}">
+                <span class="hand lang" (click)="ToggleLogout()">{{userService.userInfo.FirstName + ' ' +
+                    userService.userInfo.LastName}}</span>
+                <ul>
+                    <li><a href="javascript:void(0);"
+                            (click)="this.showLogout=false;userService.logoutUser();noteListService.SetDefaultValues();"
+                            translate>Common.Logout</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- <li><a href="javascript:void(0);" (click)="userService.logoutUser()" translate>Common.Logout</a>
+            </li> -->
+        </ul>
+    </div>
+</nav>
+<div class="main-wrapper"
+    [ngClass]="{'admin-main-wrapper': router.url.search('admin') !== -1, 'main-wrapper-sub': router.url.search('home') === -1}">
+    <nav class="p-0 sidebar content-left" *ngIf="router.url.search('admin') === -1">
+        <div class="sidebar-sticky">
+            <ul class="nav1">
+                <li class="nav-ddmenu li-institute"
+                    *ngFor="let institute of institutionService.institutionList;index as i">
+                    <a class="nav-link" href="javascript:void(0);"
+                        (click)="noteListService.ClientInsititutionChange(institute,i)"
+                        [class.active]="institute.InstitutionId == noteListService.filesParameter.InstitutionId">
+                        {{institute.InstitutionName}}
+                        <img *ngIf="studyService.loading && institute.InstitutionId == noteListService.filesParameter.InstitutionId" alt="" src="/assets/images/loading-blue.gif" style="width: 20px;">
+                    </a>
+                    <ul *ngIf="institute.InstitutionId == noteListService.filesParameter.InstitutionId">
+                        <!-- <li *ngFor="let study of studyService.studyList | myfilter: { InstitutionId : noteListService.filesParameter.InstitutionId };"> -->
+                        <li *ngFor="let study of studyService.studyList;">
+                            <a href="javascript:void(0);"
+                                (click)="noteListService.IsSearchDone=false;noteListService.IsNoteListSearchDone=false;noteListService.filesList = null;onStudyChange(study)"
+                                class="close-click-res"
+                                [class.active]="study.StudyId == noteListService.filesParameter.StudyId">
+                                {{study.StudyName}}
+                                <img *ngIf="semesterService.loading && study.StudyId == noteListService.filesParameter.StudyId" alt="" src="/assets/images/loading-blue.gif" style="width: 20px;">
+                            </a>
+                            <!-- <ul class="nav-ddmenu-inner"
+                                *ngIf="study.StudyId == noteListService.filesParameter.StudyId">
+                                <li *ngFor="let semester of semesterService.semesterList">
+                                    <a href="javascript:void(0);" class="close-click-res"
+                                        (click)="noteListService.ClientSemesterChange(semester)"
+                                        [class.active]="semester.SemesterId == noteListService.filesParameter.SemesterId">
+                                        <span>
+                                            <div style="float: left;" translate>
+                                                PageHeader.{{noteListService.filesParameter.TermType}}</div>
+                                            &nbsp;{{semester.SemesterNo}}
+                                        </span>
+                                    </a>
+                                    <ul class="nav-ddmenu-inner"
+                                        *ngIf="semester.SemesterId == noteListService.filesParameter.SemesterId">
+                                        <li *ngFor="let subject of subjectService.subjectList">
+                                            <a href="javascript:void(0);" class="close-click-res"
+                                                (click)="noteListService.ClientSubjectChange(subject)"
+                                                [class.active]="subject.SubjectId == noteListService.filesParameter.SubjectId">
+                                                {{subject.SubjectName}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul> -->
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="p-0 sidebar admin-sidebar content-left" *ngIf="router.url.search('admin') !== -1">
+        <div class="sidebar-sticky">
+            <ul class="nav1">
+                <li class="nav-ddmenu"><a class="nav-link" href="javascript:void(0);"
+                        translate>PageHeader.Educations</a>
+                    <ul class="nav-ddmenu-inner">
+                        <li><a href="javascript:void(0);" routerLink="/admin/institution" routerLinkActive="active"
+                                class="close-click-res" translate>PageHeader.Institution</a></li>
+                        <li><a href="javascript:void(0);" routerLink="/admin/study" routerLinkActive="active"
+                                class="close-click-res" translate>PageHeader.Study</a></li>
+                        <li><a href="javascript:void(0);" routerLink="/admin/subject" routerLinkActive="active"
+                                class="close-click-res" translate>PageHeader.Subject</a>
+                    </ul>
+                </li>
+                <li><a href="javascript:void(0);" routerLink="/admin/user" routerLinkActive="active"
+                        class="close-click-res" translate>PageHeader.Users</a></li>
+                <li><a href="javascript:void(0);" routerLink="/admin/unapproved-files" routerLinkActive="active"
+                        class="close-click-res" translate>PageHeader.ApproveNotes</a></li>
+                <li><a href="javascript:void(0);" routerLink="/admin/statistics" routerLinkActive="active"
+                        class="close-click-res" translate>PageHeader.Statistics</a></li>
+            </ul>
+        </div>
+    </nav>
+    <main role="main" class="content-right">
+        <div class="main-content">
+            <table width="100%" style="display:none;">
+                <tr>
+                    <td>
+                        <h5>indexInstitution= {{noteListService.indexInstitution}}</h5>
+                    </td>
+                    <td>
+                        <h5>indexInstitutionPrevious={{noteListService.indexInstitutionPrevious}}</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h5>IsSearchDone={{noteListService.IsSearchDone}}</h5>
+                    </td>
+                    <td>
+                        <h5>IsNoteListSearchDone={{noteListService.IsNoteListSearchDone}}</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h5>{{noteListService.filesParameter|json}}</h5>
+                    </td>
+                </tr>
+            </table>
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+    <div class="overlay-box"></div>
 </div>
-<div *ngIf="!isLoggedIn()">
-  <h3>Your are NOT logged in</h3>
+<div class="footer-section">
+    <footer class="footer">
+        <div class="container animate-box fadeInUp animated-fast">
+            <div class="footer-col">
+                <div class="col">
+                    <h5 translate>Common.UsefullLinks</h5>
+                    <h5 class="footer-heading" translate>Common.UsefullLinks<i
+                            class="footer-lbl fa fa-plus-square-o"></i></h5>
+                    <ul class="fl footer-collapse">
+                        <li><a href="javascript:void(0);" routerLink="/note-list" translate>Note.UploadNotes</a>
+                        </li>
+                        <li><a href="javascript:void(0);" routerLink="/aboutus" translate>PageHeader.AboutUs</a>
+                        </li>
+                        <li><a href="javascript:void(0);" translate>PageHeader.Help</a> </li>
+                        <li><a href="javascript:void(0);" translate>Common.ContactUs</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-col">
+                <div class="col">
+                    <h5 translate>Common.Email</h5>
+                    <h5 class="footer-heading" translate>Common.Email<i class="footer-lbl fa fa-plus-square-o"></i>
+                    </h5>
+                    <div class="footer-collapse">
+                        <a href="mailto:info@uninoter.com" class="email-link">info@uninoter.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <div class="col">
+                    <h5 translate>Common.Phone</h5>
+                    <h5 class="footer-heading" translate>Common.Phone<i class="footer-lbl fa fa-plus-square-o"></i>
+                    </h5>
+                    <div class="footer-collapse">
+                        <p>50314031</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <div class="col">
+                    <h5 translate>Common.ContactUs</h5>
+                    <h5 class="footer-heading" translate>Common.ContactUs<i class="footer-lbl fa fa-plus-square-o"></i>
+                    </h5>
+                    <div class="footer-collapse">
+                        <div class="social-icon">
+                            <a href="https://www.facebook.com/UniNotercom-126529599128807" target="_blank">
+                                <i class="fa fa-facebook"></i></a>
+                            <a href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                            <a href="javascript:void(0);"><i class="fa fa-youtube"></i></a>
+                            <a href="https://www.instagram.com/uninotercom/" target="_blank">
+                                <i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-col">
+                <div class="col">
+                    <a routerLink="/" href="javascript:void(0);" class="footer-logo">
+                        <img alt="" src="/assets/images/footer-logo.png"></a>
+                    <!-- <div class="">
+                        <p class="footer-text"><i class="fa fa-home"></i>Vestergade 1 D<br>9870 Sindal</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="footer-bottom" *ngIf="router.url.search('home') !== -1">
+        <div class="container">
+            <p>&nbsp;</p>
+            <ul class="pp-link">
+                <li><a href="javascript:void(0);">Privacy policy</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
-<router-outlet></router-outlet>

@@ -1,0 +1,16 @@
+div[aria-label="Pop-out"] {
+    display: none;
+}
+//syntax
+div[aria-label="toolbar"] {
+    width: 52px;
+    display: none;
+}
+
+.WACStatusBarContainer {
+    display: none !important;
+}
+
+a[title="Menu"] {
+    display: none;
+}
