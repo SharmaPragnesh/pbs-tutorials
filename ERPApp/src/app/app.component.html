@@ -1,0 +1,10 @@
+<h1>JSN</h1>
+<button (click)="login()" *ngIf="!isLoggedIn()">SIGN IN</button>
+<button (click)="logout()" *ngIf="isLoggedIn()">SIGN OUT</button>
+<div *ngIf="isLoggedIn()">
+  <h3>Your are logged in</h3>
+</div>
+<div *ngIf="!isLoggedIn()">
+  <h3>Your are NOT logged in</h3>
+</div>
+<router-outlet></router-outlet>
