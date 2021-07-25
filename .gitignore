@@ -1,2 +1,8 @@
 # Don't track content of these folders
 node_modules/
+ERPWebAPI/Common.Extension/obj/
+ERPWebAPI/ERP.Entities/obj/
+ERPWebAPI/ERP.Repository/obj/
+ERPWebAPI/ERPWebAPI/obj/
+ERPWebAPI/.vs/ERPWebAPI/v16
+ERPWebAPI/.vs/ERPWebAPI/v16/.suo
