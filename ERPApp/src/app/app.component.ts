@@ -20,8 +20,8 @@ export class AppComponent {
 
   login() {
     this.msalService.loginPopup().subscribe((res: AuthenticationResult) => {
-      // alert(res);
       console.log(res);
+      console.log(res.account.username)
       this.msalService.instance.setActiveAccount(res.account);
       // this.isLoggedIn();
     })
