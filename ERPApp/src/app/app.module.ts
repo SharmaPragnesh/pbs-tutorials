@@ -65,6 +65,7 @@ import { FeedbackComponent } from './Components/note-list/feedback/feedback.comp
 import { AboutDanishComponent } from './Components/about-us/about-danish/about-danish.component';
 import { AboutEnglishComponent } from './Components/about-us/about-english/about-english.component';
 import { CookiebotConfig } from './Models/cookiebot.config';
+import { RolesService } from './Services/roles.service';
 
 //For Translation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -133,6 +134,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConfirmationDialogComponent
   ],
   providers: [
+    RolesService,
     InstitutionService,
     StudyService,
     UserService,

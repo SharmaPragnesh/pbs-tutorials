@@ -19,6 +19,8 @@ export const environment = {
   ShowTimerLogs: false,
   // apiURL: 'https://uninoter.salesoptimizer.eu/api'
   apiURL: 'https://uninoter.salesoptimizer.eu/api',
+  erpApiURL: 'http://localhost:64904',
+  // erpApiURL: 'https://test-pssplerp-webapi.azurewebsites.net',
   webshipperapiURL: 'https://milcom.api.webshipper.io/v2',
   webshipperDotNetapiURL: 'http://localhost:64121',
   // apiURL: 'http://10.0.0.103:8164'

@@ -40,6 +40,8 @@ import { TermTypeComponent } from './study/term-type/term-type.component';
 import { TermTypeListComponent } from './study/term-type-list/term-type-list.component';
 import { TermTypeOptionalNameComponent } from './study/term-type-optional-name/term-type-optional-name.component';
 import { CallbackPipe } from 'src/app/Pipes/callback.pipe';
+import { RolesComponent } from './roles/roles.component';
+import { RolesListComponent } from './roles/roles-list/roles-list.component';
 
 //For Translation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -68,7 +70,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     TermTypeComponent,
     TermTypeListComponent,
     TermTypeOptionalNameComponent,
-    CallbackPipe
+    CallbackPipe,
+    RolesComponent,
+    RolesListComponent
   ],
   imports: [
     SharedModule,//For those component need for multiple modules

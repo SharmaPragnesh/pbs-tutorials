@@ -5,6 +5,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth.guard';
 import { InstitutionListComponent } from './institution/institution-list/institution-list.component';
 import { InstitutionComponent } from './institution/institution.component';
+import { RolesListComponent } from './roles/roles-list/roles-list.component';
 import { SemesterListComponent } from './semester/semester-list/semester-list.component';
 import { SemesterComponent } from './semester/semester.component';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
       {
         path: '',
         children: [
+          { path: 'roles', component: RolesListComponent, data: { roles: [Role.Admin] }, canActivate: [AuthGuard] },
           { path: 'institution', component: InstitutionListComponent, data: { roles: [Role.Admin] }, canActivate: [AuthGuard] },
           { path: 'study', component: StudyListComponent, data: { roles: [Role.Admin] }, canActivate: [AuthGuard] },
           { path: 'semester', component: SemesterListComponent, data: { roles: [Role.Admin] }, canActivate: [AuthGuard] },

@@ -40,6 +40,13 @@ namespace ERPWebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            //Below code for Localization - END
+            app.UseCors(options => options
+                //.WithOrigins(Configuration.GetSection("FrontEndURL").Value, Configuration.GetSection("FrontEndURL2").Value, "http://localhost:4200")
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

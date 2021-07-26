@@ -1,0 +1,45 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0 admin-heading" translate>Roles</h3>
+                    <div class="admin-action">
+                        <button class="btn text-white" (click)="AddOrEditInstitution(0)" translate>New Role
+                            <i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="table-responsive" *ngIf="rolesList!=null">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="hand" (click)="sort('name')">
+                                    <span class="sorting-column" translate>
+                                        Name
+                                        <i class="fa sorting-angle" *ngIf="key =='name'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="text-center delete-width"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let roles of rolesList; index as i; let first = first; let last = last;"
+                                [ngClass]="{'alt_row': i%2!==0}">
+                                <td class="hand" (click)="AddOrEditInstitution(roles.id)">
+                                    {{roles.name}}
+                                </td>
+                                <td class="text-center">
+                                    <i class="fa fa-trash fa-lg hand remove-icon"
+                                        (click)="DeleteConfirmDialog(roles)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

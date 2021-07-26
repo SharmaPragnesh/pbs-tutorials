@@ -1,3 +1,8 @@
+ng g s Services/Roles
+ng g c Components/Admin/roles
+ng g c Components/Admin/roles/roles-list
+ng g class Models/Roles --type=model
+----------------------------------------------------------
 ng g c Components/Admin/order
 ng g c Components/Admin/order/order-list
 ----------------------------------------------------------
