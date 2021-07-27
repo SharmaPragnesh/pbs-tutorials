@@ -6,6 +6,7 @@ import { Institution } from 'src/app/Models/institution.model';
 import { PageParameter, Roles } from 'src/app/Models/roles.model';
 import { NotificationService } from 'src/app/Services/notification.service';
 import { RolesService } from 'src/app/Services/roles.service';
+import { environment } from 'src/environments/environment';
 import { RolesComponent } from '../roles.component';
 
 @Component({
@@ -17,8 +18,8 @@ export class RolesListComponent implements OnInit {
 
   //sorting
   config: any;
-  key: string = 'Sorting';
-  reverse: boolean = false;
+  key: string = 'Name';
+  reverse: boolean = true;
 
   rolesList: Roles[] = null;
   pageParameter: PageParameter;
@@ -30,6 +31,13 @@ export class RolesListComponent implements OnInit {
   ngOnInit(): void {
     this.GetFormModel();
     this.GetRolesList();
+
+    this.config = {
+      id: 'paginationUserList',
+      itemsPerPage: environment.pageSize,
+      currentPage: 1,
+      totalItems: this.rolesList != undefined ? this.rolesList.length : 0
+    };
   }
 
   GetFormModel() {
@@ -39,7 +47,7 @@ export class RolesListComponent implements OnInit {
         SortColumn: "Name",
         SortOrder: "asc",
         PageStart: 1,
-        PageSize: 10
+        PageSize: 100
       };
     }
   }
@@ -48,7 +56,7 @@ export class RolesListComponent implements OnInit {
     this.rolesService.RolesList(this.pageParameter).subscribe(
       res => {
         console.log(res);
-        debugger;
+        // debugger;
         this.rolesList = res["list"];
         console.log(this.rolesList);
       },
@@ -77,8 +85,24 @@ export class RolesListComponent implements OnInit {
   }
 
   sort(key) {
-
+    debugger;
+    if (this.key == key) {
+      this.reverse = !this.reverse;
+    }
+    else {
+      this.reverse = false;
+    }
+    this.key = key;
+    if (environment.ShowConsoleLogs) {
+      console.log(key);
+      console.log(this.reverse);
+    }
   }
+
+  pageChanged(event) {
+    this.config.currentPage = event;
+  }
+
 
   MoveUp(index: number) {
   }

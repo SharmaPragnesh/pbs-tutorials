@@ -9,7 +9,7 @@ export const environment = {
   production: false,
   timeSpanMedium: 5000,
   timeSpanLarge: 7000,
-  pageSize: 20,
+  pageSize: 10,
   UploadFileSize: 104857600,
   GoogleClientId: "981659961080-9qeq7ra4kt6k47t9k1lnfbvrjrglom5l.apps.googleusercontent.com",
   FacebookClientId: "1046651368784150",

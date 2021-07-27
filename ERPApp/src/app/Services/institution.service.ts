@@ -41,7 +41,6 @@ export class InstitutionService {
 
   GetInstitutionList() {
     this.institutionParameter.LanguageId = Number(this.userService.selectedLanguageId);
-    debugger;
     this.http.post<Institution[]>(environment.apiURL + '/Institution/GetInstitution', this.institutionParameter)
       .pipe(catchError(this.handleError))
       .toPromise()

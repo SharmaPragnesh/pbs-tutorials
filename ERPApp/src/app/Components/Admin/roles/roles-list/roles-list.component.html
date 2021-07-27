@@ -14,10 +14,10 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th class="hand" (click)="sort('name')">
+                                <th class="hand" (click)="sort('Name')">
                                     <span class="sorting-column" translate>
                                         Name
-                                        <i class="fa sorting-angle" *ngIf="key =='name'"
+                                        <i class="fa sorting-angle" *ngIf="key =='Name'"
                                             [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
                                     </span>
                                 </th>
@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let roles of rolesList; index as i; let first = first; let last = last;"
+                            <tr *ngFor="let roles of rolesList| orderBy: key : reverse | paginate: config ;index as i;"
                                 [ngClass]="{'alt_row': i%2!==0}">
                                 <td class="hand" (click)="AddOrEditInstitution(roles.id)">
                                     {{roles.name}}
@@ -38,6 +38,11 @@
                         </tbody>
                     </table>
                     <div class="clear"></div>
+                    <div class="text-center">
+                        <pagination-controls id="paginationUserList" (pageChange)="pageChanged($event)"
+                            [previousLabel]="rolesService.labels.previousLabel | translate"
+                            [nextLabel]="rolesService.labels.nextLabel | translate"></pagination-controls>
+                    </div>
                 </div>
             </div>
         </div>

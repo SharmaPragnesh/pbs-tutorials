@@ -10,6 +10,11 @@ import { PageParameter, Roles } from '../Models/roles.model';
   providedIn: 'root'
 })
 export class RolesService {
+  
+  public labels: any = {
+    previousLabel: 'Common.Previous',
+    nextLabel: 'Common.Next'
+  };
 
   constructor(private http: HttpClient, private router: Router) { }
 
