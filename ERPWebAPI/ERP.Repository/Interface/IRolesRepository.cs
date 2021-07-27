@@ -10,5 +10,8 @@ namespace ERP.Repository.Interface
     public interface IRolesRepository
     {
         Task<Page<RolesResponse>> GetRoles(PageParameter pageParameter);
+
+        Task InsertRoles(RolesResponse rolesResponse);
+        Task UpdateRoles(RolesResponse rolesResponse);
     }
 }

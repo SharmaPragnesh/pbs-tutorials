@@ -11,5 +11,10 @@ namespace ERP.Entities.Roles
         public string Name { get; set; }
 
         public byte IsActive { get; set; }
+
+        /////
+        public int? EnumValue { get; set; }
+        public string LandingURL { get; set; }
+        public int? CreatedBy { get; set; }
     }
 }

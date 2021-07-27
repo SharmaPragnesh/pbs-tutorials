@@ -84,3 +84,35 @@ BEGIN
          
 END
 GO
+
+-----------------
+ 
+ALTER PROCEDURE USP_UpdateRoles
+(
+	@Id				INT = 1,
+    @Name			NVARCHAR(25) = NULL
+)
+AS
+BEGIN
+    UPDATE dbo.Roles
+    SET Name = @Name
+    WHERE ID = @ID
+         
+END
+GO
+
+-----------------
+
+CREATE PROCEDURE USP_InsertRoles
+(
+	@Id				INT = 1,
+    @Name			NVARCHAR(25) = NULL,
+    @CreatedBy		INT = 1
+)
+AS
+BEGIN
+    INSERT INTO dbo.Roles (Name,CreatedBy,CreatedOn,ModifiedOn,Active)
+    VALUES (@Name,@CreatedBy,GETDATE(),GETDATE(),1)
+         
+END
+GO

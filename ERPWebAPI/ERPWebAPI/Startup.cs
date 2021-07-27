@@ -29,6 +29,13 @@ namespace ERPWebAPI
         {
             services.AddControllers();
 
+            ////////PRAGNESH:If you want to convert model from Camelcase to Pascalcase then uncomment below code : e.g. languageCode,languageName to LanguageCode,LanguageName
+            services.AddMvc().AddJsonOptions(o =>
+            {
+                o.JsonSerializerOptions.PropertyNamingPolicy = null;
+                o.JsonSerializerOptions.DictionaryKeyPolicy = null;
+            });
+
             services.AddScoped<IRolesRepository,RolesRepository>();
         }
 

@@ -27,8 +27,8 @@
                         <tbody>
                             <tr *ngFor="let roles of rolesList| orderBy: key : reverse | paginate: config ;index as i;"
                                 [ngClass]="{'alt_row': i%2!==0}">
-                                <td class="hand" (click)="AddOrEditInstitution(roles.id)">
-                                    {{roles.name}}
+                                <td class="hand" (click)="AddOrEditInstitution(roles.Id)">
+                                    {{roles.Name}}
                                 </td>
                                 <td class="text-center">
                                     <i class="fa fa-trash fa-lg hand remove-icon"

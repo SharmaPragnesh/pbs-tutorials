@@ -10,7 +10,7 @@ import { PageParameter, Roles } from '../Models/roles.model';
   providedIn: 'root'
 })
 export class RolesService {
-  
+
   public labels: any = {
     previousLabel: 'Common.Previous',
     nextLabel: 'Common.Next'
@@ -23,6 +23,23 @@ export class RolesService {
       catchError(this.handleError)
     );
   }
+
+  InsertUpdateRoles(institution?: Roles) {
+    debugger;
+    if (institution != undefined) {
+      institution.Id = Number(institution.Id);
+      return this.http.post<any>(environment.erpApiURL + '/Roles/InsertUpdateRoles', institution).pipe(
+        catchError(this.handleError)
+      );
+    }
+    // else {
+    // institution.Id = Number(institution.Id);
+    // return this.http.post<any>(environment.apiURL + '/Roles/InsertUpdateRoles', this.institutionFormData).pipe(
+    //   catchError(this.handleError)
+    // );
+    // }
+  }
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

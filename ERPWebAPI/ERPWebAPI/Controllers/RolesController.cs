@@ -32,5 +32,32 @@ namespace ERPWebAPI.Controllers
         {
             return await _repository.GetRoles(pageParameter);
         }
+
+        //[Authorize]
+        [HttpPost]
+        [Route("InsertUpdateRoles")]
+        public async Task InsertUpdateRoles([FromBody] RolesResponse rolesResponse)
+        {
+            try
+            {
+                //string userId = User.Claims.First(c => c.Type == "UserId").Value;
+                rolesResponse.CreatedBy = 96;
+                //rolesResponse.UserId = Convert.ToInt32(userId);
+                if (rolesResponse.Id == 0)
+                {
+                    await _repository.InsertRoles(rolesResponse);
+                }
+                else
+                {
+                    await _repository.UpdateRoles(rolesResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError("Error in InsertUpdateRoles : {0}", ex.Message);
+                //_logger.LogError("Error in InsertUpdateRoles : {0}", ex.StackTrace);
+                throw new Exception(Convert.ToString(ex));
+            }
+        }
     }
 }

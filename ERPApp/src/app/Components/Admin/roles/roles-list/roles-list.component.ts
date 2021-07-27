@@ -19,7 +19,7 @@ export class RolesListComponent implements OnInit {
   //sorting
   config: any;
   key: string = 'Name';
-  reverse: boolean = true;
+  reverse: boolean = false;
 
   rolesList: Roles[] = null;
   pageParameter: PageParameter;
@@ -56,8 +56,7 @@ export class RolesListComponent implements OnInit {
     this.rolesService.RolesList(this.pageParameter).subscribe(
       res => {
         console.log(res);
-        // debugger;
-        this.rolesList = res["list"];
+        this.rolesList = res["List"];
         console.log(this.rolesList);
       },
       err => {
@@ -69,13 +68,14 @@ export class RolesListComponent implements OnInit {
   ShowStudies(institution: Institution) {
   }
 
-  AddOrEditInstitution(InstitutionId: number) {
+  AddOrEditInstitution(RoleId: number) {
+    var RolesList = this.rolesList;
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = false;
     dialogConfig.panelClass = 'medium-dialog-box';
     dialogConfig.width = "100%";
-    dialogConfig.data = { InstitutionId };//passed the multiple parameter using comma (,)
+    dialogConfig.data = { RoleId, RolesList };//passed the multiple parameter using comma (,)
     this.dialog.open(RolesComponent, dialogConfig).afterClosed().subscribe(res => {
       this.GetRolesList();
     });
@@ -85,7 +85,6 @@ export class RolesListComponent implements OnInit {
   }
 
   sort(key) {
-    debugger;
     if (this.key == key) {
       this.reverse = !this.reverse;
     }

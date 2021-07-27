@@ -1,7 +1,7 @@
 export class Roles {
-    id: number;
-    name: string;
-    isActive: number;
+    Id: number;
+    Name: string;
+    IsActive: number;
 }
 
 // export class RolesParameter {

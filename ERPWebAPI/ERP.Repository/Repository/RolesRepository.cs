@@ -59,5 +59,37 @@ namespace ERP.Repository.Repository
             };
         }
 
+        public async Task InsertRoles(RolesResponse rolesResponse)
+        {
+            using (SqlConnection sql = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("USP_InsertRoles", sql))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@Id", rolesResponse.Id));
+                    cmd.Parameters.Add(new SqlParameter("@Name", rolesResponse.Name));
+                    cmd.Parameters.Add(new SqlParameter("@CreatedBy", rolesResponse.CreatedBy));
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                    return;
+                }
+            }
+        }
+
+        public async Task UpdateRoles(RolesResponse rolesResponse)
+        {
+            using (SqlConnection sql = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("USP_UpdateRoles", sql))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@Id", rolesResponse.Id));
+                    cmd.Parameters.Add(new SqlParameter("@Name", rolesResponse.Name));
+                    await sql.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                    return;
+                }
+            }
+        }
     }
 }
