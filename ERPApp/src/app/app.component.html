@@ -82,7 +82,8 @@
                         (click)="noteListService.ClientInsititutionChange(institute,i)"
                         [class.active]="institute.InstitutionId == noteListService.filesParameter.InstitutionId">
                         {{institute.InstitutionName}}
-                        <img *ngIf="studyService.loading && institute.InstitutionId == noteListService.filesParameter.InstitutionId" alt="" src="/assets/images/loading-blue.gif" style="width: 20px;">
+                        <img *ngIf="studyService.loading && institute.InstitutionId == noteListService.filesParameter.InstitutionId"
+                            alt="" src="/assets/images/loading-blue.gif" style="width: 20px;">
                     </a>
                     <ul *ngIf="institute.InstitutionId == noteListService.filesParameter.InstitutionId">
                         <!-- <li *ngFor="let study of studyService.studyList | myfilter: { InstitutionId : noteListService.filesParameter.InstitutionId };"> -->
@@ -92,7 +93,8 @@
                                 class="close-click-res"
                                 [class.active]="study.StudyId == noteListService.filesParameter.StudyId">
                                 {{study.StudyName}}
-                                <img *ngIf="semesterService.loading && study.StudyId == noteListService.filesParameter.StudyId" alt="" src="/assets/images/loading-blue.gif" style="width: 20px;">
+                                <img *ngIf="semesterService.loading && study.StudyId == noteListService.filesParameter.StudyId"
+                                    alt="" src="/assets/images/loading-blue.gif" style="width: 20px;">
                             </a>
                             <!-- <ul class="nav-ddmenu-inner"
                                 *ngIf="study.StudyId == noteListService.filesParameter.StudyId">
@@ -127,11 +129,12 @@
     <nav class="p-0 sidebar admin-sidebar content-left" *ngIf="router.url.search('admin') !== -1">
         <div class="sidebar-sticky">
             <ul class="nav1">
-                <li class="nav-ddmenu"><a class="nav-link" href="javascript:void(0);"
-                        translate>Administration</a>
+                <li class="nav-ddmenu"><a class="nav-link" href="javascript:void(0);" translate>Administration</a>
                     <ul class="nav-ddmenu-inner">
                         <li><a href="javascript:void(0);" routerLink="/admin/roles" routerLinkActive="active"
-                            class="close-click-res" translate>Roles</a></li>
+                                class="close-click-res" translate>Roles</a></li>
+                        <li><a href="javascript:void(0);" routerLink="/admin/timesheet" routerLinkActive="active"
+                                class="close-click-res" translate>TimeSheet</a></li>
                         <li><a href="javascript:void(0);" routerLink="/admin/institution" routerLinkActive="active"
                                 class="close-click-res" translate>PageHeader.Institution</a></li>
                         <li><a href="javascript:void(0);" routerLink="/admin/study" routerLinkActive="active"

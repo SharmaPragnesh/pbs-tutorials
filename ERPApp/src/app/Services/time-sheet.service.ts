@@ -4,39 +4,19 @@ import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { PageParameter, Roles } from '../Models/roles.model';
+import { TimeSheet } from '../Models/time-sheet.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RolesService {
-
-  public labels: any = {
-    previousLabel: 'Common.Previous',
-    nextLabel: 'Common.Next'
-  };
+export class TimeSheetService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  RolesList(pageParameter: PageParameter) {
-    return this.http.post<Roles[]>(environment.erpApiURL + '/Roles', pageParameter).pipe(
+  TimeSheet() {
+    return this.http.get<TimeSheet>(environment.erpApiURL + '/TimeSheet').pipe(
       catchError(this.handleError)
     );
-  }
-
-  InsertUpdateRoles(institution?: Roles) {
-    if (institution != undefined) {
-      institution.Id = Number(institution.Id);
-      return this.http.post<any>(environment.erpApiURL + '/Roles/InsertUpdateRoles', institution).pipe(
-        catchError(this.handleError)
-      );
-    }
-    // else {
-    // institution.Id = Number(institution.Id);
-    // return this.http.post<any>(environment.apiURL + '/Roles/InsertUpdateRoles', this.institutionFormData).pipe(
-    //   catchError(this.handleError)
-    // );
-    // }
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -3,6 +3,11 @@ ng g c Components/Admin/roles
 ng g c Components/Admin/roles/roles-list
 ng g class Models/Roles --type=model
 ----------------------------------------------------------
+ng g s Services/TimeSheet
+ng g c Components/Admin/TimeSheet
+ng g class Models/TimeSheet --type=model
+ng g class Models/Common --type=model
+----------------------------------------------------------
 ng g c Components/Admin/order
 ng g c Components/Admin/order/order-list
 ----------------------------------------------------------

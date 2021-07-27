@@ -50,6 +50,7 @@ export class SubjectListComponent implements OnInit {
       this.reverse = true;
     }
 
+    debugger;
     this.subjectService.GetFormModel();
     this.subjectService.subjectParameter.SubjectId = null; //because if subject is selected from frontend then set to null
     // // // this.subjectService.subjectParameter.SubjectNo = null;

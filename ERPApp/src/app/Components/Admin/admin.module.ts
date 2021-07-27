@@ -42,6 +42,7 @@ import { TermTypeOptionalNameComponent } from './study/term-type-optional-name/t
 import { CallbackPipe } from 'src/app/Pipes/callback.pipe';
 import { RolesComponent } from './roles/roles.component';
 import { RolesListComponent } from './roles/roles-list/roles-list.component';
+import { TimeSheetComponent } from './time-sheet/time-sheet.component';
 
 //For Translation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -72,7 +73,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TermTypeOptionalNameComponent,
     CallbackPipe,
     RolesComponent,
-    RolesListComponent
+    RolesListComponent,
+    TimeSheetComponent
   ],
   imports: [
     SharedModule,//For those component need for multiple modules

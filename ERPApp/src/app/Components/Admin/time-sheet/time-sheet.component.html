@@ -1,0 +1,50 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0 admin-heading" translate>Time Sheet</h3>
+
+                </div>
+                <div class="card-body education">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label translate>Project &nbsp;&nbsp;</label>
+                            <select *ngIf="projectList != null" name="Id" #Id="ngModel" [(ngModel)]="projectId"
+                                class="form-control">
+                                <option [ngValue]="0" translate>Messages.ChooseInstitution</option>
+                                <option *ngFor='let project of projectList' [ngValue]="project.Id">
+                                    {{project.DisplayText}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label translate>Resource &nbsp;&nbsp;</label>
+                            <select *ngIf="resourceList != null" name="Id" #Id="ngModel" [(ngModel)]="resourceId"
+                                class="form-control">
+                                <option [ngValue]="0" translate>Messages.ChooseInstitution</option>
+                                <option *ngFor='let resource of resourceList' [ngValue]="resource.Id">
+                                    {{resource.DisplayText}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>aaa &nbsp;&nbsp;</label>
+                            <!-- <select name="SemesterId" #SemesterId="ngModel"
+                                [(ngModel)]="noteListService.filesParameter.SemesterId" class="form-control"
+                                (change)='onSemesterChange($event)'>
+                                <option [ngValue]="0" translate>Common.All</option>
+                                <option class='option' *ngFor='let semester of semesterService.semesterList'
+                                    [ngValue]="semester.SemesterId">{{semester.SemesterName}}</option>
+                            </select> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>JSN</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

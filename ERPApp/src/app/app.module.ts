@@ -66,6 +66,7 @@ import { AboutDanishComponent } from './Components/about-us/about-danish/about-d
 import { AboutEnglishComponent } from './Components/about-us/about-english/about-english.component';
 import { CookiebotConfig } from './Models/cookiebot.config';
 import { RolesService } from './Services/roles.service';
+import { TimeSheetService } from './Services/time-sheet.service';
 
 //For Translation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -135,6 +136,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     RolesService,
+    TimeSheetService,
     InstitutionService,
     StudyService,
     UserService,
