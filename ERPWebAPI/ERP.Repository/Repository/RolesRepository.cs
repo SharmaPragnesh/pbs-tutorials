@@ -1,20 +1,101 @@
 ﻿using Common.Extension;
+using ERP.Entities;
 using ERP.Entities.Roles;
 using ERP.Repository.Interface;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Extension;
+using System.Data.SqlClient;
 
 namespace ERP.Repository.Repository
 {
     public class RolesRepository : IRolesRepository ///, BaseRepository
     {
+        private readonly ApplicationDbContext _dbContext;
+
         private readonly string _connectionString = "Data Source=erptrainee.database.windows.net;Initial Catalog=ERPTrainees_DEV;User ID=erpadmin;password=psspl@12345;";
+
+        public RolesRepository(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public async Task<Page<RolesResponse>> GetRoles(PageParameter pageParameter)
         {
+            int from = 0, size = 10;
+            string searchText = string.Empty;
+            string secondarySearchText = string.Empty;
+            DateTime todaysDate = DateTime.UtcNow.Date;
+
+            if (Convert.ToInt32(pageParameter.PageSize) != 0)
+            {
+                size = Convert.ToInt32(pageParameter.PageSize);
+                from = (Convert.ToInt32(pageParameter.PageStart) - 1) * size;
+            }
+
+            Page<RolesResponse> result = new Page<RolesResponse>();
+            int activeStatus = (int)Enums.Status.Active;
+            IQueryable<RolesResponse> query = null;
+            query = (from roles in _dbContext.Roles
+                     where roles.Active == activeStatus
+                     select new RolesResponse()
+                     {
+                         Id = roles.Id,
+                         Name = roles.Name,
+                         IsActive = roles.Active
+                     });
+
+            #region Sorting
+
+            string sortOrder = pageParameter.SortOrder.ToLower(CultureInfo.InvariantCulture) == Common.Extension.Constants.SortOrder.Descending
+                ? Common.Extension.Constants.SortOrder.Descending : Common.Extension.Constants.SortOrder.Ascending;
+
+            string sortColumn = Convert.ToString(pageParameter.SortColumn).ToLower(CultureInfo.InvariantCulture);
+
+            if (sortColumn == "Name".ToLower(CultureInfo.InvariantCulture))
+            {
+                query = sortOrder == Constants.SortOrder.Ascending ?
+                    query.OrderBy(u => u.Name) : query.OrderByDescending(u => u.Name);
+            }
+            else if (sortColumn == "id".ToLower(CultureInfo.InvariantCulture))
+            {
+                query = sortOrder == Constants.SortOrder.Ascending ?
+                    query.OrderBy(u => u.Id) : query.OrderByDescending(u => u.Id);
+            }
+            else if (sortColumn == "IsActive".ToLower(CultureInfo.InvariantCulture))
+            {
+                query = sortOrder == Constants.SortOrder.Ascending ?
+                    query.OrderBy(u => u.IsActive) : query.OrderByDescending(u => u.IsActive);
+            }
+            else
+            {
+                //Indicates default sorting
+                query = query.OrderByDescending(u => u.Id);
+            }
+
+            #endregion
+
+            result.TotalCount = query.Count();
+
+
+            #region Paging
+
+            if (size != -1)
+                query = query.Skip(from).Take(size);
+
+            #endregion
+
+            result.List = query.ToList();
+
+            //var lstRoles = _db.Roles.ToList();
+            //result.List = lstRoles;
+            return result;
+
+            /*
             using (SqlConnection sql = new SqlConnection(_connectionString))
             {
                 using (SqlCommand cmd = new SqlCommand("USP_GetRoles", sql))
@@ -47,7 +128,9 @@ namespace ERP.Repository.Repository
                     return result;
                     //return Response<Page<RolesResponse>>("sucess", string.Empty, result);
                 }
-            }
+            }              
+             
+             */
         }
         private RolesResponse MapToValue(SqlDataReader reader)
         {

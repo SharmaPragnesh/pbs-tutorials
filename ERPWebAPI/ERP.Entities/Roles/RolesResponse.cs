@@ -17,4 +17,13 @@ namespace ERP.Entities.Roles
         public string LandingURL { get; set; }
         public int? CreatedBy { get; set; }
     }
+
+    public class Roles
+    {
+        public long Id { get; set; }
+
+        public string Name { get; set; }
+
+        public byte Active { get; set; }
+    }
 }
