@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace ERPWebAPI
 {
@@ -41,6 +42,13 @@ namespace ERPWebAPI
 
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IRolesRepository,RolesRepository>();
+
+            //Inject AppSettings
+            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+            
+            //For JWT Authentication
+            var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

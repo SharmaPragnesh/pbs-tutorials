@@ -21,5 +21,8 @@ namespace ERP.Entities
         public string Designation { get; set; }
 
         public byte Active { get; set; }
+
+        [NotMapped]
+        public string Token { get; set; }
     }
 }
