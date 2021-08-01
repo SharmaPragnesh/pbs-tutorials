@@ -39,6 +39,7 @@ namespace ERPWebAPI
                 o.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
 
+            services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IRolesRepository,RolesRepository>();
         }
 

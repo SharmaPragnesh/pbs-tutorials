@@ -13,5 +13,6 @@ namespace ERP.Entities
         }
 
         public DbSet<ERP.Entities.Roles.Roles> Roles { get; set; }
+        public DbSet<ERP.Entities.Resources> Resources { get; set; }
     }
 }
