@@ -1,1 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/slick.css";
+@import "assets/bootstrap.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.hand { cursor: pointer; }
+.form-group.required .col-form-label:after {
+    color: #d00;
+    content: "*";
+    position: absolute;
+    margin-left: 5px;
+    top: 1px;
+}
+
+input.ng-touched.ng-invalid {
+    border: 1px solid red;
+    box-shadow: 0 0 13px inset rgba(255, 0, 0, 0.1);
+}
+
+textarea.ng-touched.ng-invalid {
+    border: 1px solid red;
+    box-shadow: 0 0 13px inset rgba(255, 0, 0, 0.1);
+}
+/*CODE START FOR CLOSE ICON IN POPUP*/
+// COLORS
+$softorange: #000032;
+$tomatored: #2962ff;
+
+
+.close-container{
+  position: relative;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+  margin-top: 0px;
+  cursor: pointer;
+  float: right;
+  -webkit-appearance: button-bevel !important;
+}
+
+.leftright{
+  height: 4px;
+  width: 25px;
+  position: absolute;
+  margin-top: 10px;
+  background-color: $softorange;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all .3s ease-in;
+}
+
+.rightleft{
+  height: 4px;
+  width: 25px;
+  position: absolute;
+  margin-top: 10px;
+  background-color: $softorange;
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all .3s ease-in;
+}
+.close{
+  margin: 60px 0 0 5px;
+  position: absolute;
+}
+
+.close-container:hover .leftright{
+  transform: rotate(-45deg);
+  background-color: $tomatored;
+}
+.close-container:hover .rightleft{
+  transform: rotate(45deg);
+  background-color: $tomatored;
+}
+
+/*CODE END FOR CLOSE ICON IN POPUP*/
