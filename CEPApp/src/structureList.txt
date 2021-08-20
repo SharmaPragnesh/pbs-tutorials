@@ -1,3 +1,9 @@
+ng g c Components/Dashboard
+ng g c Components/Client
+ng g c Components/Client/client-list
+ng g s Services/Client
+ng g class Models/Client --type=model
+*********************************************************************
 ng g s Services/Roles
 ng g c Components/Admin/roles
 ng g c Components/Admin/roles/roles-list

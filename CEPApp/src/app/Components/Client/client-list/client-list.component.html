@@ -1,0 +1,52 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0 admin-heading" translate>My Clients</h3>
+                    <div class="admin-action">
+                        <button class="btn text-white" translate>Add Client
+                            <i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="container-fluid pt-2">
+                    <div class="row">
+                        <div class="col-md-4" *ngFor="let client of clientList">
+                            <div class="card text-center">
+                                <div class="card-header">
+                                    <b>{{client.ClientName}}</b>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Client Code = {{client.ClientCode}}</h5>
+                                    <p class="card-text">ContactNumber = {{client.ContactNumber}}</p>
+                                    <p class="card-text">Fax = {{client.Fax}}</p>
+                                    Email = <a href="mailto:{{client.EmailId}}">{{client.EmailId}}</a>
+                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                </div>
+                                <div class="card-footer text-muted">
+                                    Last Updated = {{client.UpdatedOn}}
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 
+<table style="width: 100%;">
+    <tr>
+        <td>
+            
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+</table> -->

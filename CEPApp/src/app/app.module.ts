@@ -17,6 +17,10 @@ import { Ng2OrderModule } from 'ng2-order-pipe';//For Sorting
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';//For Datepicker
 
 import { AppComponent } from './app.component';
+import { ClientService } from './Services/client.service';
+import { ClientListComponent } from './Components/Client/client-list/client-list.component';
+import { ClientComponent } from './Components/client/client.component';
+import { DashboardComponent } from './Components/dashboard/dashboard.component';
 
 //For Translation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -25,7 +29,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ClientListComponent,
+    ClientComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     // NumberDirectiveModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    ClientService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

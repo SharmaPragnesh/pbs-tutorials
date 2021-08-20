@@ -1,19 +1,19 @@
-<div class="py-2">
-  <div class="row">
-    <div class="col-md-12 mx-auto">
-      <span class="anchor" id="formLogin"></span>
-      <div class="card rounded-0">
-        <div class="card-header">
-          <h3 class="mb-0 admin-heading">PageHeader.Institution</h3>
-          <div class="admin-action">
-            <button class="btn text-white">Institution.AddInstitution
-              <i class="fa fa-plus"></i></button>
-            <button class="btn btn-success text-white">Common.Save
-              <i class="fa fa-floppy-o"></i></button>
-          </div>
+<div class="main-wrapper">
+    <nav class="p-0 sidebar admin-sidebar content-left">
+        <div class="sidebar-sticky">
+            <ul class="nav1">
+                <li><a href="javascript:void(0);" routerLink="/client" routerLinkActive="active"
+                        class="close-click-res" translate>Add Client</a></li>
+                <li><a href="javascript:void(0);" routerLink="/client-list" routerLinkActive="active"
+                        class="close-click-res" translate>Client</a></li>
+            </ul>
         </div>
-      </div>
-    </div>
-  </div>
+    </nav>
+    <main role="main" class="content-right">
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+    <div class="overlay-box"></div>
 </div>
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
