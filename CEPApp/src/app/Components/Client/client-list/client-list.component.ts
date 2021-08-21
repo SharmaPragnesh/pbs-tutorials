@@ -28,4 +28,9 @@ export class ClientListComponent implements OnInit {
     localStorage.setItem('clientId', clientId.toString());
     this.router.navigate(['/client']);
   }
+
+  SelectClient(clientId: number) {
+    localStorage.setItem('selectedClientId', clientId.toString());
+    this.router.navigate(['/client-detail']);
+  }
 }

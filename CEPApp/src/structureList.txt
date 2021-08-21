@@ -1,8 +1,10 @@
 ng g c Components/Dashboard
 ng g c Components/Client
 ng g c Components/Client/client-list
+ng g c Components/Client/client-detail
 ng g s Services/Client
 ng g class Models/Client --type=model
+ng g pipe Pipes/custom-date
 -----------------------------------------------------------
 ng g s Services/notification
 *********************************************************************

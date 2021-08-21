@@ -26,6 +26,7 @@ export class ClientService {
   }
 
   SaveClient(client: Client) {
+    client.Status = Number.parseInt(client.Status.toString());
     client.ClientIndustryId = Number.parseInt(client.ClientIndustryId.toString());
     return this.http.post<any>(environment.apiURL + '/Client/SaveClient', client).pipe(
       catchError(this.handleError)

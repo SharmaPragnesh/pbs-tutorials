@@ -21,6 +21,8 @@ import { ClientService } from './Services/client.service';
 import { ClientListComponent } from './Components/Client/client-list/client-list.component';
 import { ClientComponent } from './Components/client/client.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { ClientDetailComponent } from './Components/Client/client-detail/client-detail.component';
+import { CustomDatePipe } from './Pipes/custom-date.pipe';
 
 //For Translation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,7 +34,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     ClientListComponent,
     ClientComponent,
-    DashboardComponent
+    DashboardComponent,
+    ClientDetailComponent,
+    CustomDatePipe
   ],
   imports: [
     BrowserModule,

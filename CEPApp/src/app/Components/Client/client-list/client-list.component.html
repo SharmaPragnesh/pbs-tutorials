@@ -13,13 +13,21 @@
                 <div class="container-fluid pt-2">
                     <div class="row">
                         <div class="col-md-4" *ngFor="let client of clientList">
-                            <div class="card text-center">
+                            <div class="card text-left">
                                 <div class="card-header">
-                                    <b>{{client.ClientName}}</b>
-                                    <a href="javascript:void(0)" style="float: right;"
+                                    <a href="javascript:void(0)" class="float-left"
+                                        (click)="SelectClient(client.ClientId)">
+                                        <b>{{client.ClientName}}</b>
+                                    </a>
+                                    <a href="javascript:void(0)" class="float-right"
                                         (click)="AddEditClient(client.ClientId)">Edit</a>
+                                    <div class="float-right pr-3">
+                                        <span *ngIf="client.Status==1">Active</span>
+                                        <span *ngIf="client.Status==0">Inactive</span>
+                                        <span *ngIf="client.Status==2">Blacklist</span>
+                                    </div>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body float-left">
                                     <h5 class="card-title">Client Code = {{client.ClientCode}}</h5>
                                     <p class="card-text">ContactNumber = {{client.ContactNumber}}</p>
                                     <p class="card-text">Fax = {{client.Fax}}</p>
@@ -27,7 +35,7 @@
                                     <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                                 </div>
                                 <div class="card-footer text-muted">
-                                    Last Updated = {{client.UpdatedOn}}
+                                    Last Updated = {{client.UpdatedOn | customDate}}
                                 </div>
                             </div>
                             <br>
