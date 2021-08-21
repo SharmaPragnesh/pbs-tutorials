@@ -1,1 +1,83 @@
-<p>client works!</p>
+<h4 class="uni-header"><span *ngIf="clientId ==0">Add</span><span *ngIf="clientId !=0">Edit</span> Client</h4>
+<form [formGroup]="registerForm" autocomplete="off" (ngSubmit)="onSubmit()" class="admin-form-content">
+    <input type="hidden" class="form-control" formControlName="ClientId">
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label">Client Name</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="ClientName" maxlength="200">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.ClientName.touched && f.ClientName.errors?.required">The field must be
+                specified</label>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-sm-3 col-form-label">Client Code</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="ClientCode" maxlength="50">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.ClientCode.touched && f.ClientCode.errors?.required">The field must be
+                specified</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">ContactNumber</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="ContactNumber" maxlength="50">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.ContactNumber.touched && f.ContactNumber.errors?.required">The field
+                must be
+                specified</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Email Id</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="EmailId" maxlength="200">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.EmailId.touched && f.EmailId.errors?.required">The field must be
+                specified</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Fax</label>
+        <div class="col-sm-5">
+            <input class="form-control" formControlName="Fax" maxlength="200">
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.Fax.touched && f.Fax.errors?.required">The field must be
+                specified</label>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Client Industry</label>
+        <div class="col-sm-5">
+            <!-- <input class="form-control" formControlName="Fax" maxlength="200"> -->
+            <select formControlName="ClientIndustryId" class="form-control">
+                <option value="">Select Client Industry</option>
+                <option *ngFor='let clientIndustry of clientIndustryList' [value]="clientIndustry.ClientIndustryId">
+                    {{clientIndustry.ClientIndustryName}}</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <label class="text-danger" *ngIf="f.ClientIndustryId.touched && f.ClientIndustryId.errors?.required">The field must be
+                specified</label>
+        </div>
+    </div>
+    <div class="form-row admin-action-footer">
+        <label class="col-sm-3 col-form-label"></label>
+        <div class="col-sm-9">
+            <div class="admin-action flt">
+                <button type="submit" class="btn" [disabled]="registerForm.invalid">Save
+                    <i class="fa fa-floppy-o"></i>
+                </button>
+                <button type="button" class="btn btn-secondary" routerLink="/client-list">Cancel
+                    <i class="fa fa-close"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

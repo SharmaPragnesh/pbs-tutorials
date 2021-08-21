@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Client } from 'src/app/Models/client.model';
 import { ClientService } from 'src/app/Services/client.service';
 
@@ -10,7 +11,7 @@ import { ClientService } from 'src/app/Services/client.service';
 export class ClientListComponent implements OnInit {
 
   clientList: Client[];
-  constructor(public clientService: ClientService) { }
+  constructor(public clientService: ClientService, private router: Router) { }
 
   ngOnInit(): void {
     this.GetClients();
@@ -21,5 +22,10 @@ export class ClientListComponent implements OnInit {
       // console.log(res);
       this.clientList = res;
     })
+  }
+
+  AddEditClient(clientId: number) {
+    localStorage.setItem('clientId', clientId.toString());
+    this.router.navigate(['/client']);
   }
 }

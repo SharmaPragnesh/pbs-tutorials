@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Client } from '../Models/client.model';
+import { Client, ClientIndustry } from '../Models/client.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,26 @@ export class ClientService {
   constructor(private http: HttpClient, private router: Router) { }
 
   GetClients() {
-    return this.http.get<Client[]>(environment.apiURL + '/Client').pipe(
+    return this.http.get<Client[]>(environment.apiURL + '/Client/GetClients').pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  GetClientById(clientId: number) {
+    return this.http.get<Client>(environment.apiURL + '/Client/GetClientById?clientId=' + clientId).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  SaveClient(client: Client) {
+    client.ClientIndustryId = Number.parseInt(client.ClientIndustryId.toString());
+    return this.http.post<any>(environment.apiURL + '/Client/SaveClient', client).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  GetClientIndustries() {
+    return this.http.get<ClientIndustry[]>(environment.apiURL + '/Client/GetClientIndustries').pipe(
       catchError(this.handleError)
     );
   }
