@@ -3,6 +3,8 @@ ng g c Components/Client
 ng g c Components/Client/client-list
 ng g s Services/Client
 ng g class Models/Client --type=model
+-----------------------------------------------------------
+ng g s Services/notification
 *********************************************************************
 ng g s Services/Roles
 ng g c Components/Admin/roles
@@ -38,8 +40,6 @@ ng g c Components/Admin/user/user-list
 ng g c Components/Admin/user/user-file-list
 ng g c Components/Admin/user/user-monitoring-list
 -- ng g s Services/User
------------------------------------------------------------
-ng g s Services/notification
 -----------------------------------------------------------
 ng generate module Components/Admin --routing
 ng generate module shared

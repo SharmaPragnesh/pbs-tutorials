@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client, ClientIndustry } from 'src/app/Models/client.model';
 import { ClientService } from 'src/app/Services/client.service';
+import { NotificationService } from 'src/app/Services/notification.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-client',
@@ -17,8 +19,8 @@ export class ClientComponent implements OnInit {
   isValid: boolean = true;
   clientIndustryList: ClientIndustry[];
 
-  constructor(public clientService: ClientService, private formBuilder: FormBuilder,
-    public router: Router) { }
+  constructor(public clientService: ClientService, private notifyService: NotificationService,
+    private formBuilder: FormBuilder, public router: Router) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -69,7 +71,6 @@ export class ClientComponent implements OnInit {
   }
 
   onSubmit() {
-    debugger;
     if (this.registerForm.invalid) {
       return false;
     }
@@ -78,13 +79,14 @@ export class ClientComponent implements OnInit {
       this.clientService.SaveClient(this.registerForm.value).subscribe(
         res => {
           if (res == 1) {
+            this.notifyService.showInfoWithTimeout("Client Info Saved successfully", "", environment.timeSpanMedium);
             this.router.navigate(['/client-list']);
           }
           else if (res == 2) {
-            alert('Client name already exist')
+            this.notifyService.showErrorWithTimeout("Client name already exist", "", environment.timeSpanMedium);
           }
 
-          // this.notifyService.showInfoWithTimeout(this.translate.instant('Messages.SaveSuccess'), "", environment.timeSpanMedium);
+
           // this.institutionService.GetInstitutionList();
           // this.dialogRef.close();
         },
