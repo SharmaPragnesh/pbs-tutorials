@@ -1,1 +1,103 @@
-<p>client-detail works!</p>
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0 admin-heading">{{selectedClientName}}</h3>
+                    <div class="admin-action">
+                        <button type="button" class="btn btn-light" routerLink='/client-list'>
+                            Back</button>
+                        <button class="btn text-white" (click)="AddEditEngagement(0)">Add Engagement
+                            <i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="container-fluid pt-2 pb-2">
+                    <div class="row">
+                        <div class="col-md-12 float-left">
+                            <div class="card text-center float-left">
+                                <div class="card-header">
+                                    <h6>Engagements</h6>
+                                </div>
+                                <div class="card-body float-left">
+                                    <h5>{{totalEngagement}}</h5>
+                                </div>
+                            </div>
+                            <div class="card text-center float-left">
+                                <div class="card-header">
+                                    <h6>Open Request</h6>
+                                </div>
+                                <div class="card-body float-left">
+                                    <h5>NN</h5>
+                                </div>
+                            </div>
+                            <div class="card text-center float-left">
+                                <div class="card-header">
+                                    <h6>Uploaded</h6>
+                                </div>
+                                <div class="card-body float-left">
+                                    <h5>NN</h5>
+                                </div>
+                            </div>
+                            <div class="card text-center float-left">
+                                <div class="card-header">
+                                    <h6>Re-Request</h6>
+                                </div>
+                                <div class="card-body float-left">
+                                    <h5>NN</h5>
+                                </div>
+                            </div>
+                            <div class="card text-center float-left">
+                                <div class="card-header">
+                                    <h6>Approved</h6>
+                                </div>
+                                <div class="card-body float-left">
+                                    <h5>NN</h5>
+                                </div>
+                            </div>
+                            <div class="card text-center float-left">
+                                <div class="card-header">
+                                    <h6>Past Due</h6>
+                                </div>
+                                <div class="card-body float-left">
+                                    <h5>NN</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid pt-2">
+                    <div class="row">
+                        <div class="col-md-4" *ngFor="let engagement of engagementList">
+                            <div class="card text-left">
+                                <div class="card-header">
+                                    <a href="javascript:void(0)" class="float-left"
+                                        (click)="SelectEngagement(engagement)">
+                                        <b>{{engagement.EngagementName}}</b>
+                                    </a>
+                                    <a href="javascript:void(0)" class="float-right"
+                                        (click)="AddEditEngagement(engagement.EngagementId)">Edit</a>
+                                    <div class="float-right pr-3">
+                                        fsdfsf
+                                    </div>
+                                </div>
+                                <div class="card-body float-left">
+                                    <h5 class="card-title">Client Code = client.ClientCode}}</h5>
+                                    <p class="card-text">ContactNumber = client.ContactNumber}}</p>
+                                    <p class="card-text">Fax = client.Fax}}</p>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    Last Updated = client.UpdatedOn | customDate}}
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <div *ngIf="engagementList != null && engagementList.length ==0" class="p-2">
+                            <h5>There is no Engagements.</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

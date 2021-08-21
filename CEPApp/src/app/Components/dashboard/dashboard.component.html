@@ -14,9 +14,13 @@
                                     <h4>Clients</h4>
                                 </div>
                                 <div class="card-body float-left">
-                                    <a href="javascript:void(0);" class="a-link" routerLink="/client-list">
+                                    <a href="javascript:void(0);" class="a-link" routerLink="/client-list"
+                                        *ngIf="totalClients != 0">
                                         <h4>{{totalClients}}</h4>
                                     </a>
+                                    <h4 *ngIf="totalClients == 0">
+                                        {{totalClients}}
+                                    </h4>
                                 </div>
                             </div>
                         </div>

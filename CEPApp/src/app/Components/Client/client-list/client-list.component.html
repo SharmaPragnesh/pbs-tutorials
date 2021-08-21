@@ -16,7 +16,7 @@
                             <div class="card text-left">
                                 <div class="card-header">
                                     <a href="javascript:void(0)" class="float-left"
-                                        (click)="SelectClient(client.ClientId)">
+                                        (click)="SelectClient(client)">
                                         <b>{{client.ClientName}}</b>
                                     </a>
                                     <a href="javascript:void(0)" class="float-right"
@@ -39,6 +39,9 @@
                                 </div>
                             </div>
                             <br>
+                        </div>
+                        <div *ngIf="clientList != null && clientList.length ==0" class="p-2">
+                            <h5>There is no Clients.</h5>
                         </div>
                     </div>
                 </div>

@@ -6,6 +6,11 @@ ng g s Services/Client
 ng g class Models/Client --type=model
 ng g pipe Pipes/custom-date
 -----------------------------------------------------------
+ng g class Models/Engagement --type=model
+ng g s Services/Engagement
+ng g c Components/Engagement/engagement-list
+ng g c Components/Engagement
+-----------------------------------------------------------
 ng g s Services/notification
 *********************************************************************
 ng g s Services/Roles

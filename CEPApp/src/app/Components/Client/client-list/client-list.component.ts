@@ -19,7 +19,6 @@ export class ClientListComponent implements OnInit {
 
   GetClients() {
     this.clientService.GetClients().subscribe(res => {
-      // console.log(res);
       this.clientList = res;
     })
   }
@@ -29,8 +28,9 @@ export class ClientListComponent implements OnInit {
     this.router.navigate(['/client']);
   }
 
-  SelectClient(clientId: number) {
-    localStorage.setItem('selectedClientId', clientId.toString());
+  SelectClient(client: Client) {
+    localStorage.setItem('selectedClientId', client.ClientId.toString());
+    localStorage.setItem('selectedClientName', client.ClientName.toString());
     this.router.navigate(['/client-detail']);
   }
 }

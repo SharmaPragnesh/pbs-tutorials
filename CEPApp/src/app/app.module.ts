@@ -23,6 +23,9 @@ import { ClientComponent } from './Components/client/client.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { ClientDetailComponent } from './Components/Client/client-detail/client-detail.component';
 import { CustomDatePipe } from './Pipes/custom-date.pipe';
+import { EngagementService } from './Services/engagement.service';
+import { EngagementListComponent } from './Components/Engagement/engagement-list/engagement-list.component';
+import { EngagementComponent } from './Components/engagement/engagement.component';
 
 //For Translation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -36,7 +39,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ClientComponent,
     DashboardComponent,
     ClientDetailComponent,
-    CustomDatePipe
+    CustomDatePipe,
+    EngagementListComponent,
+    EngagementComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +70,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule
   ],
   providers: [
-    ClientService
+    ClientService,
+    EngagementService
   ],
   bootstrap: [AppComponent]
 })
