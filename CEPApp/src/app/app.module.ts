@@ -26,10 +26,22 @@ import { CustomDatePipe } from './Pipes/custom-date.pipe';
 import { EngagementService } from './Services/engagement.service';
 import { EngagementListComponent } from './Components/Engagement/engagement-list/engagement-list.component';
 import { EngagementComponent } from './Components/engagement/engagement.component';
+import { LoginComponent } from './Components/core/login/login.component';
+import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
+import { MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
 
 //For Translation
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
+}
+
+export function MSALInstanceFactory(): IPublicClientApplication {
+  return new PublicClientApplication({
+    auth: {
+      clientId: 'c8a20593-c899-450e-aba9-dde0107d355c',
+      redirectUri: 'http://localhost:65416/'
+    }
+  })
 }
 
 @NgModule({
@@ -41,7 +53,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ClientDetailComponent,
     CustomDatePipe,
     EngagementListComponent,
-    EngagementComponent
+    EngagementComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +84,12 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     ClientService,
-    EngagementService
+    EngagementService,
+    {
+      provide: MSAL_INSTANCE,
+      useFactory: MSALInstanceFactory
+    },
+    MsalService
   ],
   bootstrap: [AppComponent]
 })

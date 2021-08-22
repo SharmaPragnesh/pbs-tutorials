@@ -1,10 +1,12 @@
 ng g c Components/Dashboard
-ng g c Components/Client
-ng g c Components/Client/client-list
-ng g c Components/Client/client-detail
-ng g s Services/Client
+ng g c Components/client
+ng g c Components/client/client-list
+ng g c Components/client/client-detail
+ng g s Services/client
 ng g class Models/Client --type=model
 ng g pipe Pipes/custom-date
+-----------------------------------------------------------
+ng g c Components/core/login
 -----------------------------------------------------------
 ng g class Models/Engagement --type=model
 ng g s Services/Engagement
