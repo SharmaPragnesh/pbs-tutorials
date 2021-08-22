@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from './Services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'CEPApp';
+  showLogout: boolean = false;
+  
+  constructor(public userService: UserService) {
+    if (this.userService.isLoggedIn()) {
+      if (!!localStorage.getItem('logininfo')) {
+        this.userService.userInfo = JSON.parse(localStorage.getItem('logininfo'));
+      }
+    }
+  }
+
+  ToggleLogout() {
+    this.showLogout = !this.showLogout;
+  }
 }

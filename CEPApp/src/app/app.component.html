@@ -1,16 +1,47 @@
+<nav class="navbar sticky-top" id="pbsnavbar">
+    <a class="navbar-brand p-0" routerLink="/" href="javascript:void(0);"><img alt="" src="/assets/images/logo.png"></a>
+    <!-- first main menu -->
+    <a href="javascript:void(0);" class="sidebar-toggle"><i></i></a>
+    <!-- second search menu -->
+    <a href="javascript:void(0);" class="search-menu"><i class="fa fa-search"></i></a>
+    <!-- third more menu -->
+    <a href="javascript:void(0);" class="dots"><i class="fa fa-ellipsis-v"></i></a>
+    <div class="nav-right">
+        <a href="javascript:void(0);" class="btn btn-primary pull-right login-button login-close-button"
+            routerLink="/login" *ngIf="!userService.isLoggedIn()" routerLinkActive="active">Login<img
+                alt="" src="/assets/images/user-icon.png" class="user-icon">
+        </a>
+        <ul class="nav-middle-right" *ngIf="userService.isLoggedIn()">
+            <li class="user-name" [ngClass]="{'active' : showLogout}">
+                <span class="hand lang" (click)="ToggleLogout()">{{userService.userInfo.username}}</span>
+                <ul>
+                    <li><a href="javascript:void(0);"
+                            (click)="this.showLogout=false;userService.logoutUser();">Logout</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- <li><a href="javascript:void(0);" (click)="userService.logoutUser()">Common.Logout</a>
+            </li> -->
+        </ul>
+    </div>
+</nav>
 <div class="main-wrapper">
     <nav class="p-0 sidebar admin-sidebar content-left">
         <div class="sidebar-sticky">
             <ul class="nav1">
                 <li><a href="javascript:void(0);" routerLink="/dashboard" routerLinkActive="active"
-                        class="close-click-res" translate>Dashboard</a></li>
+                        class="close-click-res">Dashboard</a></li>
                 <li><a href="javascript:void(0);" routerLink="/client-list" routerLinkActive="active"
-                        class="close-click-res" translate>Client</a></li>
+                        class="close-click-res">Client</a></li>
                 <li><a href="javascript:void(0);" routerLink="/engagement-list" routerLinkActive="active"
-                        class="close-click-res" translate>Engagement</a></li>
+                        class="close-click-res">Engagement</a></li>
             </ul>
         </div>
     </nav>
+    <ul class="nav-middle-right" *ngIf="userService.isLoggedIn()">
+        <li>---</li>
+    </ul>
+    aaa
     <main role="main" class="content-right">
         <div class="main-content">
             <router-outlet></router-outlet>

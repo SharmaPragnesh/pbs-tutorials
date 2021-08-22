@@ -14,6 +14,8 @@ ng g c Components/Engagement/engagement-list
 ng g c Components/Engagement
 -----------------------------------------------------------
 ng g s Services/notification
+ng g s Services/User
+-----------------------------------------------------------
 *********************************************************************
 ng g s Services/Roles
 ng g c Components/Admin/roles
