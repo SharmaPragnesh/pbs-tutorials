@@ -8,7 +8,8 @@ import { MsalService } from '@azure/msal-angular';
 export class UserService {
 
   userInfo: any;
-
+  redirectUrl: string;
+  
   constructor(private msalService: MsalService, public router: Router) { }
 
   logoutUser() {

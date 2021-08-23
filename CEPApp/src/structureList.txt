@@ -7,6 +7,8 @@ ng g class Models/Client --type=model
 ng g pipe Pipes/custom-date
 -----------------------------------------------------------
 ng g c Components/core/login
+ng g c Components/core/forgot-password
+ng g c Components/core/reset-password
 -----------------------------------------------------------
 ng g class Models/Engagement --type=model
 ng g s Services/Engagement
@@ -93,6 +95,8 @@ ng g s Services/upload-file
 ng g s Services/auto-logout
 -----------------------------------------------------------
 ng g c Components/Admin/unapproved-files
+-----------------------------------------------------------
+ng g guard Auth
 -----------------------------------------------------------
 ng g c Components/Admin/statistics
 ng g class Models/statistics --type=model

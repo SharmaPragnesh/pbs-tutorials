@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
       this.userService.userInfo = res.account;
       localStorage.setItem('logininfo', JSON.stringify(res.account));
       this.msalService.instance.setActiveAccount(res.account);
-      this.router.navigate(['/dashboard']);
+      const redirect = this.userService.redirectUrl ? this.userService.redirectUrl : '/dashboard';
+      this.router.navigate([redirect]);
     })
   }
 

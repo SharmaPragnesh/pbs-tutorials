@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from './Services/user.service';
 
 @Component({
@@ -9,8 +10,8 @@ import { UserService } from './Services/user.service';
 export class AppComponent {
   title = 'CEPApp';
   showLogout: boolean = false;
-  
-  constructor(public userService: UserService) {
+
+  constructor(public userService: UserService, public router: Router) {
     if (this.userService.isLoggedIn()) {
       if (!!localStorage.getItem('logininfo')) {
         this.userService.userInfo = JSON.parse(localStorage.getItem('logininfo'));

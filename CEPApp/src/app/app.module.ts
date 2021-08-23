@@ -29,6 +29,8 @@ import { EngagementComponent } from './Components/engagement/engagement.componen
 import { LoginComponent } from './Components/core/login/login.component';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
 import { MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
+import { ForgotPasswordComponent } from './Components/core/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './Components/core/reset-password/reset-password.component';
 
 //For Translation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -39,7 +41,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
       clientId: 'c8a20593-c899-450e-aba9-dde0107d355c',
-      redirectUri: 'http://localhost:65416/'
+      redirectUri: 'http://localhost:4201/'
     }
   })
 }
@@ -54,7 +56,9 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     CustomDatePipe,
     EngagementListComponent,
     EngagementComponent,
-    LoginComponent
+    LoginComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
