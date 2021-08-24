@@ -1,6 +1,7 @@
 ng g c Components/Dashboard
 ng g c Components/client
 ng g c Components/client/client-list
+ng g c Components/client/client-grid
 ng g c Components/client/client-detail
 ng g s Services/client
 ng g class Models/Client --type=model

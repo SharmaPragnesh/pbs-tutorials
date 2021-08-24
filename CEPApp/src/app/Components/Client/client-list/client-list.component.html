@@ -10,39 +10,49 @@
                             <i class="fa fa-plus"></i></button>
                     </div>
                 </div>
-                <div class="container-fluid pt-2">
-                    <div class="row">
-                        <div class="col-md-4" *ngFor="let client of clientList">
-                            <div class="card text-left">
-                                <div class="card-header">
-                                    <a href="javascript:void(0)" class="float-left"
-                                        (click)="SelectClient(client)">
-                                        <b>{{client.ClientName}}</b>
-                                    </a>
-                                    <a href="javascript:void(0)" class="float-right"
-                                        (click)="AddEditClient(client.ClientId)">Edit</a>
-                                    <div class="float-right pr-3">
-                                        <span *ngIf="client.Status==1">Active</span>
-                                        <span *ngIf="client.Status==0">Inactive</span>
-                                        <span *ngIf="client.Status==2">Blacklist</span>
-                                    </div>
-                                </div>
-                                <div class="card-body float-left">
-                                    <h5 class="card-title">Client Code = {{client.ClientCode}}</h5>
-                                    <p class="card-text">ContactNumber = {{client.ContactNumber}}</p>
-                                    <p class="card-text">Fax = {{client.Fax}}</p>
-                                    Email = <a href="mailto:{{client.EmailId}}">{{client.EmailId}}</a>
-                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-                                </div>
-                                <div class="card-footer text-muted">
-                                    Last Updated = {{client.UpdatedOn | customDate}}
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-                        <div *ngIf="clientList != null && clientList.length ==0" class="p-2">
-                            <h5>There is no Clients.</h5>
-                        </div>
+                <div class="table-responsive" *ngIf="clientList!=null">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="hand" (click)="sort('ClientName')">
+                                    <span class="sorting-column" translate>
+                                        Client Name
+                                        <i class="fa sorting-angle" *ngIf="key =='ClientName'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand firstname-width" (click)="sort('ClientCode')">
+                                    <span class="sorting-column" translate>
+                                        Client Code
+                                        <i class="fa sorting-angle" *ngIf="key =='ClientCode'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="hand firstname-width" (click)="sort('UpdatedOn')">
+                                    <span class="sorting-column" translate>
+                                        Last Updated
+                                        <i class="fa sorting-angle" *ngIf="key =='UpdatedOn'"
+                                            [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
+                                    </span>
+                                </th>
+                                <th class="text-center single-width"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let client of clientList | orderBy: key : reverse | paginate: config ;index as i;"
+                                [ngClass]="{'alt_row': i%2!==0}">
+                                <td class="hand" (click)="SelectClient(client)">{{client.ClientName}}</td>
+                                <td class="hand" (click)="SelectClient(client)">{{client.ClientCode}}</td>
+                                <td>{{client.UpdatedOn | customDate}}</td>
+                                <td class="text-center"><a href="javascript:void(0)"
+                                        (click)="AddEditClient(client.ClientId)">Edit</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="clear"></div>
+                    <div class="text-center">
+                        <pagination-controls id="paginationUserList" (pageChange)="pageChanged($event)"
+                            [previousLabel]="Previous" [nextLabel]="Next"></pagination-controls>
                     </div>
                 </div>
             </div>

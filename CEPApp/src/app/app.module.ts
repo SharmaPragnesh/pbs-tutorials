@@ -31,6 +31,7 @@ import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-b
 import { MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
 import { ForgotPasswordComponent } from './Components/core/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './Components/core/reset-password/reset-password.component';
+import { ClientGridComponent } from './Components/client/client-grid/client-grid.component';
 
 //For Translation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -58,7 +59,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     EngagementComponent,
     LoginComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ClientGridComponent
   ],
   imports: [
     BrowserModule,

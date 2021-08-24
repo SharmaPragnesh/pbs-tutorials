@@ -1,0 +1,65 @@
+<div class="py-2">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <span class="anchor" id="formLogin"></span>
+            <div class="card rounded-0">
+                <div class="card-header">
+                    <h3 class="mb-0 admin-heading">My Clients</h3>
+                    <div class="admin-action">
+                        <button class="btn text-white" (click)="AddEditClient(0)">Add Client
+                            <i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+                <div class="container-fluid pt-2">
+                    <div class="row">
+                        <div class="col-md-4" *ngFor="let client of clientList">
+                            <div class="card text-left">
+                                <div class="card-header">
+                                    <a href="javascript:void(0)" class="float-left"
+                                        (click)="SelectClient(client)">
+                                        <b>{{client.ClientName}}</b>
+                                    </a>
+                                    <a href="javascript:void(0)" class="float-right"
+                                        (click)="AddEditClient(client.ClientId)">Edit</a>
+                                    <div class="float-right pr-3">
+                                        <span *ngIf="client.Status==1">Active</span>
+                                        <span *ngIf="client.Status==0">Inactive</span>
+                                        <span *ngIf="client.Status==2">Blacklist</span>
+                                    </div>
+                                </div>
+                                <div class="card-body float-left">
+                                    <h5 class="card-title">Client Code = {{client.ClientCode}}</h5>
+                                    <p class="card-text">ContactNumber = {{client.ContactNumber}}</p>
+                                    <p class="card-text">Fax = {{client.Fax}}</p>
+                                    Email = <a href="mailto:{{client.EmailId}}">{{client.EmailId}}</a>
+                                    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                                </div>
+                                <div class="card-footer text-muted">
+                                    Last Updated = {{client.UpdatedOn | customDate}}
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                        <div *ngIf="clientList != null && clientList.length ==0" class="p-2">
+                            <h5>There is no Clients.</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 
+<table style="width: 100%;">
+    <tr>
+        <td>
+            
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+</table> -->
