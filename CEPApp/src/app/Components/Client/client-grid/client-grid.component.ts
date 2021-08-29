@@ -103,6 +103,21 @@ export class ClientGridComponent implements OnInit {
     this.GetClients();
   }
 
+  onSortBy(sortColumn: any) {
+    // alert(sortColumn.target.value);
+    this.clientService.clientParameter.SortColumn = sortColumn.target.value;
+    this.p = 1;
+    this.clientService.clientParameter.PageStart = this.p;
+    this.GetClients();
+  }
+
+  onSortOrder(sortOrder: any) {
+    this.clientService.clientParameter.SortOrder = sortOrder.target.value == "true" ? true : false;
+    this.p = 1;
+    this.clientService.clientParameter.PageStart = this.p;
+    this.GetClients();
+  }
+
   ConvertToId(obj: any) {
     var id = 0;
 

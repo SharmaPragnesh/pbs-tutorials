@@ -16,7 +16,7 @@ export class ClientListComponent implements OnInit {
   totalItems: any;
   //sorting
   config: any;
-  key: string = 'ClientName';
+  key: string;
   reverse: boolean = false;
   clientList: Client[];
   /////////////////
@@ -25,6 +25,9 @@ export class ClientListComponent implements OnInit {
 
   ngOnInit(): void {
     this.clientService.GetFormModel();
+    if (this.key == null) {
+      this.key = this.clientService.clientParameter.SortColumn;
+    }
     this.p = this.clientService.clientParameter.PageStart;
     // this.clientService.clientParameter.PageStart = 1;
     this.GetClients();

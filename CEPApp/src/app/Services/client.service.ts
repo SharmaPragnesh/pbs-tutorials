@@ -26,7 +26,6 @@ export class ClientService {
   }
 
   GetClientsSearch() {
-    debugger;
     return this.http.post<Client[]>(environment.apiURL + '/Client/GetClientsSearch', this.clientParameter).pipe(
       catchError(this.handleError)
     );

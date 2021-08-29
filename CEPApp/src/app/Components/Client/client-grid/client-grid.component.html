@@ -27,6 +27,21 @@
                                 <option value="2">Blacklist</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label>Sort by</label>
+                            <select class="form-control" (change)='onSortBy($event)'>
+                                <option value="ClientName">Alphabetical</option>
+                                <option value="ClientCode">Client Code</option>
+                                <option value="UpdatedOn">Last Updated</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Sort order</label>
+                            <select class="form-control" (change)='onSortOrder($event)'>
+                                <option value="false">Ascending</option>
+                                <option value="true">Descending</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="container-fluid pt-2" *ngIf="clientList!=null  && clientList.length >0">
