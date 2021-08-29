@@ -10,26 +10,46 @@
                             <i class="fa fa-plus"></i></button>
                     </div>
                 </div>
+                <div class="card-body education">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Client Name</label>
+                            <input type="text" #titleInput class="form-control">
+                            <button type="button" (click) = "Search(titleInput.value)" class="btn btn-primary">Show Button value!</button>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" (change)='onStatusChange($event)'>
+                                <option value="">All</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                                <option value="2">Blacklist</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- <h1>key= {{key}}, reverse={{reverse}}</h1>
+                <h1>key= {{clientService.clientParameter.SortColumn}}, reverse={{clientService.clientParameter.SortOrder}}</h1> -->
                 <div class="table-responsive" *ngIf="clientList!=null">
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th class="hand" (click)="sort('ClientName')">
-                                    <span class="sorting-column" translate>
+                                    <span class="sorting-column">
                                         Client Name
                                         <i class="fa sorting-angle" *ngIf="key =='ClientName'"
                                             [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
                                     </span>
                                 </th>
                                 <th class="hand firstname-width" (click)="sort('ClientCode')">
-                                    <span class="sorting-column" translate>
+                                    <span class="sorting-column">
                                         Client Code
                                         <i class="fa sorting-angle" *ngIf="key =='ClientCode'"
                                             [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
                                     </span>
                                 </th>
                                 <th class="hand firstname-width" (click)="sort('UpdatedOn')">
-                                    <span class="sorting-column" translate>
+                                    <span class="sorting-column">
                                         Last Updated
                                         <i class="fa sorting-angle" *ngIf="key =='UpdatedOn'"
                                             [ngClass]="{'fa-angle-down':reverse,'fa-angle-up':!reverse}"></i>
@@ -39,8 +59,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let client of clientList | orderBy: key : reverse | paginate: config ;index as i;"
-                                [ngClass]="{'alt_row': i%2!==0}">
+                            <tr *ngFor="let client of clientList | paginate: { itemsPerPage: 10, currentPage: p, totalItems: totalItems } ; index as i; let first = first; let last = last;"
+                                [ngClass]="{'alt_row': i%2!==0}" id="trClient_{{client.ClientId}}">
+                                <!-- <tr *ngFor="let client of clientList | orderBy: key : reverse | paginate: config ;index as i;"
+                                [ngClass]="{'alt_row': i%2!==0}"> -->
                                 <td class="hand" (click)="SelectClient(client)">{{client.ClientName}}</td>
                                 <td class="hand" (click)="SelectClient(client)">{{client.ClientCode}}</td>
                                 <td>{{client.UpdatedOn | customDate}}</td>
@@ -51,8 +73,11 @@
                     </table>
                     <div class="clear"></div>
                     <div class="text-center">
-                        <pagination-controls id="paginationUserList" (pageChange)="pageChanged($event)"
-                            [previousLabel]="Previous" [nextLabel]="Next"></pagination-controls>
+                        <h1>{{p}}</h1>
+                        <!-- <pagination-controls id="paginationUserList" (pageChange)="pageChanged($event)"
+                            [previousLabel]="Previous" [nextLabel]="Next"></pagination-controls> -->
+                        <pagination-controls (pageChange)="getPage(p = $event)"></pagination-controls>
+
                     </div>
                 </div>
             </div>

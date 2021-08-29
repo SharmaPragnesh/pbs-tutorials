@@ -4,14 +4,32 @@ import { Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Client, ClientIndustry } from '../Models/client.model';
+import { Client, ClientIndustry, ClientParameter } from '../Models/client.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientService {
 
+  clientParameter: ClientParameter;
   constructor(private http: HttpClient, private router: Router) { }
+
+  GetFormModel() {
+    if (this.clientParameter === undefined) {
+      this.clientParameter = {
+        PageStart: 1,
+        PageSize: environment.pageSize,
+        SortOrder: true,
+        SortColumn: "ClientName"
+      };
+    }
+  }
+
+  GetClientsSearch() {
+    return this.http.post<Client[]>(environment.apiURL + '/Client/GetClientsSearch', this.clientParameter).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   GetClients() {
     return this.http.get<Client[]>(environment.apiURL + '/Client/GetClients').pipe(

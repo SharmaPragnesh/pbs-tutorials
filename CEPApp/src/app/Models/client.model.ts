@@ -19,3 +19,13 @@ export enum ClientStatusType {
     Active = 1,
     Blacklist = 2
 }
+
+export class ClientParameter {
+    PageSize: number;
+    PageStart: number;
+    SortOrder: boolean;
+    SortColumn: string;
+    Status?: number;
+    Search?: string;
+}
+
