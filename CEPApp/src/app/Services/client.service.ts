@@ -19,13 +19,14 @@ export class ClientService {
       this.clientParameter = {
         PageStart: 1,
         PageSize: environment.pageSize,
-        SortOrder: true,
+        SortOrder: false,
         SortColumn: "ClientName"
       };
     }
   }
 
   GetClientsSearch() {
+    debugger;
     return this.http.post<Client[]>(environment.apiURL + '/Client/GetClientsSearch', this.clientParameter).pipe(
       catchError(this.handleError)
     );

@@ -15,7 +15,8 @@
                         <div class="form-group">
                             <label>Client Name</label>
                             <input type="text" #titleInput class="form-control">
-                            <button type="button" (click) = "Search(titleInput.value)" class="btn btn-primary">Show Button value!</button>
+                            <button type="button" (click)="Search(titleInput.value)"
+                                class="btn btn-primary">Search</button>
                         </div>
                         <div class="form-group">
                             <label>Status</label>
@@ -30,7 +31,7 @@
                 </div>
                 <!-- <h1>key= {{key}}, reverse={{reverse}}</h1>
                 <h1>key= {{clientService.clientParameter.SortColumn}}, reverse={{clientService.clientParameter.SortOrder}}</h1> -->
-                <div class="table-responsive" *ngIf="clientList!=null">
+                <div class="table-responsive" *ngIf="clientList!=null  && clientList.length >0">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -73,12 +74,15 @@
                     </table>
                     <div class="clear"></div>
                     <div class="text-center">
-                        <h1>{{p}}</h1>
+                        <!-- <h1>{{p}}</h1> -->
                         <!-- <pagination-controls id="paginationUserList" (pageChange)="pageChanged($event)"
                             [previousLabel]="Previous" [nextLabel]="Next"></pagination-controls> -->
                         <pagination-controls (pageChange)="getPage(p = $event)"></pagination-controls>
 
                     </div>
+                </div>
+                <div *ngIf="clientList != null && clientList.length ==0" class="p-2">
+                    <h5>There is no Clients.</h5>
                 </div>
             </div>
         </div>
