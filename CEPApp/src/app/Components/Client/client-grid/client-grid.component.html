@@ -29,9 +29,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="container-fluid pt-2">
+                <div class="container-fluid pt-2" *ngIf="clientList!=null  && clientList.length >0">
+                    <div class="text-center">
+                        <!-- <h1>{{p}}</h1> -->
+                        <!-- <pagination-controls id="paginationUserList" (pageChange)="pageChanged($event)"
+                            [previousLabel]="Previous" [nextLabel]="Next"></pagination-controls> -->
+                        <pagination-controls (pageChange)="getPage(p = $event)"></pagination-controls>
+
+                    </div>
                     <div class="row">
-                        <div class="col-md-4" *ngFor="let client of clientList">
+                        <div class="col-md-4" *ngFor="let client of clientList | paginate: { itemsPerPage: 10, currentPage: p, totalItems: totalItems } ; index as i; let first = first; let last = last;">
                             <div class="card text-left">
                                 <div class="card-header">
                                     <a href="javascript:void(0)" class="float-left" (click)="SelectClient(client)">

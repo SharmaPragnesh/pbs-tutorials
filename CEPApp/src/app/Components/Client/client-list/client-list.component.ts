@@ -92,8 +92,13 @@ export class ClientListComponent implements OnInit {
   }
 
   onStatusChange(status: any) {
+    this.p = 1;
+    this.clientService.clientParameter.PageStart = this.p;
     if (status.target.value != "") {
       this.clientService.clientParameter.Status = Number(status.target.value);
+    }
+    else {
+      this.clientService.clientParameter.Status = null;
     }
     this.GetClients();
   }
