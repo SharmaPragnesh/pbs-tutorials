@@ -20,9 +20,11 @@ export class ClientService {
         PageStart: 1,
         PageSize: environment.pageSize,
         SortOrder: false,
-        SortColumn: "ClientName"
+        SortColumn: "ClientName",
+        Status : -1
       };
     }
+    debugger;
   }
 
   GetClientsSearch() {

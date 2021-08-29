@@ -14,14 +14,16 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Client Name</label>
-                            <input type="text" #titleInput class="form-control">
-                            <button type="button" (click)="Search(titleInput.value)"
+                            <input type="text" name="ClientName" #ClientName
+                                [(ngModel)]="clientService.clientParameter.Search" class="form-control">
+                            <button type="button" (click)="Search(ClientName.value)"
                                 class="btn btn-primary">Search</button>
                         </div>
                         <div class="form-group">
                             <label>Status</label>
-                            <select class="form-control" (change)='onStatusChange($event)'>
-                                <option value="">All</option>
+                            <select class="form-control" name="Status" #Status="ngModel"
+                                [(ngModel)]="clientService.clientParameter.Status" (change)='onStatusChange($event)'>
+                                <option value="-1">All</option>
                                 <option value="1">Active</option>
                                 <option value="0">Inactive</option>
                                 <option value="2">Blacklist</option>
