@@ -1,0 +1,122 @@
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.exe
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.deps.json
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.runtimeconfig.json
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.runtimeconfig.dev.json
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.pdb
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.csproj.AssemblyReference.cache
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.AssemblyInfoInputs.cache
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.AssemblyInfo.cs
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.csproj.CoreCompileInputs.cache
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\staticwebassets\LearnEntity.StaticWebAssets.Manifest.cache
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\staticwebassets\LearnEntity.StaticWebAssets.xml
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\scopedcss\bundle\LearnEntity.styles.css
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.RazorTargetAssemblyInfo.cache
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.csproj.CopyComplete
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.dll
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.pdb
+C:\Users\pragnesh\OneDrive - Prakash Software Solutions Pvt. Ltd\Desktop\LearnEntity\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.genruntimeconfig.cache
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\appsettings.Development.json
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\appsettings.json
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.exe
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.deps.json
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.runtimeconfig.json
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.runtimeconfig.dev.json
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\LearnEntity.pdb
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.ComponentModel.Annotations.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.csprojAssemblyReference.cache
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.AssemblyInfoInputs.cache
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.AssemblyInfo.cs
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.csproj.CoreCompileInputs.cache
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.MvcApplicationPartsAssemblyInfo.cache
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\staticwebassets\LearnEntity.StaticWebAssets.Manifest.cache
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\staticwebassets\LearnEntity.StaticWebAssets.xml
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\scopedcss\bundle\LearnEntity.styles.css
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.RazorTargetAssemblyInfo.cache
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.csproj.CopyComplete
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.dll
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.pdb
+D:\Pragnesh\Study\LearnEntity\LearnEntity\obj\Debug\netcoreapp3.1\LearnEntity.genruntimeconfig.cache
