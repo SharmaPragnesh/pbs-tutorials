@@ -114,6 +114,19 @@ namespace LearnEntity.Controllers
         }
 
         [HttpPost]
+        [Route("ForgotPassword")]
+        public int ForgotPassword(User user)
+        {
+            var userData = _db.User.Where(data => data.UserName == user.UserName).SingleOrDefault();
+
+            if (userData != null)
+            {
+                return 1;
+            }
+            return 2;
+        }
+
+        [HttpPost]
         [Route("ChangePassword")]
         public int ChangePassword(ChangePassword changePassword)
         {
