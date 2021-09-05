@@ -30,6 +30,62 @@ namespace LearnEntity.Controllers
             return userList;
         }
 
+        [HttpGet]
+        [Route("GetUserById")]
+        public User GetUserById(long userId)
+        {
+            var user = _db.User.Where(data => data.UserId == userId).SingleOrDefault();
+            return user;
+        }
+
+        [HttpPost]
+        [Route("UpdateProfile")]
+        public int UpdateProfile(User user)
+        {
+            if (user.UserId == 0)
+            {
+                bool isUserExist = _db.Client.Where(x => x.ClientName == user.UserName).FirstOrDefault() == null ? false : true;
+
+                if (!isUserExist)
+                {
+                    user.IsActive = true;
+                    //user.CreatedBy = 1;
+                    //user.CreatedOn = DateTime.Now;
+                    //user.UpdatedBy = 1;
+                    //user.UpdatedOn = DateTime.Now;
+                    _db.User.Add(user);
+                    _db.SaveChanges();
+                    return 1;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+            else
+            {
+                bool isClientExist = _db.User.Where(x => x.UserName == user.UserName && x.UserId != user.UserId).FirstOrDefault() == null ? false : true;
+
+                if (!isClientExist)
+                {
+                    var userData = _db.User.Where(data => data.UserId == user.UserId).SingleOrDefault();
+                    userData.FirstName = user.FirstName;
+                    userData.LastName = user.LastName;
+                    //userData.UserName = user.UserName;
+                    //userData.IsActive = user.IsActive;
+                    //userData.UpdatedBy = 1;
+                    //userData.UpdatedOn = DateTime.Now;
+                    _db.User.Update(userData);
+                    _db.SaveChanges();
+                    return 1;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+        }
+
         #region Login and Other methods
 
         [HttpPost]
@@ -37,13 +93,14 @@ namespace LearnEntity.Controllers
         public async Task<IActionResult> Login(User userModel)
         {
             var userSingle = _db.User.ToList().Where(data => data.UserName == userModel.UserName && data.Password == userModel.Password).SingleOrDefault();
-            
-            if(userSingle != null)
+
+            if (userSingle != null)
             {
                 UserInfo singleUser = new UserInfo();
                 singleUser.UserId = userSingle.UserId;
                 singleUser.FirstName = userSingle.FirstName;
                 singleUser.LastName = userSingle.LastName;
+                singleUser.UserName = userSingle.UserName;
                 singleUser.Password = userSingle.Password;
                 singleUser.Token = "ABCDEFG";
                 singleUser.IsActive = userSingle.IsActive;
@@ -54,6 +111,29 @@ namespace LearnEntity.Controllers
                 return BadRequest(new { message = "IncorrectPassword" });
 
             //return Ok(new { userList });
+        }
+
+        [HttpPost]
+        [Route("ChangePassword")]
+        public int ChangePassword(ChangePassword changePassword)
+        {
+            var userData = _db.User.Where(data => data.UserId == changePassword.UserId).SingleOrDefault();
+
+            if(userData != null)
+            {
+                if(userData.Password == changePassword.ExistingPassword)
+                {
+                    userData.Password = changePassword.Password;
+                    _db.User.Update(userData);
+                    _db.SaveChanges();
+                    return 1;
+                }
+                else
+                {
+                    return 2;
+                }
+            }
+            return 2;
         }
 
         #endregion
