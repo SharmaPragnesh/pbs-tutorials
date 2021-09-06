@@ -97,5 +97,14 @@ namespace LearnEntity.Controllers
 			//             return engagement;
 			//         }
 		}
+
+
+		[HttpGet]
+		[Route("GetEngagementsByID")]
+		public Engagements GetEngagementsByID(long EngagementID)
+		{
+			var engagements = _db.Engagements.Where(data => data.EngagementID == EngagementID).SingleOrDefault();
+			return engagements;
+		}
 	}
 }
