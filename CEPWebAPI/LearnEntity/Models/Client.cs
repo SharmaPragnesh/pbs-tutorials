@@ -21,6 +21,9 @@ namespace LearnEntity.Models
         public DateTime CreatedOn { get; set; }
         public long UpdatedBy { get; set; }
         public DateTime UpdatedOn { get; set; }
+        public int ActiveEngagement { get; set; }
+        public int NewRequests { get; set; }
+        public int OverdueRequests { get; set; }
     }
 
     public class ClientIndustry
