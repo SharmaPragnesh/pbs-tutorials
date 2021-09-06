@@ -40,7 +40,7 @@ namespace LearnEntity.Controllers
 						 ClientId = cli.ClientId,
 						 ClientName = cli.ClientName,
 						 ClientCode = cli.ClientCode,
-						 ActiveEngagement = _db.Engagement.Where(x => x.ClientId == cli.ClientId).Count(),
+						 ActiveEngagement = _db.Engagements.Where(x => x.ClientID == cli.ClientId).Count(),
 						 NewRequests = 0,
 						 OverdueRequests = 0,
 						 Status = cli.Status,

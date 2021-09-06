@@ -16,7 +16,7 @@ namespace LearnEntity.Models
         public DbSet<User> User { get; set; }
         public DbSet<Client> Client { get; set; }
         public DbSet<ClientIndustry> ClientIndustry { get; set; }
-        public DbSet<Engagement> Engagement { get; set; }
+        public DbSet<Engagements> Engagements { get; set; }
         /////
         public DbSet<Department> Department { get; set; }
         public DbSet<tblDepartment> tblDepartment { get; set; }
