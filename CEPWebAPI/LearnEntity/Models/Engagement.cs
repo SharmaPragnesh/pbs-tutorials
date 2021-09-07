@@ -31,7 +31,7 @@ namespace LearnEntity.Models
 		public bool SortOrder { get; set; }
 		public string SortColumn { get; set; }
 		public int? Status { get; set; }
-		//public string Search { get; set; }
+		public string Search { get; set; }
 		public int ClientID { get; set; }
 	}
 }

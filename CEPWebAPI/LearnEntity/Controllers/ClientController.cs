@@ -82,12 +82,17 @@ namespace LearnEntity.Controllers
 				query = clientParameter.SortOrder == false ?
 						   query.OrderBy(u => u.ClientCode) : query.OrderByDescending(u => u.ClientCode);
 			}
+			else if (clientParameter.SortColumn == "ActiveEngagement")
+			{
+				query = clientParameter.SortOrder == false ?
+						   query.OrderBy(u => u.ActiveEngagement) : query.OrderByDescending(u => u.ActiveEngagement);
+			}
 			else if (clientParameter.SortColumn == "UpdatedOn")
 			{
 				query = clientParameter.SortOrder == false ?
 						   query.OrderBy(u => u.UpdatedOn) : query.OrderByDescending(u => u.UpdatedOn);
 			}
-
+			
 
 			List<ClientGrid> listTemp = query.ToList();
 			clients.TotalCount = listTemp != null ? listTemp.Count : 0;

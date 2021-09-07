@@ -53,6 +53,10 @@ namespace LearnEntity.Controllers
 			//	int status = int.Parse(clientParameter.Status.Value.ToString());
 			//	query = query.Where(u => u.Status == status);
 			//}
+			if (!string.IsNullOrEmpty(clientParameter.Search))
+			{
+				query = query.Where(u => u.EngagementName.Contains(clientParameter.Search));
+			}
 			if (clientParameter.ClientID != 0)
 			{
 				query = query.Where(u => u.ClientID == clientParameter.ClientID);
@@ -60,22 +64,21 @@ namespace LearnEntity.Controllers
 
 			#endregion
 
-			//if (clientParameter.SortColumn == "ClientName")
-			//{
-			//	query = clientParameter.SortOrder == false ?
-			//			   query.OrderBy(u => u.ClientName) : query.OrderByDescending(u => u.ClientName);
-			//}
-			//else if (clientParameter.SortColumn == "ClientCode")
-			//{
-			//	query = clientParameter.SortOrder == false ?
-			//			   query.OrderBy(u => u.ClientCode) : query.OrderByDescending(u => u.ClientCode);
-			//}
-			//else if (clientParameter.SortColumn == "UpdatedOn")
-			//{
-			//	query = clientParameter.SortOrder == false ?
-			//			   query.OrderBy(u => u.UpdatedOn) : query.OrderByDescending(u => u.UpdatedOn);
-			//}
-
+			if (clientParameter.SortColumn == "EngagementName")
+			{
+				query = clientParameter.SortOrder == false ?
+						   query.OrderBy(u => u.EngagementName) : query.OrderByDescending(u => u.EngagementName);
+			}
+			else if (clientParameter.SortColumn == "EngagementCode")
+			{
+				query = clientParameter.SortOrder == false ?
+						   query.OrderBy(u => u.EngagementCode) : query.OrderByDescending(u => u.EngagementCode);
+			}
+			else if (clientParameter.SortColumn == "DateModified")
+			{
+				query = clientParameter.SortOrder == false ?
+						   query.OrderBy(u => u.DateModified) : query.OrderByDescending(u => u.DateModified);
+			}
 
 			List<Engagements> listTemp = query.ToList();
 			clients.TotalCount = listTemp != null ? listTemp.Count : 0;
