@@ -24,10 +24,10 @@ namespace LearnEntity.Controllers
 
 		[HttpPost]
 		[Route("GetClientsSearch")]
-		public Page<Client> GetClientsSearch(ClientParameter clientParameter)
+		public Page<ClientGrid> GetClientsSearch(ClientParameter clientParameter)
 		{
-			IQueryable<Client> query = null;
-			Page<Client> clients = new Page<Client>();
+			IQueryable<ClientGrid> query = null;
+			Page<ClientGrid> clients = new Page<ClientGrid>();
 			//var clientList = _db.Client.ToList();
 			int from = 0, size = 0;
 			size = clientParameter.PageSize;
@@ -35,7 +35,7 @@ namespace LearnEntity.Controllers
 
 			query = (from cli in _db.Client
 						 //where timesheettasks.Active == activeStatus && timesheettasks.ProjectId == prjid
-					 select new Client()
+					 select new ClientGrid()
 					 {
 						 ClientId = cli.ClientId,
 						 ClientName = cli.ClientName,
@@ -89,7 +89,7 @@ namespace LearnEntity.Controllers
 			}
 
 
-			List<Client> listTemp = query.ToList();
+			List<ClientGrid> listTemp = query.ToList();
 			clients.TotalCount = listTemp != null ? listTemp.Count : 0;
 			//clients.TotalCount = query.Count(); //Stop because some issue in code
 
@@ -107,7 +107,7 @@ namespace LearnEntity.Controllers
 		[Route("GetClients")]
 		public IEnumerable<Client> GetClients()
 		{
-			var clientList = _db.Client.ToList();
+			var clientList = _db.Client.Where(data => data.Status == 1).ToList();
 			return clientList;
 		}
 

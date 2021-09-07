@@ -21,12 +21,16 @@ namespace LearnEntity.Models
         public DateTime CreatedOn { get; set; }
         public long UpdatedBy { get; set; }
         public DateTime UpdatedOn { get; set; }
+    }
+
+    public class ClientGrid : Client
+    {
         public int ActiveEngagement { get; set; }
         public int NewRequests { get; set; }
         public int OverdueRequests { get; set; }
     }
 
-    public class ClientIndustry
+        public class ClientIndustry
     {
         [Key]
         public long ClientIndustryId { get; set; }

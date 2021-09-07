@@ -38,7 +38,8 @@ namespace LearnEntity.Controllers
 						 EngagementID = cli.EngagementID,
 						 ClientID = cli.ClientID,
 						 EngagementName = cli.EngagementName,
-						 EngagementCode = cli.EngagementCode
+						 EngagementCode = cli.EngagementCode,
+						 DateModified = cli.DateModified
 					 }).DefaultIfEmpty();
 
 
@@ -105,6 +106,70 @@ namespace LearnEntity.Controllers
 		{
 			var engagements = _db.Engagements.Where(data => data.EngagementID == EngagementID).SingleOrDefault();
 			return engagements;
+		}
+
+
+		[HttpPost]
+		[Route("SaveEngagements")]
+		public int SaveEngagements(Engagements engagements)
+		{
+			if (engagements.EngagementID == 0)
+			{
+				bool isEngagementsExist = _db.Engagements.Where(x => x.EngagementName == engagements.EngagementName).FirstOrDefault() == null ? false : true;
+
+				if (!isEngagementsExist)
+				{
+					engagements.EngagementName = engagements.EngagementName;
+					engagements.EngagementCode = engagements.EngagementCode;
+					engagements.ClientID = engagements.ClientID;
+					engagements.StartDate = engagements.StartDate;
+					engagements.EndDate = engagements.EndDate;
+					//Temp Hardcoded
+					engagements.EngagementStatusID = 2;
+					engagements.ServiceLineID = 2;
+					engagements.RecordStatusID = 1;
+					engagements.DateAdded = DateTime.Now;
+					engagements.AddedBy = 3;
+					engagements.DateModified = DateTime.Now;
+					engagements.ModifiedBy = 3;
+					_db.Engagements.Add(engagements);
+					_db.SaveChanges();
+					return 1;
+				}
+				else
+				{
+					return 2;
+				}
+				return 2;
+			}
+			else
+			{
+				bool isEngagementsExist = _db.Engagements.Where(x => x.EngagementName == engagements.EngagementName && x.EngagementID != engagements.EngagementID).FirstOrDefault() == null ? false : true;
+
+				if (!isEngagementsExist)
+				{
+					var engagementsData = _db.Engagements.Where(data => data.EngagementID == engagements.EngagementID).SingleOrDefault();
+					engagementsData.EngagementName = engagements.EngagementName;
+					engagementsData.EngagementCode = engagements.EngagementCode;
+					engagementsData.ClientID = engagements.ClientID;
+					engagementsData.StartDate = engagements.StartDate;
+					engagementsData.EndDate = engagements.EndDate;
+					//clientData.Status = engagements.Status;
+					//clientData.ContactNumber = engagements.ContactNumber;
+					//clientData.EmailId = engagements.EmailId;
+					//clientData.Fax = engagements.Fax;
+					//clientData.ClientIndustryId = engagements.ClientIndustryId;
+					//clientData.UpdatedBy = 1;
+					//clientData.date = DateTime.Now;
+					_db.Engagements.Update(engagementsData);
+					_db.SaveChanges();
+					return 1;
+				}
+				else
+				{
+					return 2;
+				}
+			}
 		}
 	}
 }
