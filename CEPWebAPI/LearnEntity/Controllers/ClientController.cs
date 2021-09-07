@@ -172,6 +172,57 @@ namespace LearnEntity.Controllers
 			}
 		}
 
+		[HttpPost]
+		[Route("SaveClientNew")]
+		public int SaveClientNew(Client client)
+		{
+			if (client.ClientId == 0)
+			{
+				bool isClientExist = _db.Client.Where(x => x.ClientName == client.ClientName).FirstOrDefault() == null ? false : true;
+
+				if (!isClientExist)
+				{
+					client.Status = 1;
+					client.CreatedBy = 1;
+					client.CreatedOn = DateTime.Now;
+					client.UpdatedBy = 1;
+					client.UpdatedOn = DateTime.Now;
+					_db.Client.Add(client);
+					_db.SaveChanges();
+					return 1;
+				}
+				else
+				{
+					return 2;
+				}
+			}
+			else
+			{
+				bool isClientExist = _db.Client.Where(x => x.ClientName == client.ClientName && x.ClientId != client.ClientId).FirstOrDefault() == null ? false : true;
+
+				if (!isClientExist)
+				{
+					var clientData = _db.Client.Where(data => data.ClientId == client.ClientId).SingleOrDefault();
+					clientData.ClientName = client.ClientName;
+					clientData.ClientCode = client.ClientCode;
+					clientData.Status = client.Status;
+					clientData.ContactNumber = client.ContactNumber;
+					clientData.EmailId = client.EmailId;
+					clientData.Fax = client.Fax;
+					clientData.ClientIndustryId = client.ClientIndustryId;
+					clientData.UpdatedBy = 1;
+					clientData.UpdatedOn = DateTime.Now;
+					_db.Client.Update(clientData);
+					_db.SaveChanges();
+					return 1;
+				}
+				else
+				{
+					return 2;
+				}
+			}
+		}
+
 		#endregion
 
 		#region Client Industry
