@@ -15,10 +15,10 @@ namespace LearnEntity.Models
 		public int GroupID { get; set; }
 		public string Description { get; set; }
 		public int Status { get; set; }
-		public long CreatedBy { get; set; }
-		public DateTime CreatedOn { get; set; }
-		public long UpdatedBy { get; set; }
-		public DateTime UpdatedOn { get; set; }
+		public DateTime DateAdded { get; set; }
+		public int AddedBy { get; set; }
+		public DateTime DateModified { get; set; }
+		public int ModifiedBy { get; set; }
 	}
 
 	public class RequestGrid : Request
@@ -35,5 +35,14 @@ namespace LearnEntity.Models
 		public int? Status { get; set; }
 		public string Search { get; set; }
 		public int EngagementID { get; set; }
+	}
+
+	public class RequestStatus
+	{
+		public int Total { get; set; }
+		public int New { get; set; }
+		public int Completed { get; set; }
+		public int Approved { get; set; }
+		public int Overdue { get; set; }
 	}
 }

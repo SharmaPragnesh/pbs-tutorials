@@ -104,7 +104,6 @@ namespace LearnEntity.Controllers
 			return engagements;
 		}
 
-
 		[HttpPost]
 		[Route("SaveEngagements")]
 		public int SaveEngagements(Engagements engagements)
@@ -172,8 +171,27 @@ namespace LearnEntity.Controllers
 
 		[HttpPost]
 		[Route("GetRequests")]
-		public Page<RequestGrid> GetRequests(RequestParameter requestParameter)
+		public EnagementDetails GetRequests(RequestParameter requestParameter)
 		{
+			var engagements = _db.Engagements.Where(data => data.EngagementID == requestParameter.EngagementID).SingleOrDefault();
+			var client = _db.Client.Where(data => data.ClientId == engagements.ClientID).SingleOrDefault();
+
+			EnagementDetails enagementDetails = new EnagementDetails();
+			enagementDetails.ClientID = engagements.ClientID;
+			enagementDetails.ClientName = client.ClientName;
+			enagementDetails.ClientCode = client.ClientCode;
+			enagementDetails.EngagementID = engagements.EngagementID;
+			enagementDetails.EngagementName = engagements.EngagementName;
+			enagementDetails.EngagementCode = engagements.EngagementCode;
+
+			RequestStatus requestStatus = new RequestStatus();
+			requestStatus.Total = _db.Request.Where(data => data.EngagementID == requestParameter.EngagementID).Count();
+			requestStatus.New = _db.Request.Where(data => data.EngagementID == requestParameter.EngagementID && data.Status == 1).Count();
+			requestStatus.Completed = _db.Request.Where(data => data.EngagementID == requestParameter.EngagementID && data.Status == 4).Count();
+			requestStatus.Approved = _db.Request.Where(data => data.EngagementID == requestParameter.EngagementID && data.Status == 5).Count();
+			requestStatus.Overdue = _db.Request.Where(data => data.EngagementID == requestParameter.EngagementID && data.Status == 7).Count();
+			enagementDetails.RequestStatus = requestStatus;
+
 			IQueryable<RequestGrid> query = null;
 			Page<RequestGrid> clients = new Page<RequestGrid>();
 			int from = 0, size = 0;
@@ -238,8 +256,39 @@ namespace LearnEntity.Controllers
 				query = query.Skip(from).Take(size);
 
 			clients.List = query.ToList();
-			return clients;
+			enagementDetails.RequestList = clients;
+			return enagementDetails;
+		}
 
+		[HttpGet]
+		[Route("GetRequestsByID")]
+		public Request GetRequestsByID(int RequestID)
+		{
+			var request = _db.Request.Where(data => data.RequestID == RequestID).SingleOrDefault();
+			return request;
+		}
+
+		[HttpPost]
+		[Route("EditRequest")]
+		public int EditRequest(Request request)
+		{
+			bool isRequestExist = _db.Request.Where(x => x.RequestName == request.RequestName && x.RequestID != request.RequestID).FirstOrDefault() == null ? false : true;
+
+			if (!isRequestExist)
+			{
+				var requestData = _db.Request.Where(data => data.RequestID == request.RequestID).SingleOrDefault();
+				requestData.RequestName = request.RequestName;
+				requestData.Description = request.Description;
+				requestData.DateModified = DateTime.Now;
+				requestData.ModifiedBy = 3;
+				_db.Request.Update(requestData);
+				_db.SaveChanges();
+				return 1;
+			}
+			else
+			{
+				return 2;
+			}
 		}
 	}
 }

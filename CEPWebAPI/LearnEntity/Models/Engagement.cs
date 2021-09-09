@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LearnEntity.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -41,5 +42,17 @@ namespace LearnEntity.Models
 		public int? Status { get; set; }
 		public string Search { get; set; }
 		public int ClientID { get; set; }
+	}
+
+	public class EnagementDetails
+	{
+		public int ClientID { get; set; }
+		public string ClientCode { get; set; }
+		public string ClientName { get; set; }
+		public int EngagementID { get; set; }
+		public string EngagementName { get; set; }
+		public string EngagementCode { get; set; }
+		public Page<RequestGrid> RequestList { get; set; }
+		public RequestStatus RequestStatus { get; set; }
 	}
 }
