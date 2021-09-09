@@ -24,6 +24,14 @@ namespace LearnEntity.Models
 		public int ModifiedBy { get; set; }
 	}
 
+	public class EngagementsGrid : Engagements
+	{
+		public int NewRequests { get; set; }
+		public int Completed { get; set; }
+		public int Approved { get; set; }
+		public int Overdue { get; set; }
+	}
+
 	public class EngagementsParameter
 	{
 		public int PageSize { get; set; }
