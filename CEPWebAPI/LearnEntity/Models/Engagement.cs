@@ -53,6 +53,6 @@ namespace LearnEntity.Models
 		public string EngagementName { get; set; }
 		public string EngagementCode { get; set; }
 		public Page<RequestGrid> RequestList { get; set; }
-		public RequestStatus RequestStatus { get; set; }
+		public RequestHeaderStatus RequestHeaderStatus { get; set; }
 	}
 }

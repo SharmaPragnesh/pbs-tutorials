@@ -24,6 +24,7 @@ namespace LearnEntity.Models
 	public class RequestGrid : Request
 	{
 		public string GroupName { get; set; }
+		public string StatusName { get; set; }
 	}
 
 	public class RequestParameter
@@ -38,6 +39,17 @@ namespace LearnEntity.Models
 	}
 
 	public class RequestStatus
+	{
+		[Key]
+		public int RequestStatusID { get; set; }
+		public string RequestStatusName { get; set; }
+		public DateTime DateAdded { get; set; }
+		public int AddedBy { get; set; }
+		public DateTime DateModified { get; set; }
+		public int ModifiedBy { get; set; }
+	}
+
+	public class RequestHeaderStatus
 	{
 		public int Total { get; set; }
 		public int New { get; set; }
