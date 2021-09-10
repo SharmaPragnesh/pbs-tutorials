@@ -65,6 +65,23 @@ namespace LearnEntity.Controllers
 				int status = int.Parse(clientParameter.Status.Value.ToString());
 				query = query.Where(u => u.Status == status);
 			}
+			if (clientParameter.RecentActivity != -1)
+			{
+				int recentActivity = int.Parse(clientParameter.RecentActivity.ToString());
+                if (recentActivity == 1)
+                {
+					query = query.Where(u => u.UpdatedOn >= DateTime.Now.AddDays(-5));
+				}
+				else if (recentActivity == 2)
+				{
+					query = query.Where(u => u.UpdatedOn >= DateTime.Now.AddDays(-7));
+				}
+				else
+				{
+					query = query.Where(u => u.UpdatedOn >= DateTime.Now.AddDays(-30));
+				}
+			}
+
 			if (!string.IsNullOrEmpty(clientParameter.Search))
 			{
 				query = query.Where(u => u.ClientName.Contains(clientParameter.Search));
