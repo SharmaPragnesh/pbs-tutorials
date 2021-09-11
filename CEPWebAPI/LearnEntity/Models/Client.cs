@@ -12,6 +12,7 @@ namespace LearnEntity.Models
         public long ClientId { get; set; }
         public string ClientName { get; set; }
         public string ClientCode { get; set; }
+        public string FilePath { get; set; }
         public int Status { get; set; }
         public string ContactNumber { get; set; }
         public string Fax { get; set; }

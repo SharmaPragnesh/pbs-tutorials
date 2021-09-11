@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,7 +32,7 @@ namespace LearnEntity.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                Summary = Path.Combine(Directory.GetCurrentDirectory()) + " - " + Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
         }

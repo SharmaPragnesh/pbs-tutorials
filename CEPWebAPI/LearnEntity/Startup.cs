@@ -1,10 +1,12 @@
 using LearnEntity.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace LearnEntity
 {
@@ -53,6 +56,19 @@ namespace LearnEntity
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+
+            ////Below code for Show Files on that Images by URL.
+            app.UseStaticFiles();
+
+            if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory() + "\\Images")))
+            {
+                Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory() + "\\Images"));
+            }
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+                RequestPath = new PathString("/Images")
+            });
 
             app.UseHttpsRedirection();
 
