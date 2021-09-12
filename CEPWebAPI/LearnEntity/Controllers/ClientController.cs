@@ -288,7 +288,7 @@ namespace LearnEntity.Controllers
                     {
                         int clientId = Int32.Parse(Convert.ToString(data["clientId"]));
                         var clientData = _db.Client.Where(data => data.ClientId == clientId).SingleOrDefault();
-                        clientData.FilePath = _configuration.GetSection("FrontEndURL").Value + "/Images/" + NewFileName + "." + file.FileName.Split(".")[uploadFileLength - 1];
+                        clientData.FilePath = NewFileName + "." + file.FileName.Split(".")[uploadFileLength - 1];
                         //clientData.UpdatedBy = 1;
                         //clientData.UpdatedOn = DateTime.Now;
                         _db.Client.Update(clientData);
