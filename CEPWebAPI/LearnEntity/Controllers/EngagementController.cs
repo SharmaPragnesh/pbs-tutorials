@@ -193,6 +193,19 @@ namespace LearnEntity.Controllers
             requestHeaderStatus.Overdue = _db.Request.Where(data => data.EngagementID == requestParameter.EngagementID && data.Status == 7).Count();
             enagementDetails.RequestHeaderStatus = requestHeaderStatus;
 
+            IQueryable<RequestByGroup> query1 = null;
+
+            query1 = (from cli in _db.Request
+                      where cli.EngagementID == requestParameter.EngagementID
+                      select new RequestByGroup()
+                      {
+                          GroupID = cli.GroupID,
+                          GroupName = _db.Group.Where(x => x.GroupID == cli.GroupID).Select(x => x.GroupName).FirstOrDefault(),
+                          RequestCount = _db.Request.Where(x => x.EngagementID == requestParameter.EngagementID && x.GroupID == cli.GroupID).Count()
+                      }).Distinct();
+
+            enagementDetails.RequestByGroup = query1.ToList();
+
             IQueryable<RequestGrid> query = null;
             Page<RequestGrid> clients = new Page<RequestGrid>();
             int from = 0, size = 0;
@@ -261,6 +274,74 @@ namespace LearnEntity.Controllers
             clients.List = query.ToList();
             enagementDetails.RequestList = clients;
             return enagementDetails;
+        }
+
+        [HttpPost]
+        [Route("GetRequestsByGroupId")]
+        public Page<RequestGrid> GetRequestsByGroupId(RequestGroupParameter requestParameter)
+        {
+            IQueryable<RequestGrid> query = null;
+            Page<RequestGrid> clients = new Page<RequestGrid>();
+            int from = 0, size = 0;
+            size = requestParameter.PageSize;
+            from = (requestParameter.PageStart - 1) * size;
+
+            query = (from cli in _db.Request
+                         where cli.EngagementID == requestParameter.EngagementID && cli.GroupID == requestParameter.GroupID
+                     select new RequestGrid()
+                     {
+                         RequestID = cli.RequestID,
+                         RequestName = cli.RequestName,
+                         EngagementID = cli.EngagementID,
+                         GroupName = _db.Group.Where(x => x.GroupID == cli.GroupID).Select(x => x.GroupName).FirstOrDefault(),
+                         GroupID = cli.GroupID,
+                         Status = cli.Status,
+                         StatusName = _db.RequestStatus.Where(x => x.RequestStatusID == cli.Status).Select(x => x.RequestStatusName).FirstOrDefault(),
+                         Description = cli.Description,
+                     }).DefaultIfEmpty();
+
+
+            clients.PageStart = requestParameter.PageStart;
+            clients.PageSize = requestParameter.PageSize;
+
+            #region Search
+
+            //if (clientParameter.Status != -1)
+            //{
+            //	int status = int.Parse(clientParameter.Status.Value.ToString());
+            //	query = query.Where(u => u.Status == status);
+            //}
+            if (!string.IsNullOrEmpty(requestParameter.Search))
+            {
+                query = query.Where(u => u.RequestName.Contains(requestParameter.Search));
+            }
+            if (requestParameter.EngagementID != 0)
+            {
+                query = query.Where(u => u.EngagementID == requestParameter.EngagementID);
+            }
+
+            #endregion
+
+            if (requestParameter.SortColumn == "RequestName")
+            {
+                query = requestParameter.SortOrder == false ?
+                           query.OrderBy(u => u.RequestName) : query.OrderByDescending(u => u.RequestName);
+            }
+            else if (requestParameter.SortColumn == "GroupName")
+            {
+                query = requestParameter.SortOrder == false ?
+                           query.OrderBy(u => u.GroupName) : query.OrderByDescending(u => u.GroupName);
+            }
+            
+
+            List<RequestGrid> listTemp = query.ToList();
+            clients.TotalCount = listTemp != null ? listTemp.Count : 0;
+
+            if (size != -1)
+                query = query.Skip(from).Take(size);
+
+            clients.List = query.ToList();
+            return clients;
         }
 
         [HttpGet]

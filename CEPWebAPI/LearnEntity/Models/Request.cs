@@ -27,6 +27,12 @@ namespace LearnEntity.Models
 		public string StatusName { get; set; }
 	}
 
+	public class RequestByGroup : Request
+	{
+		public string GroupName { get; set; }
+		public int RequestCount { get; set; }
+	}
+
 	public class RequestParameter
 	{
 		public int PageSize { get; set; }
@@ -36,6 +42,18 @@ namespace LearnEntity.Models
 		public int? Status { get; set; }
 		public string Search { get; set; }
 		public int EngagementID { get; set; }
+	}
+
+	public class RequestGroupParameter
+	{
+		public int PageSize { get; set; }
+		public int PageStart { get; set; }
+		public bool SortOrder { get; set; }
+		public string SortColumn { get; set; }
+		public int? Status { get; set; }
+		public string Search { get; set; }
+		public int EngagementID { get; set; }
+		public int GroupID { get; set; }
 	}
 
 	public class RequestStatus
