@@ -86,6 +86,17 @@ namespace LearnEntity.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("ChangeUserStatus")]
+        public int ChangeUserStatus(User user)
+        {
+            var userData = _db.User.Where(data => data.UserId == user.UserId).SingleOrDefault();
+            userData.IsActive = user.IsActive;
+            _db.User.Update(userData);
+            _db.SaveChanges();
+            return 1;
+        }
+
         #region Login and Other methods
 
         [HttpPost]
@@ -132,9 +143,9 @@ namespace LearnEntity.Controllers
         {
             var userData = _db.User.Where(data => data.UserId == changePassword.UserId).SingleOrDefault();
 
-            if(userData != null)
+            if (userData != null)
             {
-                if(userData.Password == changePassword.ExistingPassword)
+                if (userData.Password == changePassword.ExistingPassword)
                 {
                     userData.Password = changePassword.Password;
                     _db.User.Update(userData);
