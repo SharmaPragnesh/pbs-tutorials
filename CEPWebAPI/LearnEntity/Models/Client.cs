@@ -52,4 +52,19 @@ namespace LearnEntity.Models
         public int? RecentActivity { get; set; }
         public string Search { get; set; }
     }
+
+    public class ServiceIndustries
+	{
+        [Key]
+        public int ServiceIndustryID { get; set; }
+        public string ServiceIndustryCode { get; set; }
+        public string ServiceIndustryName { get; set; }
+        public string ServiceIndustryDescription { get; set; }
+        public bool IsActive { get; set; }
+        /////
+        public DateTime DateAdded { get; set; }
+        public int AddedBy { get; set; }
+        public DateTime DateModified { get; set; }
+        public int ModifiedBy { get; set; }
+    }
 }

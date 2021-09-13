@@ -20,6 +20,8 @@ namespace LearnEntity.Models
         public DbSet<Group> Group { get; set; }
         public DbSet<Request> Request { get; set; }
         public DbSet<RequestStatus> RequestStatus { get; set; }
+        public DbSet<ServiceIndustries> ServiceIndustries { get; set; }
+        
         /////
         public DbSet<Department> Department { get; set; }
         public DbSet<tblDepartment> tblDepartment { get; set; }
