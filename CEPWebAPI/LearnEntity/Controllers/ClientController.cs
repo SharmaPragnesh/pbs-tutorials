@@ -336,16 +336,16 @@ namespace LearnEntity.Controllers
 		[Route("SaveServiceIndustries")]
 		public int SaveServiceIndustries(ServiceIndustries serviceIndustries)
 		{
-			if(serviceIndustries.ServiceIndustryID == 0)
+			if (serviceIndustries.ServiceIndustryID == 0)
 			{
 				bool isServiceIndustriesExist = _db.ServiceIndustries.Where(x => x.ServiceIndustryName == serviceIndustries.ServiceIndustryName).FirstOrDefault() == null ? false : true;
 
 				if (!isServiceIndustriesExist)
 				{
 					serviceIndustries.IsActive = true;
-					serviceIndustries.AddedBy= 1;
+					//serviceIndustries.AddedBy = 1;
 					serviceIndustries.DateAdded = DateTime.Now;
-					serviceIndustries.ModifiedBy = 1;
+					//serviceIndustries.ModifiedBy = 1;
 					serviceIndustries.DateModified = DateTime.Now;
 					_db.ServiceIndustries.Add(serviceIndustries);
 					_db.SaveChanges();
@@ -365,7 +365,7 @@ namespace LearnEntity.Controllers
 					var serviceIndustriesData = _db.ServiceIndustries.Where(data => data.ServiceIndustryID == serviceIndustries.ServiceIndustryID).SingleOrDefault();
 					serviceIndustriesData.ServiceIndustryName = serviceIndustries.ServiceIndustryName;
 					serviceIndustriesData.ServiceIndustryDescription = serviceIndustries.ServiceIndustryDescription;
-					serviceIndustriesData.ModifiedBy = 101;
+					serviceIndustriesData.ModifiedBy = serviceIndustries.ModifiedBy;
 					serviceIndustriesData.DateModified = DateTime.Now;
 					_db.ServiceIndustries.Update(serviceIndustriesData);
 					_db.SaveChanges();
@@ -375,8 +375,28 @@ namespace LearnEntity.Controllers
 				{
 					return 2;
 				}
-			}			
+			}
 		}
 
+
+		[HttpGet]
+		[Route("DeleteServiceIndustry")]
+		public int DeleteServiceIndustry(int serviceIndustryID)
+		{
+			var serviceIndustriesData = _db.ServiceIndustries.Where(data => data.ServiceIndustryID == serviceIndustryID).SingleOrDefault();
+			if (serviceIndustriesData != null)
+			{
+				serviceIndustriesData.IsActive = false;
+				serviceIndustriesData.ModifiedBy = 101;
+				serviceIndustriesData.DateModified = DateTime.Now;
+				_db.ServiceIndustries.Update(serviceIndustriesData);
+				_db.SaveChanges();
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
 	}
 }
