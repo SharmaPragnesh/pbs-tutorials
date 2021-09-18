@@ -17,6 +17,8 @@ namespace LearnEntity.Models
         public string Password { get; set; }
         public bool IsActive { get; set; }
         public int UserType { get; set; }
+        public string Location { get; set; }
+        public int ClientId { get; set; }
     }
 
     public class UserInfo

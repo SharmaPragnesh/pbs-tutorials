@@ -44,11 +44,16 @@ namespace LearnEntity.Controllers
         {
             if (user.UserId == 0)
             {
-                bool isUserExist = _db.Client.Where(x => x.ClientName == user.UserName).FirstOrDefault() == null ? false : true;
+                bool isUserExist = _db.User.Where(x => x.UserName == user.UserName).FirstOrDefault() == null ? false : true;
 
                 if (!isUserExist)
                 {
+                    //user.UserName = user.FirstName + user.LastName + DateTime.Now.ToString();
+                    user.Password = "abcd";
                     user.IsActive = true;
+                    user.UserType = 4;
+                    //user.Location = "ahmedabad";
+                    //user.ClientId = 1;
                     //user.CreatedBy = 1;
                     //user.CreatedOn = DateTime.Now;
                     //user.UpdatedBy = 1;
@@ -103,7 +108,8 @@ namespace LearnEntity.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login(User userModel)
         {
-            var userSingle = _db.User.ToList().Where(data => data.UserName == userModel.UserName && data.Password == userModel.Password).SingleOrDefault();
+            var userSingle = _db.User.ToList().Where(data => data.UserName == userModel.UserName && 
+            data.Password == userModel.Password && data.IsActive == true).SingleOrDefault();
 
             if (userSingle != null)
             {
@@ -128,7 +134,7 @@ namespace LearnEntity.Controllers
         [Route("ForgotPassword")]
         public int ForgotPassword(User user)
         {
-            var userData = _db.User.Where(data => data.UserName == user.UserName).SingleOrDefault();
+            var userData = _db.User.Where(data => data.UserName == user.UserName && data.IsActive == true).SingleOrDefault();
 
             if (userData != null)
             {
@@ -141,7 +147,7 @@ namespace LearnEntity.Controllers
         [Route("ChangePassword")]
         public int ChangePassword(ChangePassword changePassword)
         {
-            var userData = _db.User.Where(data => data.UserId == changePassword.UserId).SingleOrDefault();
+            var userData = _db.User.Where(data => data.UserId == changePassword.UserId && data.IsActive == true).SingleOrDefault();
 
             if (userData != null)
             {
