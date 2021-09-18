@@ -22,12 +22,81 @@ namespace LearnEntity.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetUser")]
-        public IEnumerable<User> GetUser()
+        public Page<User> GetUser(UserParameter userParameter)
         {
-            var userList = _db.User.ToList();
-            return userList;
+            IQueryable<User> query = null;
+            Page<User> users = new Page<User>();
+            //var clientList = _db.Client.ToList();
+            int from = 0, size = 0;
+            size = userParameter.PageSize;
+            from = (userParameter.PageStart - 1) * size;
+
+            query = (from cli in _db.User
+                         //where timesheettasks.Active == activeStatus && timesheettasks.ProjectId == prjid
+                     select new User()
+                     {
+                         UserId = cli.UserId,
+                         FirstName = cli.FirstName,
+                         LastName = cli.LastName,
+                         UserName = cli.UserName,
+                         IsActive = cli.IsActive,
+                         UserType = cli.UserType,
+                         Location = cli.Location,
+                         ClientId = cli.ClientId
+                     }).DefaultIfEmpty();
+
+            users.PageStart = userParameter.PageStart;
+            users.PageSize = userParameter.PageSize;
+
+            #region Search
+
+            //if (userParameter.Status != -1)
+            //{
+            //    int status = int.Parse(userParameter.Status.Value.ToString());
+            //    query = query.Where(u => u.Status == status);
+            //}
+            
+
+            if (!string.IsNullOrEmpty(userParameter.Search))
+            {
+                query = query.Where(u => u.UserName.Contains(userParameter.Search));
+            }
+
+            #endregion
+
+            if (userParameter.SortColumn == "FirstName")
+            {
+                query = userParameter.SortOrder == false ?
+                           query.OrderBy(u => u.FirstName) : query.OrderByDescending(u => u.FirstName);
+            }
+            else if (userParameter.SortColumn == "LastName")
+            {
+                query = userParameter.SortOrder == false ?
+                           query.OrderBy(u => u.LastName) : query.OrderByDescending(u => u.LastName);
+            }
+            //else if (userParameter.SortColumn == "ActiveEngagement")
+            //{
+            //    query = userParameter.SortOrder == false ?
+            //               query.OrderBy(u => u.ActiveEngagement) : query.OrderByDescending(u => u.ActiveEngagement);
+            //}
+            //else if (userParameter.SortColumn == "UpdatedOn")
+            //{
+            //    query = userParameter.SortOrder == false ?
+            //               query.OrderBy(u => u.UpdatedOn) : query.OrderByDescending(u => u.UpdatedOn);
+            //}
+
+
+            List<User> listTemp = query.ToList();
+            users.TotalCount = listTemp != null ? listTemp.Count : 0;
+            //clients.TotalCount = query.Count(); //Stop because some issue in code
+
+            if (size != -1)
+                query = query.Skip(from).Take(size);
+
+            users.List = query.ToList();
+            return users;
         }
 
         [HttpGet]
@@ -108,7 +177,7 @@ namespace LearnEntity.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login(User userModel)
         {
-            var userSingle = _db.User.ToList().Where(data => data.UserName == userModel.UserName && 
+            var userSingle = _db.User.ToList().Where(data => data.UserName == userModel.UserName &&
             data.Password == userModel.Password && data.IsActive == true).SingleOrDefault();
 
             if (userSingle != null)

@@ -40,4 +40,14 @@ namespace LearnEntity.Models
         public string ExistingPassword { get; set; }
         public string Password { get; set; }
     }
+
+    public class UserParameter
+    {
+        public int PageSize { get; set; }
+        public int PageStart { get; set; }
+        public bool SortOrder { get; set; }
+        public string SortColumn { get; set; }
+        public int? Status { get; set; }
+        public string Search { get; set; }
+    }
 }
